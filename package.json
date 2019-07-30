@@ -1,0 +1,25 @@
+{
+  "name": "plankawen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rashrazak/plankawen.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rashrazak/plankawen/issues"
+  },
+  "homepage": "https://github.com/rashrazak/plankawen#readme",
+  "dependencies": {
+    "next": "^9.0.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}
