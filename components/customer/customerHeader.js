@@ -1,5 +1,6 @@
-import Link from 'next/link'
 import Head from 'next/head'
+import ActiveLink from '../ActiveLink'
+
 
 export default ({ children, title = 'This is the default title' }) => (
   <div>
@@ -10,17 +11,17 @@ export default ({ children, title = 'This is the default title' }) => (
     </Head>
     <header>
       <nav>
-        <Link href='/'>
+        <ActiveLink href='/'>
           <a>Home</a>
-        </Link>{' '}
+        </ActiveLink>{' '}
         |
-        <Link href='/about'>
+        <ActiveLink href='/about'>
           <a>About</a>
-        </Link>{' '}
+        </ActiveLink>{' '}
         |
-        <Link href='/contact'>
+        <ActiveLink href='/contact'>
           <a>Contact</a>
-        </Link>
+        </ActiveLink>
       </nav>
     </header>
 
