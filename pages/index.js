@@ -1,4 +1,5 @@
 import Layout from '../components/customer/customerHeader'
+import '../css/index.css'
 
 function Index(){
     return (
