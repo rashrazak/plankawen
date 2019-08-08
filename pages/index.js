@@ -3,7 +3,7 @@ import '../css/index.css'
 
 function Index(){
     return (
-        <Layout>
+        <Layout title="Selamat Datang ke PlanKawen">
             <div className="row row-1">
                 <div className="box-red"></div>
                 <div className="container container-1">
