@@ -1,0 +1,52 @@
+@import "//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap";
+
+html, .row{
+    width: 100%;
+}
+body{
+    font-family: 'Open sans'!important;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+header > nav > a{
+    font-size: 14px;
+    color: #3E3E3E;
+    font-weight: 700;
+    margin: 0 15px;
+}
+footer{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.footer-first > img, .footer-first > p{
+    display: inline-block;
+    vertical-align: top;
+}
+.footer-first > p{
+    font-weight: 700;
+    color: #BABABA;
+    font-size: 12px;
+    width: 200px;
+    margin-left: 30px;
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+.footer-second > a{
+    font-weight: 400;
+    color: #3E3E3E;
+    font-size: 12px;
+    margin: 0 15px;
+}
+.btn-register{
+    background-color: #ED795F;
+    border-radius: 25px;
+    color: #FFF;
+    font-weight: 700;
+    height: 45px;
+    width: 165px;
+    font-size: 14px;
+}

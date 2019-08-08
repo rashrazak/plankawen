@@ -1,4 +1,4 @@
-import Layout from '../components/customer/customerHeader'
+import Layout from '../components/Header'
 
 function Contact(){
     return (
