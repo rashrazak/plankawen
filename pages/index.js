@@ -4,7 +4,7 @@ import IndexPackage from '../components/IndexPackage';
 
 function Index(){
     return (
-        <Layout>
+        <Layout title="Selamat Datang ke PlanKawen">
             <div className="row row-1">
                 <div className="box-red"></div>
                 <div className="container container-1">
