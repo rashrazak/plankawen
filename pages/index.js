@@ -1,5 +1,6 @@
 import Layout from '../components/Header'
 import '../css/index.css'
+import IndexPackage from '../components/IndexPackage';
 
 function Index(){
     return (
@@ -56,6 +57,7 @@ function Index(){
                     </div>
                 </div>
             </div>
+            <IndexPackage/>
             <div className="row">
                 <div className="container container-4">
                     <img src="/static/images/logo/logo-official.png"/>
