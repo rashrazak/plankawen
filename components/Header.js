@@ -2,12 +2,12 @@ import Head from 'next/head'
 import ActiveLink from '../components/ActiveLink'
 import '../css/bootstrap.min.css'
 import '../css/global.css'
-// import Logo from '../images/logo/logo-official.png'
+import { LSContext } from '../context/LSContext'
 
-
-// const Layout = ({ children, title = 'This is the default title' }) => (
 const Layout = ({ children, title = 'This is the default title' }) => 
 {
+	const {loginCtx} = useContext(LSContext)
+
 	return(
     	<div>
         	<Head>
@@ -20,12 +20,21 @@ const Layout = ({ children, title = 'This is the default title' }) =>
         		<div className="">
 					<img src="/static/images/logo/logo-official.png" />
           		</div>
-          		<nav>
-            		<ActiveLink href='/'>Tentang Kami </ActiveLink>{' '}
-            		<ActiveLink href='/about'>Hubungi Kami</ActiveLink>{' '}
-            		<ActiveLink href='/contact'>Blog</ActiveLink>
-					<a href=""><button type="button" className="btn btn-register">Daftar Masuk</button></a>
-          		</nav>
+				{
+					loginCtx == true ?
+					<nav>
+						<ActiveLink href='/'>Tentang Kami </ActiveLink>{' '}
+						<ActiveLink href='/about'>Hubungi Kami</ActiveLink>{' '}
+						<ActiveLink href='/contact'>Blog</ActiveLink>
+						<a href=""><button type="button" className="btn btn-register">Daftar Masuk</button></a>
+					</nav>
+					:
+					<nav>
+						<h4>Login Header</h4>
+					</nav>
+
+				}
+          		
         	</header>
 
         	{children}
