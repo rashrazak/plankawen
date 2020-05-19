@@ -4,6 +4,7 @@ import SearchBox from 'react-search-box'
 import '../css/index.css'
 import { LSContext } from '../context/LSContext'
 import Router from 'next/router';
+import IndexPackage from '../components/IndexPackage';
 
 function Index(){
     const gMapsCities = [
@@ -106,6 +107,7 @@ function Index(){
                     </div>
                 </div>
             </div>
+            <IndexPackage/>
             <div className="row">
                 <div className="container container-4">
                     <img src="/static/images/logo/logo-official.png"/>
