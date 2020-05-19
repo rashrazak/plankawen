@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import React, {useEffect, useContext, useState} from 'react'
 import ActiveLink from '../components/ActiveLink'
 import '../css/bootstrap.min.css'
 import '../css/global.css'
