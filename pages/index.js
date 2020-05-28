@@ -7,6 +7,9 @@ import Router from 'next/router';
 import IndexPackage from '../components/IndexPackage';
 
 function Index(){
+    useEffect(() => {
+        window.location.href = "https://plankawen.wixsite.com/website"
+    }, [])
     const gMapsCities = [
         {key:'Johor', value:'Johor'},
         {key:'Kedah', value:'Kedah'},

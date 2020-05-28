@@ -1,6 +1,6 @@
 import React,{createContext, useState, useEffect} from 'react'
 export const LSContext = createContext();
-
+import firebase from '../config/firebaseConfig'
 const LSContextProvider = (props) => {
     
     const [loginCtx, setLoginCtx] = useState(false)

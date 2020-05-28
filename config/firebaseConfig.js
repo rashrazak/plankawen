@@ -1,5 +1,5 @@
 import * as app from 'firebase/app';
-import Swal from 'sweetalert2'
+// import Swal from 'sweetalert2'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
@@ -35,7 +35,7 @@ class Firebase {
     }
 
     async check(email){
-        return await this.db.collection('vendor').where('email', '==', email).get()
+        return await this.db.collection('client').where('email', '==', email).get()
     }
 
     async signIn(email, password){
