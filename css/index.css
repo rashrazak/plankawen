@@ -57,12 +57,11 @@
     margin: 50px 20px;
 }
 .container-2 > div:nth-child(2) > p{
-    font-weight: 700;
-    font-size: 16px;
-    color: #3E3E3E;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1rem;
     text-align: center;
-    max-width: 700px;
-    margin: auto;
+    color: #3E3E3E;
 }
 .container-2 > div:nth-child(2) > p:last-child{
     margin-top: 20px;
@@ -137,7 +136,7 @@
 .btn-pengatin{
     background-color: #FFF;
     color: #ED795F;
-    border-radius: 50px;
+    border-radius: 10px;
     border: 1px solid #ED795F;
     height: 60px;
     width: 200px;
@@ -150,7 +149,7 @@
 .btn-vendor{
     background-color: #FFF;
     color: #47CBC4;
-    border-radius: 50px;
+    border-radius: 10px;
     border: 1px solid #47CBC4;
     height: 60px;
     width: 200px;
@@ -173,7 +172,7 @@
 .btn-mesej{
     background-color: #ED795F;
     color: #FFF;
-    border-radius: 25px;
+    border-radius: 10px;
     border: 1px solid #ED795F;
     height: 45px;
     width: 165px;
