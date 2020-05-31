@@ -3,46 +3,47 @@ export const LSContext = createContext();
 import firebase from '../config/firebaseConfig'
 const LSContextProvider = (props) => {
     
+    const [clientCtx, setClientCtx] = useState(null)
     const [loginCtx, setLoginCtx] = useState(false)
+
+    
 
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem('user'));
         if (user == null){
             firebase.isInitialized().then(val => {
                 if (val) {
-                console.log(val)
-                this.setState({
-                    user:{
+                    console.log(val)
+                    setClientCtx({
                         name:val.displayName,
                         email:val.email,
                         photoUrl: val.photoURL,
                         emailVerified: val.emailVerified,
                         uid: val.uid
-                    },
-                    isLogin:true
-                })
-                localStorage.setItem('user', JSON.stringify({
-                    name:val.displayName,
-                    email:val.email,
-                    photoUrl: val.photoURL,
-                    emailVerified: val.emailVerified,
-                    uid: val.uid
-                }))
-                
-                setLoginCtx(true)
+                    })
+                    localStorage.setItem('clientCtx', JSON.stringify({
+                        name:val.displayName,
+                        email:val.email,
+                        photoUrl: val.photoURL,
+                        emailVerified: val.emailVerified,
+                        uid: val.uid
+                    }))
+                    
+                    setLoginCtx(true)
                 } else {
                 // Router.push('/');
                 }
               
+            }).error(err => {
+                console.log(err)
             })
         }else if( user != null){
-        setLoginCtx(true)
-        
+            setLoginCtx(true)
         }
     }, [])
 
     return (
-        <LSContext.Provider value={{loginCtx, setLoginCtx}}>
+        <LSContext.Provider value={{loginCtx, setLoginCtx, setClientCtx, clientCtx}}>
             {props.children}
         </LSContext.Provider>
     )

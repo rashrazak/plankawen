@@ -1,4 +1,6 @@
 import React, {useState,useEffect,useContext} from 'react'
+import { LSContext } from '../context/LSContext'
+import Router from 'next/router';
 
 function login() {
     const [select, setSelect] = useState(true)
@@ -7,6 +9,7 @@ function login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const {setClientCtx, setLoginCtx} = useContext(LSContext)
 
     useEffect(() => {
         if (goUrl == true) {
@@ -27,6 +30,7 @@ function login() {
             let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             if (!email.match(mailformat)) {
                 throw alert('Invalid email format')
+                return false
             }
         }
     }
@@ -36,12 +40,58 @@ function login() {
         //kalau akaun ni tak exist dalam client, pergi signup
     }
 
-    function seterusnya(){
+    async function seterusnya(){
         if (email && password){
             let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             if (!email.match(mailformat)) {
                 throw alert('Invalid email format')
+                return false
             }
+
+            try{
+                let exist = await firebase.check(email)
+                let result = await exist.docs
+                console.log(result);
+                if (result.length == 1) {
+                    try{
+                        let result =  await firebase.signIn(email, password);
+                        let user = result.user;
+                        console.log(user)
+                        if (user != null) {
+                            setClientCtx({
+                                name:user.displayName,
+                                email:user.email,
+                                photoUrl: user.photoURL,
+                                emailVerified: user.emailVerified,
+                                uid: user.uid
+                                
+                            },
+                            () =>  {
+                                localStorage.setItem('client', JSON.stringify({
+                                name:user.displayName,
+                                email:user.email,
+                                photoUrl: user.photoURL,
+                                emailVerified: user.emailVerified,
+                                uid: user.uid
+                                }))
+                                setLoginCtx(true)
+                                Router.push('/')
+                            });
+                        }
+                    }catch(error){
+                        alert(error.message)
+                    }
+                    
+                }else{
+                    alert('Please Signup as client');
+                }
+            }catch(error){
+                throw alert(error.message)
+                return false
+            
+            }
+
+            
         }
     }
 
