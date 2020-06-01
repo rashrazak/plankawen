@@ -1,4 +1,7 @@
 import React, {useState,useEffect,useContext} from 'react'
+import Router from 'next/router'
+import firebase from '../config/firebaseConfig'
+import {LSContext} from '../context/LSContext'
 
 function signup() {
     const [email, setEmail] = useState('')
@@ -8,31 +11,78 @@ function signup() {
     const [phone, setPhone] = useState('')
     const [namaPenuh, setNamaPenuh] = useState('')
 
+    const {clientCtx} = useContext(LSContext)
+
 
     useEffect(() => {
-        //not ready
-        if (email != '') { //supoosedly from furebase / context
-            setEmail('aaaa@aaa')
-            setEmailFromFirebase(true)
-        }else{
-            if (email) {
-                //check email if exist
-                if (email == true) { //if exist
-                    setEmailNotExist(true)
+        async function checker(){
+            console.log(clientCtx)
+            if (email == '') { //supoosedly from furebase / context
+                if (Router.query.email) {
+                    // var result = firebase.checkAuth(Router.query.email)
+                    // console.log(result)
+                    setEmail(Router.query.email)
+                    setEmailFromFirebase(true)
+                }
+            }else{
+                if (email && emailNotExist == false) {
+                    //check email if exist
+                    let exist = await firebase.check(email)
+                    console.log(exist)
+                    if (exist.empty == true) { //if exist
+                        setEmailNotExist(true)
+                    }else{
+                        alert('Account Exist!, Please Login')
+                        Router.push('/login');
+                    }
                 }
             }
         }
+
+        checker()
+        
         
     }, [email])
 
     function seterusnya() {
-        //belum lagi
-        if (email && password && namaPenuh && phone){
-            let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            if (!email.match(mailformat)) {
-                throw alert('Invalid email format')
+        if (!email &&emailFromFirebase == false) {
+            //belum lagi
+            if (email && password && namaPenuh && phone){
+                let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if (!email.match(mailformat)) {
+                    throw alert('Invalid email format')
+                }
+            }
+        }else{
+            if (namaPenuh && phone){
+                let data = {
+                    nama:namaPenuh,
+                    phone,
+                    email,
+                    dateCreated: new Date()
+                }
+                setTimeout(() => {
+                    let y = firebase.signUpWithSocial(data)
+                    y.then((x) => {
+                      console.log(x.id)
+                      let y = firebase.updateClientId(x.id)
+                      y.then(() => {
+                        alert('success')
+                        Router.push(`/`)
+                      })
+                      .catch((e) => {
+                        alert('error')
+                        console.log(e)
+                      }) 
+                    })
+                    .catch((e) => {
+                      console.log(e)
+                    })
+              
+                  },2000)
             }
         }
+        
     }
 
     return (
@@ -40,9 +90,9 @@ function signup() {
             <h1><b>Daftar masuk</b></h1>
 
             {
-                emailFromFirebase == true ?
+                emailFromFirebase == true && email ?
                 <div>
-                    <input type="email" value={email} disabled/>
+                    <p>{email}</p>
                 </div>
                 :
                 <div>
@@ -62,7 +112,12 @@ function signup() {
                 <br/>
                 <input type="number" onBlur={(e)=>setPhone(e.target.value)} placeholder="+60123456789" />
                 <br/>
-                <input type="password" onBlur={(e)=>setPassword(e.target.value)} placeholder="**********" />
+                {
+                    !email && emailFromFirebase == false ?
+                    <input type="password" onBlur={(e)=>setPassword(e.target.value)} placeholder="**********" />
+                    :''
+                    
+                }
                 <br/>
                 <button onClick={()=>seterusnya()}>Seterusnya</button>
             </div>

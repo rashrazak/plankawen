@@ -1,6 +1,7 @@
 import React, {useState,useEffect,useContext} from 'react'
 import { LSContext } from '../context/LSContext'
 import Router from 'next/router';
+import firebase from '../config/firebaseConfig'
 
 function login() {
     const [select, setSelect] = useState(true)
@@ -13,7 +14,7 @@ function login() {
 
     useEffect(() => {
         if (goUrl == true) {
-            if (url == 'login') {
+            if (url == 'login' || url == '') {
                 setSelect(false);
             }else if (url == 'https://vendor.plankawen.com/signup'){
                 window.location.href = url;
@@ -35,9 +36,49 @@ function login() {
         }
     }
 
-    function loginWithSocial() {
-        //belum lagi
-        //kalau akaun ni tak exist dalam client, pergi signup
+    async function loginWithSocial() {
+        var result = await firebase.signInWithSocial();
+        console.log(result.credential.accessToken);
+        console.log(result.user);
+        var user = result.user;
+
+        try{
+            let exist = await firebase.check(user.email)
+            let result = await exist.docs
+            if (result.length == 1) {
+
+                if (user != null) {
+                    setClientCtx({
+                        name:user.displayName,
+                        email:user.email,
+                        photoUrl: user.photoURL,
+                        emailVerified: user.emailVerified,
+                        uid: user.uid
+                        
+                    },
+                    () =>  {
+                        localStorage.setItem('client', JSON.stringify({
+                        name:user.displayName,
+                        email:user.email,
+                        photoUrl: user.photoURL,
+                        emailVerified: user.emailVerified,
+                        uid: user.uid
+                        }))
+                        setLoginCtx(true)
+                        Router.push('/')
+                    });
+                }
+            }else{
+                alert('Please Signup as client');
+                Router.push(`/signup?email=${user.email}`)
+            }
+        }catch(error){
+            throw alert(error.message)
+            return false
+        
+        }
+
+
     }
 
     async function seterusnya(){
