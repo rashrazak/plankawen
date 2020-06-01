@@ -12,6 +12,7 @@ const LSContextProvider = (props) => {
         let user = JSON.parse(localStorage.getItem('user'));
         if (user == null){
             firebase.isInitialized().then(val => {
+                console.log(val)
                 if (val) {
                     console.log(val)
                     setClientCtx({
@@ -34,7 +35,7 @@ const LSContextProvider = (props) => {
                 // Router.push('/');
                 }
               
-            }).error(err => {
+            }).catch(err => {
                 console.log(err)
             })
         }else if( user != null){

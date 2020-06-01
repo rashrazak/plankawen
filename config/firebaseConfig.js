@@ -32,14 +32,29 @@ class Firebase {
         this.auth = app.auth();
         this.db = app.firestore();
         this.storage = app.storage();
+        this.provider = new app.auth.GoogleAuthProvider()
     }
 
     async check(email){
         return await this.db.collection('client').where('email', '==', email).get()
     }
 
+    // async checkAuth(email){
+    //     return await app.auth.fetchProvidersForEmail(email);
+    // }
+
     async signIn(email, password){
         return await this.auth.signInWithEmailAndPassword(email, password)
+    }
+
+    async signInWithSocial(){
+        return await app.auth().signInWithPopup(this.provider );
+    }
+    async updateClientId(id){
+        return await this.db.collection('client').doc(id).update({documentId:id})
+    }
+    async signUpWithSocial(data){
+        return await this.db.collection('client').add(data)
     }
 
     signOut(){
