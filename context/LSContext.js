@@ -34,7 +34,7 @@ const LSContextProvider = (props) => {
                 // Router.push('/');
                 }
               
-            }).error(err => {
+            }).catch(err => {
                 console.log(err)
             })
         }else if( user != null){

@@ -13,7 +13,7 @@ body{
 header{
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    /* padding: 20px; */
 }
 header > nav > a{
     font-size: 14px;
@@ -54,4 +54,60 @@ footer{
     height: 45px;
     width: 165px;
     font-size: 14px;
+}
+.header-padding {
+    padding: 6px 20px;
+}
+.header-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-div > div {
+    padding: 6px 20px;
+}
+.header-div > nav {
+    
+}
+.header-login {
+    background: #FFFFFF;
+    box-shadow: -6px 0px 15px rgba(117, 132, 142, 0.3);
+}
+.ico-bell {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.user-oval {
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+}
+.nav-login {
+    margin-bottom: 0;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+}
+.nav-login li {
+    list-style-type: none;
+    height: 57px;
+    padding: 6px 20px;
+    position: relative;
+    cursor: pointer;
+    width: 200px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #3E3E3E;
+}
+.bell-divider {
+    border: 1px solid #EAEAEA;
+    border-top: none;
+    border-bottom: none;
+    width: 100px !important;
 }

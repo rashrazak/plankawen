@@ -43,8 +43,9 @@
 .box-red{
     background-color: #FED5C4;
     width: 497px;
-    height: 700px;
+    height: 600px;
     position: absolute;
+    top: 125px;
     right: 0;
     z-index: -1;
     border-top-left-radius: 10px;

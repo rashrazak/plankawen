@@ -18,21 +18,35 @@ const Layout = ({ children, title = 'This is the default title' }) =>
         	</Head>
 
         	<header>
-        		<div className="">
-					<img src="/static/images/logo/logo-official.png" />
-          		</div>
+        		
 				{
 					loginCtx == true ?
-					<nav>
-						<ActiveLink href='/'>Tentang Kami </ActiveLink>{' '}
-						<ActiveLink href='/about'>Hubungi Kami</ActiveLink>{' '}
-						<ActiveLink href='/contact'>Blog</ActiveLink>
-						<a href=""><button type="button" className="btn btn-register">Daftar Masuk</button></a>
-					</nav>
+
+					<div className="header-div header-padding">
+						<div className="">
+							<img src="/static/images/logo/logo-official.png" />
+						</div>
+						<nav>
+							<ActiveLink href='/'>Tentang Kami </ActiveLink>{' '}
+							<ActiveLink href='/about'>Hubungi Kami</ActiveLink>{' '}
+							<ActiveLink href='/contact'>Blog</ActiveLink>
+							<a href=""><button type="button" className="btn btn-register">Daftar Masuk</button></a>
+						</nav>
+					</div>
 					:
-					<nav>
-						<h4>Login Header</h4>
-					</nav>
+					<div className="header-div header-login">
+						<div className="">
+							<img src="/static/images/logo/logo-official.png" />
+						</div>
+						<nav className="">
+							{/* <ActiveLink className="" href='/contact'><img className="ico-bell" src="/static/images/icon/bell.png"/></ActiveLink>
+							<ActiveLink className="" href='/contact'><img className="user-oval" src="/static/images/icon/ico-user-placeholder.png"/>Tom John</ActiveLink> */}
+							<ul className="nav-login">
+								<li className="bell-divider"><img className="ico-bell" src="/static/images/icon/bell.png"/></li>
+								<li><img className="user-oval" src="/static/images/icon/ico-user-placeholder.png"/>Tom John</li>
+							</ul>
+						</nav>
+					</div>
 
 				}
           		
