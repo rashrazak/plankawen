@@ -25,13 +25,13 @@ function signup() {
                     setEmailFromFirebase(true)
                 }
             }else{
-                if (email && emailNotExist == false) {
+                if (email && emailNotExist == false && emailFromFirebase == false) {
                     //check email if exist
                     let exist = await firebase.check(email)
                     console.log(exist)
-                    if (exist.empty == true) { //if exist
-                        setEmailNotExist(true)
-                    }else{
+                    setEmailFromFirebase(false)
+                    setEmailNotExist(true)
+                    if (exist.empty == false) { //if exist
                         alert('Account Exist!, Please Login')
                         Router.push('/login');
                     }
@@ -45,13 +45,45 @@ function signup() {
     }, [email])
 
     function seterusnya() {
-        if (!email &&emailFromFirebase == false) {
+        if (emailFromFirebase == false) {
             //belum lagi
             if (email && password && namaPenuh && phone){
                 let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
                 if (!email.match(mailformat)) {
                     throw alert('Invalid email format')
                 }
+
+                
+                setTimeout(() => {
+                    let data = {
+                        email,
+                        phone,
+                        dateCreated: new Date(),
+                        nama: namaPenuh,
+                        clientType: 'normal'
+                    }
+                    let y = firebase.signUpClient(data)
+                    y.then((x) => {
+                        console.log(x.id)
+                        let yy = firebase.updateClientId(x.id)
+                      yy.then(() => {
+                        let z = firebase.createClient(email, password)
+                        z.then(()=>{
+                            // 
+                            
+                        })
+                        
+                      })
+                      .catch((e) => {
+                        alert('error')
+                        console.log(e)
+                      }) 
+                    })
+                    .catch((e) => {
+                      console.log(e)
+                    })
+              
+                  },2000)
             }
         }else{
             if (namaPenuh && phone){
@@ -59,10 +91,11 @@ function signup() {
                     nama:namaPenuh,
                     phone,
                     email,
-                    dateCreated: new Date()
+                    dateCreated: new Date(),
+                    clientType:'google'
                 }
                 setTimeout(() => {
-                    let y = firebase.signUpWithSocial(data)
+                    let y = firebase.signUpClient(data)
                     y.then((x) => {
                       console.log(x.id)
                       let y = firebase.updateClientId(x.id)
@@ -113,7 +146,7 @@ function signup() {
                 <input type="number" onBlur={(e)=>setPhone(e.target.value)} placeholder="+60123456789" />
                 <br/>
                 {
-                    !email && emailFromFirebase == false ?
+                    emailNotExist == true && emailFromFirebase == false ?
                     <input type="password" onBlur={(e)=>setPassword(e.target.value)} placeholder="**********" />
                     :''
                     

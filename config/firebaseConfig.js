@@ -53,8 +53,41 @@ class Firebase {
     async updateClientId(id){
         return await this.db.collection('client').doc(id).update({documentId:id})
     }
-    async signUpWithSocial(data){
+    async signUpClient(data){
         return await this.db.collection('client').add(data)
+    }
+
+    async createClient(email, password){
+        await app.auth().createUserWithEmailAndPassword(email, password).then( async ()=>{
+            var user = app.auth().currentUser;
+
+            user.sendEmailVerification().then(function() {
+            // Email sent.
+            alert('Registered! please check email for verification.')
+
+            window.location.href = '/'
+
+            }).catch(function(error) {
+            // An error happened.
+            });
+        }).catch((err)=>{
+            alert(err)
+        })
+    }
+
+
+    async emailVerification(){
+        var user = app.auth().currentUser;
+
+        user.sendEmailVerification().then(function() {
+        // Email sent.
+        alert('Registered! please check email for verification.')
+
+        window.location.href = '/'
+
+        }).catch(function(error) {
+        // An error happened.
+        });
     }
 
     signOut(){

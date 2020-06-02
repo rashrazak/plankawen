@@ -15,10 +15,12 @@ function login() {
 
     useEffect(() => {
         if (goUrl == true) {
-            if (url == 'login' || url == '') {
+            if (  url == '') {
                 setSelect(false);
             }else if (url == 'https://vendor.plankawen.com/signup'){
                 window.location.href = url;
+            }else if(url == 'login'){
+                window.location.href = '/signup'
             }else{
                 alert('Sila Pilih Seleksi')
             } 
@@ -56,18 +58,17 @@ function login() {
                         emailVerified: user.emailVerified,
                         uid: user.uid
                         
-                    },
-                    () =>  {
-                        localStorage.setItem('client', JSON.stringify({
+                    })
+
+                    localStorage.setItem('clientCtx', JSON.stringify({
                         name:user.displayName,
                         email:user.email,
                         photoUrl: user.photoURL,
                         emailVerified: user.emailVerified,
                         uid: user.uid
-                        }))
-                        setLoginCtx(true)
-                        Router.push('/')
-                    });
+                    }))
+                    setLoginCtx(true)
+                    
                 }
             }else{
                 alert('Please Signup as client');
@@ -107,18 +108,16 @@ function login() {
                                 emailVerified: user.emailVerified,
                                 uid: user.uid
                                 
-                            },
-                            () =>  {
-                                localStorage.setItem('client', JSON.stringify({
+                            })
+                            localStorage.setItem('client', JSON.stringify({
                                 name:user.displayName,
                                 email:user.email,
                                 photoUrl: user.photoURL,
                                 emailVerified: user.emailVerified,
                                 uid: user.uid
-                                }))
-                                setLoginCtx(true)
-                                Router.push('/')
-                            });
+                            }))
+                            setLoginCtx(true)
+                            window.location.href = "/"
                         }
                     }catch(error){
                         alert(error.message)
@@ -126,6 +125,7 @@ function login() {
                     
                 }else{
                     alert('Please Signup as client');
+                    window.location.href = "/signup"
                 }
             }catch(error){
                 throw alert(error.message)
