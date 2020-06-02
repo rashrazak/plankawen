@@ -20,7 +20,7 @@ const Layout = ({ children, title = 'This is the default title' }) =>
         	<header>
         		
 				{
-					loginCtx == true ?
+					loginCtx == false ?
 
 					<div className="header-div header-padding">
 						<div className="">
@@ -30,7 +30,7 @@ const Layout = ({ children, title = 'This is the default title' }) =>
 							<ActiveLink href='/'>Tentang Kami </ActiveLink>{' '}
 							<ActiveLink href='/about'>Hubungi Kami</ActiveLink>{' '}
 							<ActiveLink href='/contact'>Blog</ActiveLink>
-							<a href=""><button type="button" className="btn btn-register">Daftar Masuk</button></a>
+							<a href="/login"><button type="button" className="btn btn-register">Daftar Masuk</button></a>
 						</nav>
 					</div>
 					:
