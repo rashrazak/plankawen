@@ -47,6 +47,7 @@ function Index(){
                     <div className="">
                         <h1>Plan yang lebih mudah <span> untuk anda</span></h1>
                         <p>Di Plankawen, kami percaya Merancang Majlis Kahwin sepatutnya lebih mudah dan teratur, baik disebelah bakal Pengantin, mahupun Vendor.</p>
+                        <div className="rancang-section">
                         {
                             loginCtx == false ?
                             <button type="button" className="btn btn-rancang" onClick={()=>countryFn()}>Mula merancang</button>
@@ -61,10 +62,13 @@ function Index(){
                                         }}
                                         value={stateMy}
                                         autoFocus
+                                        inputBoxHeight="70px"
+                                        inputBoxBorderColor="#EAEAEA"
                                     />
                                     <button type="button" className="btn btn-rancang" onClick={()=>countryFn()}>Mula merancang</button>
                             </div>
                         }
+                        </div>
                     </div>
                     <div className="">
                         <img src="/static/images/backgrounds/home/img-hero-placeholder.png"/>
@@ -209,7 +213,7 @@ function Index(){
                     </div>
                 </div>
             </div>
-            <IndexPackage/>
+            {/* <IndexPackage/> */}
             <div className="row">
                 <div className="container container-4">
                     <img src="/static/images/logo/logo-official.png"/>
@@ -235,6 +239,8 @@ function Index(){
                 .bullet-number { height: 60px; width: 60px; border-radius: 50%; border: 2px solid #47CBC4; display: block; color: #47CBC4; font-style: normal; font-weight: bold; font-size: 1.5625rem; text-align: center; line-height: 50px; margin-right: 20px;}
                 .box-red-2{ background-color: #FED5C4; width: 500px; height: 600px;position: absolute;top: 130px;left: 0;z-index: -1;border-top-right-radius: 10px;border-bottom-right-radius: 10px;}
                 .row-comment { margin-top: 300px;}
+                .search-box { background-color: red; }
+                .rancang-section { position: relative ;}
             `}</style>
         </Layout>
     )
