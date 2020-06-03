@@ -12,7 +12,7 @@ function signup() {
     const [phone, setPhone] = useState('')
     const [namaPenuh, setNamaPenuh] = useState('')
 
-    const {clientCtx} = useContext(LSContext)
+    const {clientCtx, setLoginCtx} = useContext(LSContext)
 
 
     useEffect(() => {
@@ -102,7 +102,8 @@ function signup() {
                       let y = firebase.updateClientId(x.id)
                       y.then(() => {
                         alert('success')
-                        Router.push(`/`)
+                        setLoginCtx(true)
+                        window.location.href = "/"
                       })
                       .catch((e) => {
                         alert('error')
