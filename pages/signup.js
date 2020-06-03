@@ -146,7 +146,7 @@ function signup() {
                         {
                             emailNotExist == true ?
                             <div>
-                                <p className="label-error">Maaf, kami tidak mengenalpasti e-mel anda. <br/>Daftar masuk sekarang!</p>
+                                <p className="label-error">Maaf, kami tidak mengenalpasti e-mel anda. Daftar masuk sekarang!</p>
                             </div>
                             :''
                         }
@@ -175,7 +175,7 @@ function signup() {
             <style jsx>{`
                 .master-layout { height: 100vh; position: relative;}
                 h1 { font-style: normal; font-weight: normal;font-size: 2rem;color: #3E3E3E;}
-                .bg-grey { background-color: #F4F4F4;}
+                .bg-grey { background: radial-gradient(178.63% 89.41% at 8.27% 146.36%, #F59A86 0%, #F4F4F4 100%);}
                 .auth-container { width: 1140px; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); display: flex; }
                 .image-container { margin-right: 70px;}
                 .auth-form-section { max-width: 490px; margin-top: 20px; width: 100%; }

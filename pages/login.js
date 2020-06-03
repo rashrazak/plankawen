@@ -203,7 +203,7 @@ function login() {
                 .image-container { margin-right: 70px;}
                 h1 { font-style: normal; font-weight: normal;font-size: 2rem;color: #3E3E3E;}
                 .master-layout { height: 100vh; position: relative;}
-                .bg-grey { background-color: #F4F4F4;}
+                .bg-grey { background: radial-gradient(178.63% 89.41% at 8.27% 146.36%, #F59A86 0%, #F4F4F4 100%);}
                 .auth-form-section { max-width: 490px; margin-top: 20px; }
                 .choose-your-fighter { display: flex; max-width: 400px; margin: auto; justify-content: space-between;}
                 .choose-your-fighter > div { width: 197px; }
