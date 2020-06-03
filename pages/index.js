@@ -1,6 +1,6 @@
 import React, {useEffect, useContext, useState} from 'react'
 import Layout from '../components/Header'
-import SearchBox from 'react-search'
+import SearchBox from 'react-search-box'
 import '../css/index.css'
 import { LSContext } from '../context/LSContext'
 import Router from 'next/router';
@@ -55,13 +55,12 @@ function Index(){
                                 {/* google npm react-search-box ada css attr */}
                                     <SearchBox
                                         placeholder="Pilih Negeri"
-                                        items={gMapsCities}
-                                        multiple={false}
-                                        onItemsChange={record => {
+                                        data={gMapsCities}
+                                        onSelect={record => {
                                             setStateMy(record.key)
                                         }}
                                         value={stateMy}
-                                        style={{backgroundColor:'red'}}
+                                        autoFocus
                                     />
                                     <button type="button" className="btn btn-rancang" onClick={()=>countryFn()}>Mula merancang</button>
                             </div>
