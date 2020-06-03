@@ -49,7 +49,7 @@ function Index(){
                         <p>Di Plankawen, kami percaya Merancang Majlis Kahwin sepatutnya lebih mudah dan teratur, baik disebelah bakal Pengantin, mahupun Vendor.</p>
                         <div className="rancang-section">
                         {
-                            loginCtx == true ?
+                            loginCtx == false ?
                             <button type="button" className="btn btn-rancang" onClick={()=>countryFn()}>Mula merancang</button>
                             :
                             <div>
