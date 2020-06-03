@@ -201,7 +201,7 @@ function login() {
             <style jsx>{`
                 .auth-container { width: 1140px; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); display: flex; }
                 .image-container { margin-right: 70px;}
-                h1 { font-style: normal; font-weight: normal;font-size: 32px;color: #3E3E3E;}
+                h1 { font-style: normal; font-weight: normal;font-size: 2rem;color: #3E3E3E;}
                 .master-layout { height: 100vh; position: relative;}
                 .bg-grey { background-color: #F4F4F4;}
                 .auth-form-section { max-width: 490px; margin-top: 20px; }
@@ -216,7 +216,7 @@ function login() {
                 .image-vendor:hover::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(89, 208, 201, 0.5); z-index: 2; border-radius: 5px; }
                 .klik-sini { font-style: normal;font-weight: normal;font-size: 1rem;color: #3E3E3E; margin-bottom: 0;}
                 .klik-sini > span { color: #ED795F; text-decoration: underline;}
-                .btn-next { font-style: normal; font-weight: 600; font-size: 0.875rem; text-align: left; color: #FFF; background-color: #ED795F; border-radius: 8px; background-image: url('/static/images/icon/arrow-right-white.png'); background-repeat: no-repeat; background-position: center right 10px; background-size: 20px; width: 165px; height: 45px;}
+                .btn-next { font-style: normal; font-weight: 600; font-size: 0.875rem; color: #FFF; background-color: #ED795F; border-radius: 8px; background-image: url('/static/images/icon/arrow-right-white.png'); background-repeat: no-repeat; background-position: center right 10px; background-size: 20px; width: 165px; height: 45px;}
                 .next-container { display: flex; justify-content: space-between; align-items: center; margin-top: 44px;}
                 .form-custom { background: #FFF; border-radius: 4px; font-style: normal; font-weight: normal; font-size: 0.875rem; color: #BABABA; height: 60px; border: none;} 
                 label { font-style: normal; font-weight: normal; font-size: 0.875rem; color: #47CBC4; margin-top: 10px;}
