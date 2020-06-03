@@ -2,18 +2,26 @@
     height: 800px;
 }
 .btn-rancang{
-    border-radius: 25px;
-    color: #ED795F;
-    font-size: 14px;
-    background-color: #FFF;
-    border: 1px solid #ED795F;
+    background-color: #ED795F;
+    border: 2px solid #ED795F;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #FFF;
     height: 50px;
     width: 200px;
-    transition: all .3s;
+    position: absolute;
+    right: 9px;
+    top: 10px;
 }
 .btn-rancang:hover{
     background-color: #ED795F;
     color: #FFF;
+}
+.sc-bdVaJa { 
+    border-radius: 18px !important;
+    box-shadow: 0px 6px 15px #FED5C4;
 }
 .container-1 > div > h1{
     font-weight: 700;

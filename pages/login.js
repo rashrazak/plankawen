@@ -218,7 +218,7 @@ function login() {
                 .klik-sini > span { color: #ED795F; text-decoration: underline;}
                 .btn-next { font-style: normal; font-weight: 600; font-size: 0.875rem; color: #FFF; background-color: #ED795F; border-radius: 8px; background-image: url('/static/images/icon/arrow-right-white.png'); background-repeat: no-repeat; background-position: center right 10px; background-size: 20px; width: 165px; height: 45px;}
                 .next-container { display: flex; justify-content: space-between; align-items: center; margin-top: 44px;}
-                .form-custom { background: #FFF; border-radius: 4px; font-style: normal; font-weight: normal; font-size: 0.875rem; color: #BABABA; height: 60px; border: none;} 
+                .form-custom { background: #FFF; border-radius: 4px; font-style: normal; font-weight: normal; font-size: 0.875rem; color: #2B2B2B; height: 60px; border: none;} 
                 label { font-style: normal; font-weight: normal; font-size: 0.875rem; color: #47CBC4; margin-top: 10px;}
                 .btn-google { background-color: #3E3E3E; border: 1px solid #979797; box-sizing: border-box; border-radius: 6px; height: 50px; font-style: normal; font-weight: bold; font-size: 0.9375rem; text-align: center;color: #FFF; width: 100%;}
             `}</style>

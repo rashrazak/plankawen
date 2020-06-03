@@ -180,7 +180,11 @@ function signup() {
                 .image-container { margin-right: 70px;}
                 .auth-form-section { max-width: 490px; margin-top: 20px; width: 100%; }
                 label { font-style: normal; font-weight: normal; font-size: 0.875rem; color: #47CBC4; margin-top: 10px;}
-                .form-custom { background: #FFF; border-radius: 4px; font-style: normal; font-weight: normal; font-size: 0.875rem; color: #BABABA; height: 60px; border: none;}
+                .form-custom { background: #FFF; border-radius: 4px; font-style: normal; font-weight: normal; font-size: 0.875rem; color: #2B2B2B; height: 60px; border: none;}
+                ::-webkit-input-placeholder { color: #BABABA; }
+                ::-moz-placeholder { color: #BABABA; }
+                :-ms-input-placeholder { color: #BABABA; }
+                :-moz-placeholder { color: #BABABA; }
                 .btn-next { font-style: normal; font-weight: 600; font-size: 0.875rem; color: #FFF; background-color: #ED795F; border-radius: 8px; background-image: url('/static/images/icon/arrow-right-white.png'); background-repeat: no-repeat; background-position: center right 10px; background-size: 20px; width: 165px; height: 45px;}
                 .next-container { text-align: right;  margin-top: 44px;}
                 .label-error { font-style: normal; font-weight: normal; font-size: 1rem; color: #3E3E3E; margin-top: 10px;}
