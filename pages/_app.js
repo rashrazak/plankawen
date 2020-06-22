@@ -1,7 +1,13 @@
 import React from 'react';
 import App from 'next/app';
 import LSContextProvider from '../context/LSContext'
+import BookingExtraContextProvider from '../context/BookingExtraContext'
 import Router from 'next/router';
+import '../css/bootstrap.min.css'
+import '../css/global.css'
+import '../css/index.css'
+
+
 
 
 const initialState = {
@@ -154,7 +160,9 @@ class MyApp extends App {
         const { Component, pageProps } = this.props;
         return (
             <LSContextProvider>
+              <BookingExtraContextProvider>
                 <Component {...pageProps} />
+              </BookingExtraContextProvider>
             </LSContextProvider>
         );
     }

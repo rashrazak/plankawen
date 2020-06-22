@@ -209,167 +209,22 @@ class Firebase {
         });
     }
 
-
-    async createVendor(param, password, companyEmail, ssmImage){
-        param.dateCreated = new Date();
-        if (password.length < 6) {
-            alert('Your password need more than 6 characters')
-            return false;
-        }
-        const check = await app.firestore().collection('vendor').where('email', '==', companyEmail).get()
-        let result = check.docs
-        
-        
-        if (result.length > 0) {
-            alert('Account Exist! ')
-            return false;
-        }
-        
-       
-        if (ssmImage) {
-            var storageRef = this.storage.ref();
-            let img     = ssmImage;
-            let base    = img.base64;
-            
-            
-            var locRef     = storageRef.child(`vendor/${companyEmail}/ssmImage.jpg`)
-            var locResult = locRef.putString(base, 'data_url');
-            await locResult.on('state_changed',snapshot=>{
-
-            },(error)=>{
-                console.log(error)
-            },()=>{
-                locResult.snapshot.ref.getDownloadURL().then(async function(downloadURL) {
-                    param.ssmImage = downloadURL;
-                    console.log(downloadURL)
-                    await app.auth().createUserWithEmailAndPassword(companyEmail, password).then( async ()=>{
-                        await app.firestore().collection('vendor').add(param)
-                        Swal.close()
-                        var user = app.auth().currentUser;
-
-                        user.sendEmailVerification().then(function() {
-                        // Email sent.
-                        alert('Registered! please check email for verification.')
-
-                        window.location.href = '/'
-
-                        }).catch(function(error) {
-                        // An error happened.
-                        });
-                    }).catch((err)=>{
-                        Swal.close()
-                        alert(err)
-                    })
-                    
-            
-                    
-                })
-            })
-            return true;
-        }
-
+    async getVendorUsers(state){
+        return await this.db.collection('vendor').where('kawasan', 'array-contains', state).get()
     }
 
-
-    async updateVendor(param, password, companyEmail, ssmImage, vendorId){
-        param.dateUpdated = new Date(); 
-        if (ssmImage) {
-
-            if (password) {
-                var user = app.auth().currentUser;
-                user.updatePassword(password);
-            }
-            var storageRef = this.storage.ref();
-            let img     = ssmImage;
-            let base    = img.base64;
-
-            if (img.base64 != undefined) {
-                if (param.ssmImage.length > 5) {
-                    var desertRef = storageRef.child(`vendor/${companyEmail}/ssmImage.jpg`);
-                    // Delete the file
-                    desertRef.delete();
-                }
-
-                
-                
-                
-                var locRef     = storageRef.child(`vendor/${companyEmail}/ssmImage.jpg`)
-                var locResult = locRef.putString(base, 'data_url');
-                await locResult.on('state_changed',snapshot=>{
-
-                },(error)=>{
-                    console.log(error)
-                },()=>{
-                    locResult.snapshot.ref.getDownloadURL().then(async function(downloadURL) {
-                        param.ssmImage = downloadURL;
-                        console.log(downloadURL)
-                        await app.firestore().collection('vendor').doc(vendorId).update(param)
-                        return true;
-                    })
-                }) 
-            }else{
-                param.ssmImage = ssmImage
-                await app.firestore().collection('vendor').doc(vendorId).update(param)
-            }
-            Swal.close()
-            alert('Updated!')
-            window.location.href = '/'
-
-        }
-       
-
+    async getVendorUser(email){
+        return await this.db.collection('vendor').where('email', '==', email).get()
     }
 
-    async updateVendorProfileImage(image, companyEmail, vendorId){
-        if (image) {
-            
-            var storageRef = this.storage.ref();
-            let img     = image;
-
-            if (img != undefined) {
-                // var desertRef = storageRef.child(`vendor/${companyEmail}/userImage.jpg`);
-                // desertRef.delete();
-                
-                var locRef      = storageRef.child(`vendor/${companyEmail}/userImage.jpg`)
-                var locResult   = locRef.putString(img, 'data_url');
-                await locResult.on('state_changed',snapshot=>{
-
-                },(error)=>{
-                    console.log(error)
-                },()=>{
-                    locResult.snapshot.ref.getDownloadURL().then(async function(downloadURL) {
-                        console.log(downloadURL)
-                        await app.firestore().collection('vendor').doc(vendorId).update({
-                            profileImage:downloadURL
-                        }).then(()=>{
-                            
-                        }).catch(err=> console.log(err))
-                        Swal.close()
-                        alert('Updated!')
-                        window.location.href = '/'
-                        return true;
-                    })
-                }) 
-            }
-            
-
-        }
-       
-
+    async getServiceByEmail(email, serviceName){
+        return await this.db.collection(serviceName).where('email', '==', email).get()
     }
 
-    updateVendorCompanyDesc(companyDesc, vendorId){
-        if (companyDesc) {
-            app.firestore().collection('vendor').doc(vendorId).update({
-                companyDesc
-            }).then(()=>{
-                Swal.close()
-                alert('Updated!')
-                window.location.href = '/'
-                return true;         
-            }).catch(err=> console.log(err))
-        }
+    async getServiceByState(state, serviceName){
+        return await this.db.collection(serviceName).where('areaCovered', 'array-contains', state).get()
     }
+
 
     async getVendorUser(email){
         return await this.db.collection('vendor').where('email', '==', email).get()

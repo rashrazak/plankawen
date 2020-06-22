@@ -1,6 +1,5 @@
 import React, {useState,useEffect,useContext} from 'react'
 import { LSContext } from '../context/LSContext'
-import '../css/bootstrap.min.css'
 import Router from 'next/router';
 import firebase from '../config/firebaseConfig'
 
@@ -142,7 +141,7 @@ function login() {
             <div className="master-layout bg-grey">
                 <div className="container auth-container">
                     <div className="image-container">
-                        <img src="/static/images/backgrounds/vendor-bg.png"/>
+                        <img src="/images/backgrounds/vendor-bg.png"/>
                     </div>
                 {
                     select == true ?
@@ -153,13 +152,13 @@ function login() {
                         <div className="choose-your-fighter">
                             <div onClick={()=>setUrl('login')} className="">
                                 <div className="image-bakal-pengantin">
-                                    <img src="/static/images/backgrounds/bakalpengantin.jpg"/>
+                                    <img src="/images/backgrounds/bakalpengantin.jpg"/>
                                 </div> 
                                 <h3>Bakal Pengantin</h3>
                             </div>
                             <div onClick={()=>setUrl('https://vendor.plankawen.com/signup')} className="">
                                 <div className="image-vendor">
-                                    <img src="/static/images/backgrounds/bakalvendor.jpg"/>
+                                    <img src="/images/backgrounds/bakalvendor.jpg"/>
                                 </div> 
                                 <h3>Vendor Servis</h3>
                             </div>
@@ -216,7 +215,7 @@ function login() {
                 .image-vendor:hover::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(89, 208, 201, 0.5); z-index: 2; border-radius: 5px; }
                 .klik-sini { font-style: normal;font-weight: normal;font-size: 1rem;color: #3E3E3E; margin-bottom: 0;}
                 .klik-sini > span { color: #ED795F; text-decoration: underline;}
-                .btn-next { font-style: normal; font-weight: 600; font-size: 0.875rem; color: #FFF; background-color: #ED795F; border-radius: 8px; background-image: url('/static/images/icon/arrow-right-white.png'); background-repeat: no-repeat; background-position: center right 10px; background-size: 20px; width: 165px; height: 45px;}
+                .btn-next { font-style: normal; font-weight: 600; font-size: 0.875rem; color: #FFF; background-color: #ED795F; border-radius: 8px; background-image: url('/images/icon/arrow-right-white.png'); background-repeat: no-repeat; background-position: center right 10px; background-size: 20px; width: 165px; height: 45px;}
                 .next-container { display: flex; justify-content: space-between; align-items: center; margin-top: 44px;}
                 .form-custom { background: #FFF; border-radius: 4px; font-style: normal; font-weight: normal; font-size: 0.875rem; color: #2B2B2B; height: 60px; border: none;} 
                 label { font-style: normal; font-weight: normal; font-size: 0.875rem; color: #47CBC4; margin-top: 10px;}

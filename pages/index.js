@@ -1,15 +1,15 @@
 import React, {useEffect, useContext, useState} from 'react'
 import Layout from '../components/Header'
 import SearchBox from 'react-search-box'
-import '../css/index.css'
+// import '../css/index.css'
 import { LSContext } from '../context/LSContext'
 import Router from 'next/router';
 import IndexPackage from '../components/IndexPackage';
 
 function Index(){
-    // useEffect(() => {
-    //     window.location.href = "https://plankawen.wixsite.com/website"
-    // }, [])
+    useEffect(() => {
+        window.location.href = "https://plankawen.wixsite.com/website"
+    }, [])
     const gMapsCities = [
         {key:'Johor', value:'Johor'},
         {key:'Kedah', value:'Kedah'},
@@ -71,15 +71,15 @@ function Index(){
                         </div>
                     </div>
                     <div className="">
-                        <img src="/static/images/backgrounds/home/img-hero-placeholder.png"/>
+                        <img src="/images/backgrounds/home/img-hero-placeholder.png"/>
                     </div>
                 </div>
             </div>
             <div className="row">
                 <div className="container container-2">
                     <div className="">
-                        <a href=""><img src="/static/images/icon/s-facebook.png"/></a>
-                        <a href=""><img src="/static/images/icon/s-instagram.png"/></a>
+                        <a href=""><img src="/images/icon/s-facebook.png"/></a>
+                        <a href=""><img src="/images/icon/s-instagram.png"/></a>
                     </div>
                 </div>
             </div>
@@ -88,39 +88,39 @@ function Index(){
                     <h2>Antara servis-servis <br/> yang kami sediakan adalah</h2>
                     <div className="available-servis">
                         <div className="">
-                            <img src="/static/images/icon/ico-venue.png"/>
+                            <img src="/images/icon/ico-venue.png"/>
                             <p>Lokasi Majlis</p>
                         </div>
                         <div className="">
-                            <img src="/static/images/icon/ico-pelamin.png"/>
+                            <img src="/images/icon/ico-pelamin.png"/>
                             <p>Pelamin</p>
                         </div>
                         <div className="">
-                            <img src="/static/images/icon/ico-canopy.png"/>
+                            <img src="/images/icon/ico-canopy.png"/>
                             <p>Kanopi</p>
                         </div>
                         <div className="">
-                            <img src="/static/images/icon/ico-dress.png"/>
+                            <img src="/images/icon/ico-dress.png"/>
                             <p>Baju Pengantin</p>
                         </div>
                         <div className="">
-                            <img src="/static/images/icon/ico-catering.png"/>
+                            <img src="/images/icon/ico-catering.png"/>
                             <p>Katering</p>
                         </div>
                         <div className="">
-                            <img src="/static/images/icon/ico-makeup.png"/>
+                            <img src="/images/icon/ico-makeup.png"/>
                             <p>Make Up</p>
                         </div>
                         <div className="">
-                            <img src="/static/images/icon/ico-camera.png"/>
+                            <img src="/images/icon/ico-camera.png"/>
                             <p>Foto & Video</p>
                         </div>
                         <div className="">
-                            <img src="/static/images/icon/ico-doorgift.png"/>
+                            <img src="/images/icon/ico-doorgift.png"/>
                             <p>Cenderahati</p>
                         </div>
                         <div className="">
-                            <img src="/static/images/icon/ico-card.png"/>
+                            <img src="/images/icon/ico-card.png"/>
                             <p>Kad Jemputan</p>
                         </div>
                     </div>
@@ -133,7 +133,7 @@ function Index(){
                     <p>Kami percaya merancang majlis kahwin sepatutnya lebih mudah dan teratur. Disini kami nyatakan langkah-langkah mudah dalam mengatur perancangan anda.</p>
                     <div className="fungsi-desc-container">
                         <div className="">
-                            <img src="/static/images/backgrounds/home/Howitworks.png"/>
+                            <img src="/images/backgrounds/home/Howitworks.png"/>
                         </div>
                         <div className="">
                             <div className="fungsi-desc">
@@ -186,13 +186,13 @@ function Index(){
                     </div>
                     <div className="">
                         <div className="">
-                            <img src="/static/images/icon/qoute-right.png"/>
+                            <img src="/images/icon/qoute-right.png"/>
                             <h5>“Nak kawin tapi tak tahu mana nak start lah..” “Checklist ada tapi takut masih ada terlepas pandang..” “Dapat contact Vendor dari kawan, tapi masih nak option lain lah</h5>
                             <p>Abg Man</p>
                             <p>Bakal Pengantin</p>
                         </div>
                         <div className="">
-                            <img src="/static/images/icon/qoute-right.png"/>
+                            <img src="/images/icon/qoute-right.png"/>
                             <h5>“Dah buat servis dandanan, tapi klien cuma kenalan sahaja..” “Penat juga buat promosi tapi sales kureeng” “Teringin nak besarkan prospek klien. Ada cara lain tak?”</h5>
                             <p>Kak Sin</p>
                             <p>Vendor Pelamin</p>
@@ -216,7 +216,7 @@ function Index(){
             {/* <IndexPackage/> */}
             <div className="row">
                 <div className="container container-4">
-                    <img src="/static/images/logo/logo-official.png"/>
+                    <img src="/images/logo/logo-official.png"/>
                     <p>Hubungi kami untuk keterangan lanjut</p>
                     <button type="button" className="btn btn-mesej">Mesej</button>
                     <a href="">info@plankawen.com</a>

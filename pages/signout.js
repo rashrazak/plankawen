@@ -1,9 +1,11 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useContext} from 'react'
 import firebase from '../config/firebaseConfig'
+import {LSContext} from '../context/LSContext'
 
 function signout() {
     useEffect(() => {
         localStorage.removeItem('clientCtx')
+        localStorage.removeItem('user');
         let y = firebase.signOut()
         y.then(()=>{
             window.location.href = "/"
