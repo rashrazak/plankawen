@@ -118,41 +118,47 @@ function SearchExtraService({serviceName, returnService}) {
     }
     return (
         <div>
-            <div style={{margin:'50px'}}>
+            <div className="form-width">
                 <p>Pilihan Servis Tambahan</p>
-                {
-                    vendorSearch ?
-                    <SearchBox
-                        placeholder="Cari Vendor Anda"
-                        data={vendorSearch}
-                        onSelect={record => {
-                            console.log(record)
-                            setVendor(record.key)
-                        }}
-                        onFocus={(e) => {
-                            console.log(e)
-                            setVendor('')
-                        }}
-                        inputBoxHeight="70px"
-                        inputBoxBorderColor="#EAEAEA"
-                    />
-                    :''
-                }
-                
-                <button onClick={()=>searchVendor()}>SearchVendor</button>
-                {
-                    viewAll?
-                    <div>
-                        <div onClick={()=> setHarga(!harga)} >Harga {harga == true?'Max':'Min'}</div>
-                        <div onClick={()=> setAge(!age)} >Age {age == true?'Baru':'Lama'}</div>
+                <div className="div-search-sort">
+                    <div className="searc-box-div">                    
+                    {
+                        vendorSearch ?
+                        <SearchBox
+                            placeholder="Cari Vendor Anda"
+                            data={vendorSearch}
+                            onSelect={record => {
+                                console.log(record)
+                                setVendor(record.key)
+                            }}
+                            onFocus={(e) => {
+                                console.log(e)
+                                setVendor('')
+                            }}
+                            inputBoxHeight="40px"
+                            inputBoxBorderColor="#EAEAEA"
+                            className="hee"
+                        />
+                        :''
+                    }
+                    
+                    <button className="btn btn-seacrh" onClick={()=>searchVendor()}><img src="/images/icon/search.png"/></button>
                     </div>
-                    :''
-                }
-                
+
+                    {
+                        
+                        viewAll?
+                        <React.Fragment>
+                            <button className="btn btn-sort" onClick={()=> setHarga(!harga)} >Harga {harga == true?'Max':'Min'}</button>
+                            <button className="btn btn-sort" onClick={()=> setAge(!age)} >Age {age == true?'Baru':'Lama'}</button>
+                        </React.Fragment>
+                        :''
+                    }
+                </div>
                 
                 {
                     viewAll && list.length >= 1?
-                    <div>
+                    <div className="div-result">
                         {
                             list.map((v,i) =>{
                                 var places = negeri
@@ -163,11 +169,13 @@ function SearchExtraService({serviceName, returnService}) {
                                     places = x[a-1]
                                 }
                                 return (
-                                    <div key={i}>
+                                    <div key={i} className="div-result-item">
                                         <img src={v.images.length >= 1 ? v.images[0].urlStorage : ''} />
-                                        <p onClick={()=>clickServiceToView(v)}>{v.serviceName}</p>
-                                        <p>{places}</p>
-                                        <p>Harga dari RM {v.serviceDetails.discount > 0 ? v.serviceDetails.hargaDiscount : v.serviceDetails.harga }</p>
+                                        <div className="result-item-desc">
+                                            <p onClick={()=>clickServiceToView(v)}>{v.serviceName}</p>
+                                            <p>{places}</p>
+                                            <p>Harga dari RM <span>{v.serviceDetails.discount > 0 ? v.serviceDetails.hargaDiscount : v.serviceDetails.harga }</span></p>
+                                        </div>
                                     </div>
                                 )
                             })
@@ -175,7 +183,7 @@ function SearchExtraService({serviceName, returnService}) {
 
                     </div>
                     : !viewAll && viewVendorList?
-                    <div>
+                    <div className="div-result">
                     {
                         viewVendorList.map((v,i) =>{
                                 console.log(v)
@@ -188,11 +196,13 @@ function SearchExtraService({serviceName, returnService}) {
                                     places = x[a-1]
                                 }
                                 return (
-                                    <div key={i}>
+                                    <div key={i} className="div-result-item">
                                         <img src={v.images.length >= 1 ? v.images[0].urlStorage : ''} />
-                                        <p onClick={()=>clickServiceToView(v)}>{v.serviceName}</p>
-                                        <p>{places}</p>
-                                        <p>Harga dari RM {v.serviceDetails.discount > 0 ? v.serviceDetails.hargaDiscount : v.serviceDetails.harga }</p>
+                                        <div className="result-item-desc">
+                                            <p onClick={()=>clickServiceToView(v)}>{v.serviceName}</p>
+                                            <p>{places}</p>
+                                            <p>Harga dari RM <span>{v.serviceDetails.discount > 0 ? v.serviceDetails.hargaDiscount : v.serviceDetails.harga }</span></p>
+                                        </div>
                                     </div>
                                 )
                             })
@@ -202,7 +212,21 @@ function SearchExtraService({serviceName, returnService}) {
                     :''
                 }
             </div>
-            
+        <style jsx>{`
+            .form-width { max-width: 790px; width: 100%;}
+            .searc-box-div { display: flex; max-width: 490px; width: 100%;}
+            .choose-category { display: flex; }
+            .btn-seacrh { background-color: #ED795F; border-radius: 4px; height: 40px;}
+            .div-search-sort { display: flex; justify-content: space-between; padding-bottom: 20px;}
+            .btn-sort { background-color: #FFF; border: 1px solid #EAEAEA;border-radius: 4px; width: 140px; height: 40px; font-style: normal;font-weight: normal;font-size: 0.75rem;color: #515D65; text-align: left; background-image: url('/images/icon/sort.png'); background-repeat: no-repeat; background-position: center right 10px; }
+            .div-result { display: flex; flex-wrap: wrap; justify-content: space-between;}
+            .div-result-item { max-width: 250px; margin-bottom: 41px;}
+            .div-result-item > img { width: 100%; height: 135px; border-radius: 8px; object-fit: cover;}
+            .result-item-desc { padding: 10px 0 0 10px;}
+            .result-item-desc > p:first-child { color: #2B2B2B;}
+            .result-item-desc > p { font-style: normal; font-weight: normal; font-size: 0.875rem; color: #75848E; margin: 0; line-height: 18px;}
+            .result-item-desc > p > span { font-weight:bold; color: #3E3E3E;}
+        `}</style>
         </div>
     )
 }

@@ -18,7 +18,7 @@ const Layout = ({ children, title = 'This is the default title' }) =>
         	<header>
         		
 				{
-					loginCtx == false ?
+					loginCtx == true ?
 
 					<div className="header-div header-padding">
 						<div className="">
