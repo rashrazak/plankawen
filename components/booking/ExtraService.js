@@ -23,6 +23,7 @@ function ExtraService() {
     const [name, setName] = useState('')
     const [viewData, setViewData] = useState(false) //switch
     const [viewService, setViewService] = useState(null) //data
+    const [viewVendor, setViewVendor] = useState(null)
 
     const eventSelection = (index, e) => {
         setSelect(selection)
@@ -38,10 +39,11 @@ function ExtraService() {
     }, [click])
 
 
-    const getReturnService = (data) =>{
+    const getReturnService = (data,vendor) =>{
         console.log(data)
         setViewData(true)
         setViewService(data)
+        setViewVendor(vendor)
     }
 
     return (
@@ -51,7 +53,7 @@ function ExtraService() {
                     viewData && viewService ?
                     <React.Fragment>
                         <div>
-                            <ViewExtraService sendData={viewService} closeData={setViewData}/>
+                            <ViewExtraService sendData={viewService} sendVendor={viewVendor} closeData={setViewData}/>
                         </div>
                     </React.Fragment>
                     :

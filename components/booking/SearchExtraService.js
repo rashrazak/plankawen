@@ -92,7 +92,6 @@ function SearchExtraService({serviceName, returnService}) {
 
 
     useEffect(() => {
-        console.log(vendor)
         if (vendor == '') {
             setViewAll(true)
         }else if(vendor && list && vendorList && !viewAll){
@@ -102,10 +101,7 @@ function SearchExtraService({serviceName, returnService}) {
             let vl = vendorList
             let vend = vl.filter((v,i)=>v.namaSyarikat == vd)
             let result = l.filter((v,i)=>v.email == vend[0].email)
-            console.log(list)
-            console.log(vendor)
-            console.log(vend)
-            console.log(result)
+           
             setViewVendorList(result)
         }
     }, [vendor, viewAll])
@@ -113,8 +109,16 @@ function SearchExtraService({serviceName, returnService}) {
 
 
 
-    function clickServiceToView(v){
-        returnService(v)
+    function clickServiceToView(data){
+        console.log(vendorList)
+        console.log(data)
+        let vl = vendorList
+        let x = vl.filter((v,i)=>data.email == v.email)
+        returnService(data, x[0])
+    }
+
+    function searchVendor(){
+        setViewAll(false)
     }
     return (
         <div>
@@ -165,7 +169,7 @@ function SearchExtraService({serviceName, returnService}) {
                                 return (
                                     <div key={i}>
                                         <img src={v.images.length >= 1 ? v.images[0].urlStorage : ''} />
-                                        <p onClick={()=>clickServiceToView(v)}>{v.serviceName}</p>
+                                        <p onClick={()=>clickServiceToView(v)}> <u>{v.serviceName}</u></p>
                                         <p>{places}</p>
                                         <p>Harga dari RM {v.serviceDetails.discount > 0 ? v.serviceDetails.hargaDiscount : v.serviceDetails.harga }</p>
                                     </div>
@@ -190,7 +194,7 @@ function SearchExtraService({serviceName, returnService}) {
                                 return (
                                     <div key={i}>
                                         <img src={v.images.length >= 1 ? v.images[0].urlStorage : ''} />
-                                        <p onClick={()=>clickServiceToView(v)}>{v.serviceName}</p>
+                                        <p onClick={()=>clickServiceToView(v)}> <u>{v.serviceName}</u></p>
                                         <p>{places}</p>
                                         <p>Harga dari RM {v.serviceDetails.discount > 0 ? v.serviceDetails.hargaDiscount : v.serviceDetails.harga }</p>
                                     </div>

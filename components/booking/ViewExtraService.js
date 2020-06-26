@@ -2,7 +2,7 @@ import React, {useContext, useState, useEffect} from 'react'
 // import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 // import '../../css/venueform.css'
 
-function ViewExtraService({sendData, closeData}) {
+function ViewExtraService({sendData, closeData, sendVendor}) {
     
     const [select, setSelect] = useState(false)
 
@@ -309,7 +309,15 @@ function ViewExtraService({sendData, closeData}) {
 
                 <h5>Extra:</h5>
                 <p>{about.extra}</p>
-
+                
+                {
+                    sendVendor?
+                    <div>
+                        <img src={sendVendor.profileImage ? sendVendor.profileImage :''} alt=""/>
+                        <p>{sendVendor.namaSyarikat}</p>
+                    </div>
+                    :''
+                }
                 <div>
                     <button onClick={()=>selectService(false)}>Batal</button>
                     <button onClick={()=>selectService(true)}>Pilih</button>
