@@ -6,6 +6,7 @@ import Router from 'next/router';
 import '../css/bootstrap.min.css'
 import '../css/global.css'
 import '../css/index.css'
+import "react-datepicker/dist/react-datepicker.css";
 
 
 
