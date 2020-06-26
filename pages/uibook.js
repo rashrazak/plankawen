@@ -1,10 +1,13 @@
 import React from 'react'
 import Layout from '../components/Header'
-import SideBarBook from '../components/book/SideBar'
-import SelectState from '../components/book/SelectState'
-import DatePicker from '../components/book/DatePicker'
-import TimePicker from '../components/book/TimePicker'
-import SelectBookType from '../components/book/SelectBookType'
+import SideBarBook from '../components/booking/SideBar'
+import SelectState from '../components/booking/SelectState'
+import DatePicker from '../components/booking/DatePicker'
+import TimePicker from '../components/booking/TimePicker'
+import SelectBookType from '../components/booking/SelectBookType'
+import MaklumatTempahan from '../components/booking/MaklumatTempahan'
+import MaklumatPeribadi from '../components/booking/MaklumatPeribadi'
+import Pengesahan from '../components/booking/Pengesahan'
 
 function uibook() {
     return (
@@ -16,13 +19,16 @@ function uibook() {
                     <DatePicker/>
                     <TimePicker/>
                     <SelectBookType/>
+                    <MaklumatTempahan/>
+                    <MaklumatPeribadi/>
+                    <Pengesahan/>
                 </div>
                 <SideBarBook/>
             </div>
             <style jsx>{`
                 .booking-master { display: flex; }
-                .booking-container { width: calc(100vw - 300px); padding: 50px 0 20px 120px;}
-                h2 { font-style: normal;font-weight: normal;font-size: 1rem;color: #3E3E3E;}
+                .booking-container { width: calc(100vw - 300px); padding: 50px 0 20px 120px; }
+                h2 { font-style: normal;font-weight: normal;font-size: 1rem;color: #3E3E3E; }
             `}</style>
         </Layout>
     )

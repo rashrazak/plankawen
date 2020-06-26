@@ -18,7 +18,7 @@ function DatePicker() {
                 />
             </div>
             <style jsx>{`
-                .form-width { width: 490px; margin-bottom: 10px;}
+                .form-width { max-width: 490px; margin-bottom: 10px;}
                 label { font-style: normal;font-weight: normal;font-size: 0.875rem;color: #75848E;}
                 .react-datepicker-wrapper { width: 100%;}
             `}</style>
