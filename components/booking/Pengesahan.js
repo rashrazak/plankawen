@@ -12,7 +12,7 @@ function Pengesahan() {
                 <button type="button" className="btn btn-tempah">Tempah</button>
             </div>
             <style jsx>{`
-                .form-width { max-width: 490px; margin-bottom: 20px;}
+                .form-width { max-width: 490px; margin: auto; margin-bottom: 20px; }
                 .div-pengesahan { background-color: #FFF; box-shadow: 0px 6px 15px rgba(117, 132, 142, 0.3); padding: 20px; }
                 .div-pengesahan > div { display: flex; justify-content: flex-start; margin-top: 12px;}
                 h2 { font-style: normal; font-weight: normal; font-size: 1rem; color: #2B2B2B;}

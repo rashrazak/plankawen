@@ -8,6 +8,7 @@ import SelectBookType from '../components/booking/SelectBookType'
 import MaklumatTempahan from '../components/booking/MaklumatTempahan'
 import MaklumatPeribadi from '../components/booking/MaklumatPeribadi'
 import Pengesahan from '../components/booking/Pengesahan'
+import ThankYou from '../components/booking/ThankYou'
 
 function uibook() {
     return (
@@ -15,13 +16,14 @@ function uibook() {
             <div className="booking-master">
                 <div className="booking-container">
                     <h2>Butiran tempahan</h2>
-                    <SelectState/>
-                    <DatePicker/>
-                    <TimePicker/>
-                    <SelectBookType/>
+                    {/* <SelectState/> */}
+                    {/* <DatePicker/> */}
+                    {/* <TimePicker/> */}
+                    {/* <SelectBookType/> */}
                     <MaklumatTempahan/>
                     <MaklumatPeribadi/>
                     <Pengesahan/>
+                    {/* <ThankYou/> */}
                 </div>
                 <SideBarBook/>
             </div>
