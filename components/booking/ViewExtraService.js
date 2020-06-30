@@ -318,9 +318,9 @@ function ViewExtraService({sendData, closeData, sendVendor}) {
                     </div>
                     :''
                 }
-                <div>
-                    <button onClick={()=>selectService(false)}>Batal</button>
-                    <button onClick={()=>selectService(true)}>Pilih</button>
+                <div className="button-position">
+                    <button className="btn btn-batal" onClick={()=>selectService(false)}>Batal</button>
+                    <button className="btn btn-pilih" onClick={()=>selectService(true)}>Pilih</button>
                 </div>
             </div>
             <style jsx>{`
@@ -367,6 +367,9 @@ function ViewExtraService({sendData, closeData, sendVendor}) {
                 .btn-edit:hover, .btn-edit:focus, .btn-edit:active { box-shadow: none; transition: all 3.s }
                 .btn-save { background-color: #22bb33; color: #FFF; font-size: 12px; font-weight: 500;}
                 .icon-service{width:20%;}
+                .button-position { position: absolute; bottom: 10px; right: 30px;}
+                .btn-batal { border: 1px solid #F4F4F4; background-color: #F4F4F4; border-radius: 8px; font-style: normal; font-weight: 600;font-size: 0.875rem;text-align: center;color: #3E3E3E; height: 50px; width: 160px;}
+                .btn-pilih { background-color: #ED795F; border-radius: 8px; font-style: normal; font-weight: 600;font-size: 0.875rem;text-align: center;color: #FFF; height: 50px; width: 160px; background-image:url('/images/icon/arrow-right-white.png'); background-repeat: no-repeat; background-position: center right 10px; background-size: 25px;}
             `}</style>
         </div>
     )

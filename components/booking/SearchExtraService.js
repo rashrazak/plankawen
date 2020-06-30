@@ -224,7 +224,7 @@ function SearchExtraService({serviceName, returnService}) {
             .div-search-sort { display: flex; justify-content: space-between; padding-bottom: 20px;}
             .btn-sort { background-color: #FFF; border: 1px solid #EAEAEA;border-radius: 4px; width: 140px; height: 40px; font-style: normal;font-weight: normal;font-size: 0.75rem;color: #515D65; text-align: left; background-image: url('/images/icon/sort.png'); background-repeat: no-repeat; background-position: center right 10px; }
             .div-result { display: flex; flex-wrap: wrap; justify-content: space-between;}
-            .div-result-item { max-width: 250px; margin-bottom: 41px;}
+            .div-result-item { max-width: 250px; margin-bottom: 41px; cursor: pointer;}
             .div-result-item > img { width: 100%; height: 135px; border-radius: 8px; object-fit: cover;}
             .result-item-desc { padding: 10px 0 0 10px;}
             .result-item-desc > p:first-child { color: #2B2B2B;}

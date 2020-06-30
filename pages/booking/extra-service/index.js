@@ -1,7 +1,7 @@
 import React from 'react'
 import ExtraService from '../../../components/booking/ExtraService'
 import Layout from '../../../components/Header'
-import SideBookBar from '../../../components/book/SideBar'
+import SideBookBar from '../../../components/booking/SideBar'
 
 function index() {
     return (
