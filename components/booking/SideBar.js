@@ -1,13 +1,13 @@
 import React from 'react'
 
-function SideBar() {
+function SideBar({step}) {
     return (
         <div>
             <div className="container container-sidebar">
                 <div className="">
                    <div className="div-langkah">
                         <p>Langkah</p>
-                        <h4><span>01</span>/05</h4>
+                        <h4><span>{step}</span>/05</h4>
                    </div>
                    <div className="div-total">
                         <p>Subtotal <span>MYR 0.00</span></p>

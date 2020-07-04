@@ -1,23 +1,36 @@
-import React from 'react'
+import React,{useContext, useState, useEffect} from 'react'
+import {BookingMainContext} from '../../context/BookingMainContext'
+
 
 function SelectBookType() {
+    
+    const {setMain} = useContext(BookingMainContext)
+    const {setBookCtxType} = setMain
+
+    const [selectType, setSelectType] = useState('');
+
+    useEffect(() => {
+        if (selectType) {
+            setBookCtxType(selectType)
+        }
+    }, [selectType])
     return (
         <div className="form-width">
             <label>Pilihan tempahan</label>
             <div className="div-select-type">
-                <div className="">
+                <div className="" onClick={()=>setSelectType('venue-services')} >
                     <img src="/images/backgrounds/pilih-venue-placeholder.jpg"/>
                     <div className="select-type-words">
                         <p>Pilih venue</p>
                     </div>
                 </div>
-                <div className="">
+                <div className="" onClick={()=>setSelectType('package-services')} >
                     <img src="/images/backgrounds/pilih-package-placeholder.jpg"/>
                     <div className="select-type-words">
                         <p>Pilih pakej</p>
                     </div>
                 </div>
-                <div className="">
+                <div className="" onClick={()=>setSelectType('extra-services')} >
                     <img src="/images/backgrounds/servic-lain-placeholder.jpg"/>
                     <div className="select-type-words">
                         <p>Servis lain-lain</p>

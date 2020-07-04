@@ -6,11 +6,6 @@ const LSContextProvider = (props) => {
     const [clientCtx, setClientCtx] = useState(null)
     const [loginCtx, setLoginCtx] = useState(false)
 
-    //butiran tempahan
-    const [negeri, setNegeri] = useState('Kedah')
-    const [tarikh, setTarikh] = useState('29 Jun 2020')
-    const [masa, setMasa] = useState('1:00 PM')
-    const [jenisTempahan, setJenisTempahan] = useState('extra') //venue or extra
     //end butri tempahan
     const signOut = () => {
         localStorage.removeItem('user');
@@ -52,8 +47,7 @@ const LSContextProvider = (props) => {
     }, [])
 
     return (
-        <LSContext.Provider value={{loginCtx, setLoginCtx, setClientCtx, clientCtx, signOut, negeri, setNegeri, masa, 
-        setMasa, tarikh, setTarikh, jenisTempahan, setJenisTempahan}}>
+        <LSContext.Provider value={{loginCtx, setLoginCtx, setClientCtx, clientCtx, signOut}}>
             {props.children}
         </LSContext.Provider>
     )
