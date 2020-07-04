@@ -1,10 +1,11 @@
 import React, {useEffect, useContext, useState} from 'react'
 import Layout from '../components/Header'
 import SearchBox from 'react-search-box'
-// import '../css/index.css'
 import { LSContext } from '../context/LSContext'
 import Router from 'next/router';
 import IndexPackage from '../components/IndexPackage';
+import Button from 'react-bootstrap/Button'
+import Image from 'react-bootstrap/Image'
 
 function Index(){
     useEffect(() => {
@@ -49,8 +50,8 @@ function Index(){
                         <p>Di Plankawen, kami percaya Merancang Majlis Kahwin sepatutnya lebih mudah dan teratur, baik disebelah bakal Pengantin, mahupun Vendor.</p>
                         <div className="rancang-section">
                         {
-                            loginCtx == false ?
-                            <button type="button" className="btn btn-rancang" onClick={()=>countryFn()}>Mula merancang</button>
+                            loginCtx == true ?
+                            <Button bsPrefix="btn-rancang" onClick={()=>countryFn()}>Mula merancang</Button>
                             :
                             <div>
                                 {/* google npm react-search-box ada css attr */}
@@ -65,13 +66,13 @@ function Index(){
                                         inputBoxHeight="70px"
                                         inputBoxBorderColor="#EAEAEA"
                                     />
-                                    <button type="button" className="btn btn-rancang" onClick={()=>countryFn()}>Mula merancang</button>
+                                    <Button bsPrefix="btn-rancang" onClick={()=>countryFn()}>Mula merancang</Button>
                             </div>
                         }
                         </div>
                     </div>
-                    <div className="">
-                        <img src="/images/backgrounds/home/img-hero-placeholder.png"/>
+                    <div className="image-bg">
+                        <Image src="/images/backgrounds/home/img-hero-placeholder.png" fluid/>
                     </div>
                 </div>
             </div>
@@ -202,11 +203,11 @@ function Index(){
                         <h4>Sebelum itu, SIAPA ANDA?</h4>
                         <div className="">
                             <div className="">
-                                <button type="button" className="btn btn-pengatin" onClick={()=>redirectPK('login')}>Bakal Pengantin</button>
+                                <Button bsPrefix="btn-pengatin" onClick={()=>redirectPK('login')}>Bakal Pengantin</Button>
                                 <p>Ber-darah manis yang bakal diijabkabul</p>
                             </div>
                             <div className="">
-                                <button type="button" className="btn btn-vendor" onClick={()=>redirectPK('vendor')}>Vendor Servis</button>
+                                <Button bsPrefix="btn-vendor" onClick={()=>redirectPK('vendor')}>Vendor Servis</Button>
                                 <p>Mencari si darah manis untuk menggunakan servis saya.</p>
                             </div>
                         </div>
@@ -223,6 +224,7 @@ function Index(){
                 </div>
             </div>
             <style jsx>{`
+                .row { margin: 0;}
                 h2 { font-style: normal;font-weight: bold;font-size: 22px;text-align: center; color: #47CBC4; }
                 .available-servis { display: flex; justify-content: center; align-items: center; flex-wrap: wrap;}
                 .available-servis > div {  width: 190px; margin-top: 50px;}
@@ -240,7 +242,23 @@ function Index(){
                 .box-red-2{ background-color: #FED5C4; width: 500px; height: 600px;position: absolute;top: 130px;left: 0;z-index: -1;border-top-right-radius: 10px;border-bottom-right-radius: 10px;}
                 .row-comment { margin-top: 300px;}
                 .search-box { background-color: red; }
-                .rancang-section { position: relative ;}
+                .rancang-section { position: relative;}
+                @media screen and ( max-width: 480px) {
+                    .row-1 { height: 100%; }
+                    .box-red { width: 100%; height: 579px;}
+                    .box-red-2 { width: 100%; height: 100vh; }
+                    .container-1 { position: relative;}
+                    .container-1 > div:first-child {width: 100%;}
+                    .container-2 > div:nth-child(4) > div > div { max-width: 200%; width: 100%; }
+                    .fungsi-desc-container { flex-wrap: wrap; margin-top: 50px;}
+                    .btn-pengatin, .btn-vendor { width: 100%; }
+                    .btn-rancang { width: 30%; }
+                    .image-bg { position: absolute; top: 80px;width: 100%;overflow: hidden;left: -80%;z-index: -1;}
+                    .available-servis > div {  width: 50%; margin-top: 50px;}
+                    .row-comment { margin-top: 0;}
+                    .container-2 > div:nth-child(3) { flex-wrap: wrap; margin: 60px 0;}
+                    .container-2 > div:nth-child(3) > div { margin: 0;}
+                }
             `}</style>
         </Layout>
     )

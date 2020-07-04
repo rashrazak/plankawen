@@ -48,6 +48,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    flex-wrap: wrap;
+    padding: 20px;
     /* margin-top: 50px; */
 }
 .container-1 > div:first-child{
@@ -137,6 +139,7 @@
 .container-2 > div:nth-child(4) > div{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 .container-2 > div:nth-child(4) > div > div{
    text-align: center;
@@ -198,4 +201,8 @@
     color: #9B9B9B;
     font-size: 14px;
     display: block;
+}
+@media screen and (max-width: 480px) {
+    .btn-pengatin, .btn-vendor { width: 100%; }
+                    .btn-rancang { width: 30%; }
 }

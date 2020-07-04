@@ -3,10 +3,11 @@ import App from 'next/app';
 import LSContextProvider from '../context/LSContext'
 import BookingExtraContextProvider from '../context/BookingExtraContext'
 import Router from 'next/router';
-import '../css/bootstrap.min.css'
+// import '../css/bootstrap.min.css'
 import '../css/global.css'
 import '../css/index.css'
-import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker.css"
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 
