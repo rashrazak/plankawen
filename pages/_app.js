@@ -2,14 +2,11 @@ import React from 'react';
 import App from 'next/app';
 import LSContextProvider from '../context/LSContext'
 import BookingExtraContextProvider from '../context/BookingExtraContext'
-import Router from 'next/router';
-// import '../css/bootstrap.min.css'
+import BookingMainContextProvider from '../context/BookingMainContext'
 import '../css/global.css'
 import '../css/index.css'
 import "react-datepicker/dist/react-datepicker.css"
 import 'bootstrap/dist/css/bootstrap.min.css'
-
-
 
 
 const initialState = {
@@ -163,7 +160,9 @@ class MyApp extends App {
         return (
             <LSContextProvider>
               <BookingExtraContextProvider>
+              <BookingMainContextProvider>
                 <Component {...pageProps} />
+              </BookingMainContextProvider>
               </BookingExtraContextProvider>
             </LSContextProvider>
         );

@@ -154,7 +154,7 @@ function SearchExtraService({serviceName, returnService}) {
                         viewAll?
                         <React.Fragment>
                             <button className="btn btn-sort" onClick={()=> setHarga(!harga)} >Harga {harga == true?'Max':'Min'}</button>
-                            <button className="btn btn-sort" onClick={()=> setAge(!age)} >Age {age == true?'Baru':'Lama'}</button>
+                            <button className="btn btn-sort" onClick={()=> setAge(!age)} >Paling {age == true?'Baru':'Lama'}</button>
                         </React.Fragment>
                         :''
                     }
