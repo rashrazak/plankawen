@@ -42,8 +42,14 @@ function SelectBookType() {
                 label { font-style: normal;font-weight: normal;font-size: 1rem;color: #3E3E3E;}
                 .div-select-type { display: flex; justify-content: space-between;}
                 .div-select-type > div { cursor: pointer; border: 1px solid #F59A86; border-radius: 8px; width: 160px;}
+                .div-select-type > div:hover { background-color: #ED795F; transition: .3s all;}
+                .div-select-type > div:hover > div > p { color: #FFF;}
                 .div-select-type > div > img { border-top-right-radius: 8px; border-top-left-radius: 8px;}
                 .select-type-words > p { font-style: normal;font-weight: 600;font-size: 0.875rem;text-align: center;color: #ED795F; margin: 0; padding: 15px;}
+                @media screen and ( max-width: 480px) {
+                    .div-select-type { overflow: scroll;}
+                    .div-select-type > div { margin-right: 15px;}
+                }
             `}</style>
         </div>
     )

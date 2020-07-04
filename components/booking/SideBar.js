@@ -2,7 +2,7 @@ import React from 'react'
 
 function SideBar({step}) {
     return (
-        <div>
+        <div className="width">
             <div className="container container-sidebar">
                 <div className="">
                    <div className="div-langkah">
@@ -29,6 +29,10 @@ function SideBar({step}) {
                 .div-total > p > span { color: #2B2B2B; float: right;}
                 .div-total > p:last-child > span {font-weight: 600;}
                 .btn-review { background-color: #ED795F;mborder: 2px solid #ED795F;border-radius: 8px; font-style: normal;font-weight: 600;font-size: 1rem;text-align: center;color: #FFF; height: 50px; width: 100%; margin-top: 31px;}
+                @media screen and ( max-width: 480px) {
+                    .container-sidebar { height: 100%; width: 100%; padding: 20px;}
+                    .width { width: 100%;}
+                }
             `}</style>
         </div>
     )

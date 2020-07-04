@@ -79,7 +79,7 @@ const Layout = ({ children, title = 'This is the default title' }) =>
 				<Navbar.Collapse id="basic-navbar-nav">
 
 					{
-						loginCtx == false ?
+						loginCtx == true ?
 						<Nav className="ml-auto" style={styles.nav}>
 							<Nav.Link href="#home">Tentang Kami</Nav.Link>
 							<Nav.Link href="#link">Hubungi Kami</Nav.Link>

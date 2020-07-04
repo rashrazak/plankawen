@@ -33,9 +33,13 @@ function dateTime() {
                 <SideBarBook step={'01'}/>
             </div>
             <style jsx>{`
-                .booking-master { display: flex; display: flex;}
+                .booking-master { display: flex;}
                 .booking-container { width: calc(100vw - 300px); padding: 50px 0 20px 120px; position: relative;}
                 h2 { font-style: normal;font-weight: normal;font-size: 1rem;color: #3E3E3E; }
+                @media screen and ( max-width: 480px) {
+                    .booking-master { flex-wrap: wrap;}
+                    .booking-container { width: 100%; padding: 20px;}
+                }
             `}</style>
         </Layout>
     )
