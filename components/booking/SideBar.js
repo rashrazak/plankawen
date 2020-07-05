@@ -3,7 +3,7 @@ import React from 'react'
 function SideBar({step}) {
     return (
         <div className="width">
-            <div className="container container-sidebar">
+            <div className="container-sidebar">
                 <div className="">
                    <div className="div-langkah">
                         <p>Langkah</p>
@@ -20,7 +20,7 @@ function SideBar({step}) {
                 </div>
             </div>
             <style jsx>{`
-                .container-sidebar { background-color: #F5F7F8; width: 300px; height: calc(100vh - 57px); padding: 30px;}
+                .container-sidebar { background-color: #F5F7F8; width: 300px; height: calc(100vh - 57px); padding: 30px; margin-left: auto;}
                 .div-langkah { text-align: right;}
                 .div-langkah > p { font-style: normal;font-weight: normal;font-size: 1rem;color: #9B9B9B; margin: 0;}
                 .div-langkah > h4 { margin: 0; font-style: normal;font-weight: normal;font-size: 2rem;color: #9B9B9B;}
