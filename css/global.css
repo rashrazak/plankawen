@@ -74,10 +74,6 @@ footer{
 .ico-bell {
     width: 24px;
     height: 24px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
 }
 .user-oval {
     width: 45px;
