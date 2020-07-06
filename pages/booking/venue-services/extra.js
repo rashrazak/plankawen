@@ -5,16 +5,16 @@ import SideBookBar from '../../../components/booking/SideBar'
 import ButtonBack from '../../../components/booking/ButtonBack'
 import ButtonNext from '../../../components/booking/ButtonNext'
 
-function index() {
+function extra() {
     return (
         <Layout>
             <div className="booking-master">
                 <div className="booking-container">
                     <ButtonBack />
                     <ExtraService />
-                    <ButtonNext />
+                    <ButtonNext step={'03'} />
                 </div>
-                <SideBookBar step={'02'}/>
+                <SideBookBar/>
             </div>
             <style jsx>{`
                 .booking-master { display: flex; }
@@ -24,4 +24,4 @@ function index() {
     )
 }
 
-export default index
+export default extra

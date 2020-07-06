@@ -1,6 +1,7 @@
 import React,{useContext, useState, useEffect} from 'react'
 import {BookingMainContext} from '../../context/BookingMainContext'
 import Router from 'next/router'
+import * as ls from 'local-storage'
 
 function ButtonNext() {
 
@@ -11,7 +12,7 @@ function ButtonNext() {
 
     useEffect(() => {
         if (switching) {
-            if (Router.pathname == '/booking/date-time') {
+            if (Router.pathname === '/booking/date-time') {
                 if (bookCtxType && bookCtxNegeri && bookCtxDate && bookCtxTime) {
                     if (bookCtxType === 'venue-services') {
                         Router.push('/booking/venue-services')
@@ -20,11 +21,18 @@ function ButtonNext() {
                     }else if (bookCtxType === 'extra-services'){
                         Router.push('/booking/extra-services')
                     }
+
                 }else{
     
                     alert('Sila isikan semua ruang')
     
                 }               
+            }else if(Router.pathname === '/booking/venue-services'){
+                Router.push('/booking/venue-services/extra')
+            }else if(Router.pathname === '/booking/venue-services/extra'){
+                Router.push('/booking/venue-services/tnc')
+            }else if(Router.pathname === '/booking/extra-services'){
+                Router.push('/booking/extra-services/tnc')
             }
                 setSwitching(false);
 

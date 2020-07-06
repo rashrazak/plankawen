@@ -40,35 +40,48 @@ function login() {
 
     async function loginWithSocial() {
         var result = await firebase.signInWithSocial();
-        console.log(result.credential.accessToken);
-        console.log(result.user);
         var user = result.user;
 
         try{
             let exist = await firebase.check(user.email)
             let result = await exist.docs
+            
             if (result.length == 1) {
 
-                if (user != null) {
-                    setClientCtx({
-                        name:user.displayName,
-                        email:user.email,
-                        photoUrl: user.photoURL,
-                        emailVerified: user.emailVerified,
-                        uid: user.uid
+                result.map(doc =>{
+                    let x = doc.data()
+                    if (user != null) {
+                        setClientCtx({
+                            name:x.nama,
+                            email:x.email,
+                            photoUrl: user.photoURL,
+                            emailVerified: user.emailVerified,
+                            uid: user.uid,
+                            phone:x.phone,
+                            documentId:x.documentId,
+                            dateCreated:x.dateCreated,
+                            clientType:x.clientType
+                            
+                        })
+    
+                        localStorage.setItem('client', JSON.stringify({
+                            name:x.nama,
+                            email:x.email,
+                            photoUrl: user.photoURL,
+                            emailVerified: user.emailVerified,
+                            uid: user.uid,
+                            phone:x.phone,
+                            documentId:x.documentId,
+                            dateCreated:x.dateCreated,
+                            clientType:x.clientType
+                            
+                        }))
+                        setLoginCtx(true)
                         
-                    })
+                    }
+                })
 
-                    localStorage.setItem('clientCtx', JSON.stringify({
-                        name:user.displayName,
-                        email:user.email,
-                        photoUrl: user.photoURL,
-                        emailVerified: user.emailVerified,
-                        uid: user.uid
-                    }))
-                    setLoginCtx(true)
-                    
-                }
+                
             }else{
                 alert('Please Signup as client');
                 Router.push(`/signup?email=${user.email}`)
@@ -101,19 +114,28 @@ function login() {
                         console.log(user)
                         if (user != null) {
                             setClientCtx({
-                                name:user.displayName,
-                                email:user.email,
+                                name:x.nama,
+                                email:x.email,
                                 photoUrl: user.photoURL,
                                 emailVerified: user.emailVerified,
-                                uid: user.uid
+                                uid: user.uid,
+                                phone:x.phone,
+                                documentId:x.documentId,
+                                dateCreated:x.dateCreated,
+                                clientType:x.clientType
                                 
                             })
                             localStorage.setItem('client', JSON.stringify({
-                                name:user.displayName,
-                                email:user.email,
+                                name:x.nama,
+                                email:x.email,
                                 photoUrl: user.photoURL,
                                 emailVerified: user.emailVerified,
-                                uid: user.uid
+                                uid: user.uid,
+                                phone:x.phone,
+                                documentId:x.documentId,
+                                dateCreated:x.dateCreated,
+                                clientType:x.clientType
+                                
                             }))
                             setLoginCtx(true)
                             window.location.href = "/"
@@ -148,7 +170,7 @@ function login() {
                     <div className="auth-form-section">
                         <h1>Gunakan alamat emel anda untuk <b>log</b> atau <b>daftar masuk</b></h1>
 
-                        <p className="title-p">PILIH AKAUN ANDA</p>
+                        <p className="title-p">PILIH AKAUN ANDA (DAFTAR MASUK)</p>
                         <div className="choose-your-fighter">
                             <div onClick={()=>setUrl('login')} className="">
                                 <div className="image-bakal-pengantin">

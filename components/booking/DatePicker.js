@@ -2,6 +2,8 @@ import React,{useContext, useState, useEffect} from 'react'
 import DatePickerReact from 'react-datepicker'
 import {BookingMainContext} from '../../context/BookingMainContext'
 import * as ls from 'local-storage'
+import parseISO from 'date-fns/parseISO'
+import moment from 'moment'
 
 
 function DatePicker() {
@@ -14,11 +16,19 @@ function DatePicker() {
 
     
     useEffect(() => {
-        if (selectDate != '' && selectDate != new Date()) {
-            setBookCtxDate(selectDate)
+        
+        if (selectDate) {
+            if (selectDate != new Date()) {
+                let y = moment(selectDate).format('DD/MM/YYYY')
+                setBookCtxDate(y)
+            }
         }else if (bookCtxDate){
-            setSelectDate(bookCtxDate)
+            let x = moment(bookCtxDate).toDate()
+            setSelectDate(x)
+        }else{
+            setSelectDate(new Date())
         }
+        console.log(selectDate)
         
     }, [selectDate])
 
@@ -34,7 +44,6 @@ function DatePicker() {
            if (index != 0 && index != 1) {
                x = [...x,subDays(index)]
            }
-
            if (index == 29) {
               return x
            }
@@ -49,6 +58,7 @@ function DatePicker() {
                 <DatePickerReact
                     showPopperArrow={true}
                     selected={selectDate}
+                    dateFormat={'dd/MM/yyyy'}
                     onChange={date => setSelectDate(date)}
                     className="form-control-date"
                     excludeDates={first30Days()}

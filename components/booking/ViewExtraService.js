@@ -1,8 +1,9 @@
 import React, {useContext, useState, useEffect} from 'react'
-// import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-// import '../../css/venueform.css'
-
+import {BookingMainContext} from '../../context/BookingMainContext' 
 function ViewExtraService({sendData, closeData, sendVendor}) {
+
+    const {setMain} = useContext(BookingMainContext)
+    const {mainCtxFnSelect} = setMain
     
     const [select, setSelect] = useState(false)
 
@@ -26,11 +27,6 @@ function ViewExtraService({sendData, closeData, sendVendor}) {
     const [details, setdetails] = useState([])
     const [about, setabout] = useState([])
 
-    useEffect(() => {
-        if (select) {
-            // send to context
-        }
-    },[select])
 
     useEffect(() => {
 
@@ -62,6 +58,7 @@ function ViewExtraService({sendData, closeData, sendVendor}) {
 
     const selectService = (x) =>{
         if (x) {
+            mainCtxFnSelect(serviceType,sendData)
             setSelect(true)
         }
 

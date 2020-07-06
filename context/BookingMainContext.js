@@ -9,6 +9,10 @@ const BookingMainContextProvider = (props) => {
     const [bookCtxDate, setBookCtxDate] = useState('')
     const [bookCtxTime, setBookCtxTime] = useState('')
 
+    const [bookCtxName, setBookCtxName] = useState('')
+    const [bookCtxEmail, setBookCtxEmail] = useState('')
+    const [bookCtxPhone, setBookCtxPhone] = useState('')
+
     useEffect(() => {
         if (bookCtxType && bookCtxNegeri && bookCtxDate && bookCtxTime) {
 
@@ -37,12 +41,12 @@ const BookingMainContextProvider = (props) => {
         }
         data = [...data, {[serviceType]:serviceData}]
 
-        console.log(data)
+        ls.set('service-list', data)
     }
 
     return (
-        <BookingMainContext.Provider value={{getMain:{bookCtxType,bookCtxNegeri,bookCtxDate,bookCtxTime},
-        setMain:{setBookCtxType,setBookCtxNegeri,setBookCtxDate,setBookCtxTime}}}>
+        <BookingMainContext.Provider value={{getMain:{bookCtxType,bookCtxNegeri,bookCtxDate,bookCtxTime, bookCtxName, bookCtxEmail, bookCtxPhone},
+        setMain:{setBookCtxType,setBookCtxNegeri,setBookCtxDate,setBookCtxTime,mainCtxFnSelect, setBookCtxName, setBookCtxEmail, setBookCtxPhone}}}>
             {props.children}
         </BookingMainContext.Provider>
     )

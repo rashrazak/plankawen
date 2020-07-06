@@ -6,6 +6,7 @@ import Router from 'next/router';
 import IndexPackage from '../components/IndexPackage';
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
+import * as ls from 'local-storage'
 
 function Index(){
     useEffect(() => {
@@ -33,8 +34,10 @@ function Index(){
     const {loginCtx} = useContext(LSContext)
 
     const countryFn = () =>{
+        ls.remove('booking-main')
+        ls.remove('service-list')
         let state = stateMy;
-        Router.push('/search?state='+state)
+        Router.push('/booking/date-time?state='+state)
     }
 
     const redirectPK = (x) =>{

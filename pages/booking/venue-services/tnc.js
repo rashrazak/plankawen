@@ -1,20 +1,23 @@
 import React from 'react'
-import ExtraService from '../../../components/booking/ExtraService'
+import MaklumatTempahan from '../../../components/booking/MaklumatTempahan'
+import MaklumatPeribadi from '../../../components/booking/MaklumatPeribadi'
+import Pengesahan from '../../../components/booking/Pengesahan'
 import Layout from '../../../components/Header'
 import SideBookBar from '../../../components/booking/SideBar'
 import ButtonBack from '../../../components/booking/ButtonBack'
 import ButtonNext from '../../../components/booking/ButtonNext'
 
-function index() {
+function tnc() {
     return (
         <Layout>
             <div className="booking-master">
                 <div className="booking-container">
                     <ButtonBack />
-                    <ExtraService />
-                    <ButtonNext />
+                    <MaklumatTempahan/>
+                    <MaklumatPeribadi/>
+                    <Pengesahan/>
                 </div>
-                <SideBookBar step={'02'}/>
+                <SideBookBar  step={'04'} />
             </div>
             <style jsx>{`
                 .booking-master { display: flex; }
@@ -24,4 +27,4 @@ function index() {
     )
 }
 
-export default index
+export default tnc
