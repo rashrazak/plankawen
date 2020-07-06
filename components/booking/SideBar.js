@@ -1,14 +1,88 @@
 import React, {useState,useContext, useEffect} from 'react'
 import {BookingMainContext} from '../../context/BookingMainContext'
+import * as ls from 'local-storage'
+import Router from 'next/router'
 
 function SideBar({step}) {
 
     const {getMain} = useContext(BookingMainContext)
     const {bookCtxNegeri,bookCtxDate,bookCtxTime} = getMain
 
-    useEffect(() => {
+    const [allService, setAllService] = useState(null)
+    
+    const [serviceList, setServiceList] = useState(null)
+    const [venue, setVenue] = useState(null)
+    const [totalPrice, setTotalPrice] = useState(0)
+
+    // useEffect(() => {
+    //     if (!allService && ls('service-list')) {
+    //         getPrice(ls.get('service-list'))
+    //         getVenue(ls.get('service-list'))
+    //         getExtraService(ls.get('service-list'))
+    //         setAllService(ls.get('service-list'))
+    //     }else if(allService !== ls.get('service-list')){
+    //         // setAllService(null)
+    //     }
         
-    }, [getMain])
+    // }, [allService])
+
+    function getPrice(param){
+        let price = 0
+
+        if (param.length >=1) {
+            param.map((v,i)=>{
+                let x = Object.keys(v)
+                x = x[0]
+                let data = v[x]
+                let w = data.serviceDetails.hargaDiscount ? data.serviceDetails.hargaDiscount : data.serviceDetails.harga ;
+                w = parseInt(w)
+                price = price + w
+                
+                if (i == param.length - 1) {
+                    setTotalPrice(price)
+                }
+            
+            })
+        }
+
+        
+    }
+
+    function getVenue(param){
+        param.map((v,i)=>{
+            let x = Object.keys(v)
+            x = x[0]
+            let data = v[x]
+
+            if (x =='Venue') {
+                setVenue(data)
+            }
+        })
+    }
+
+    function getExtraService(param){
+        let arr = []
+
+        param.map((v,i)=>{
+            let x = Object.keys(v)
+            x = x[0]
+            let data = v[x]
+
+            if (x !='Venue') {
+                arr = [...arr,data]
+            }
+
+            if (i == param.length - 1) {
+                if (data.length >= 1) {
+                    setServiceList(arr)
+                }
+            }
+        })
+    }
+
+    function openInNewTab(){
+        window.open('/review', '_blank')
+    }
 
     return (
         <div className="width">
@@ -41,15 +115,51 @@ function SideBar({step}) {
                            :
                            <p>-</p>
                        }
+
+                       {
+
+                        venue ? 
+                            <div>
+                                <label>Pilih Venue</label>
+                                <p>{venue.serviceName}</p>
+                                <p>{venue.serviceDetails.hargaDiscount ? `RM ${venue.serviceDetails.hargaDiscount}` : `RM ${venue.serviceDetails.harga}`  }</p>
+                            </div>
+
+                        :''
+                       }
+
+                       {
+                        serviceList ?
+                            <>
+                                <label>Servis tambahan</label>
+                                {
+                                    serviceList.map((v,i)=>{
+                                        let x = Object.keys(v)
+                                        x = x[0]
+                                        let data = v[x]
+                                        if (x != 'Venue') {
+                                            return(
+                                                <div key={i}>
+                                                    <p>{data.serviceType}</p>
+                                                    <p>{data.serviceDetails.hargaDiscount ? `RM ${data.serviceDetails.hargaDiscount}` : `RM ${data.serviceDetails.harga}`  }</p>
+                                                </div>
+                                            )
+                                        }
+                                    })
+                                }
+                            </>
+                           :'-'
+                       }
+
                    </div>
                    <div className="div-total">
-                        <p>Subtotal <span>MYR 0.00</span></p>
-                        <p>Discount <span>MYR 0.00</span></p>
-                        <p>Total <span>MYR 0.00</span></p>
+                        {/* <p>Subtotal <span>MYR 0.00</span></p> */}
+                        {/* <p>Discount <span>MYR 0.00</span></p> */}
+                        <p>Total <span>MYR {totalPrice}</span></p>
                    </div>
                 </div>
                 <div className="">
-                    <button type="button" className="btn btn-review">Review</button>
+                    <button type="button" className="btn btn-review" onClick={()=> openInNewTab()}>Review</button>
                 </div>
             </div>
             <style jsx>{`

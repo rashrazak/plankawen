@@ -68,12 +68,10 @@ function SearchExtraService({serviceName, returnService}) {
             if (harga == false) {
                 let l = list
                 let l1 = l.sort((a,b) =>a.serviceDetails.harga - b.serviceDetails.harga)
-                console.log(l1)
                 setList(l1)
             }else{
                 let l = list
                 let l1 = l.sort((a,b) =>b.serviceDetails.harga - a.serviceDetails.harga)
-                console.log(l1)
                 setList(l1)
             }
     
@@ -81,17 +79,15 @@ function SearchExtraService({serviceName, returnService}) {
             if (age == false) {
                 let l = list
                 let l1 = l.sort((a,b) =>a.getTime - b.getTime)
-                console.log(l1)
                 setList(l1)
             }else{
                 let l = list
                 let l1 = l.sort((a,b) =>b.getTime - a.getTime)
-                console.log(l1)
                 setList(l1)
             }         
         }
         
-    }, [list, harga, age])
+    }, [list])
 
 
     useEffect(() => {

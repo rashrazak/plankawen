@@ -1,5 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react'
 import {BookingMainContext} from '../../context/BookingMainContext' 
+import Router  from 'next/router'
 function ViewExtraService({sendData, closeData, sendVendor}) {
 
     const {setMain} = useContext(BookingMainContext)
@@ -60,6 +61,9 @@ function ViewExtraService({sendData, closeData, sendVendor}) {
         if (x) {
             mainCtxFnSelect(serviceType,sendData)
             setSelect(true)
+            if (serviceType == 'Venue') {
+                Router.push('/booking/venue-services/extra')
+            }
         }
 
         closeData(false)

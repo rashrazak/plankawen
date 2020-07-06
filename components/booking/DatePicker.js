@@ -12,7 +12,7 @@ function DatePicker() {
     const {setBookCtxDate} = setMain
     const {bookCtxDate} = getMain
 
-    const [selectDate, setSelectDate] = useState('');
+    const [selectDate, setSelectDate] = useState(new Date());
 
     
     useEffect(() => {
@@ -21,14 +21,11 @@ function DatePicker() {
             if (selectDate != new Date()) {
                 let y = moment(selectDate).format('DD/MM/YYYY')
                 setBookCtxDate(y)
+            }else if (bookCtxDate){
+                let x = moment(bookCtxDate).toDate()
+                setSelectDate(x)
             }
-        }else if (bookCtxDate){
-            let x = moment(bookCtxDate).toDate()
-            setSelectDate(x)
-        }else{
-            setSelectDate(new Date())
         }
-        console.log(selectDate)
         
     }, [selectDate])
 

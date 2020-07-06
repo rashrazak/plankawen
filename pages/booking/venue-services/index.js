@@ -12,7 +12,6 @@ function index() {
                 <div className="booking-container">
                     <ButtonBack />
                     <VenueService />
-                    <ButtonNext/>
                 </div>
                 <SideBarBook step={'02'}/>
             </div>
