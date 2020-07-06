@@ -1,6 +1,15 @@
-import React from 'react'
+import React, {useState,useContext, useEffect} from 'react'
+import {BookingMainContext} from '../../context/BookingMainContext'
 
 function SideBar({step}) {
+
+    const {getMain} = useContext(BookingMainContext)
+    const {bookCtxNegeri,bookCtxDate,bookCtxTime} = getMain
+
+    useEffect(() => {
+        
+    }, [getMain])
+
     return (
         <div className="width">
             <div className="container-sidebar">
@@ -8,6 +17,30 @@ function SideBar({step}) {
                    <div className="div-langkah">
                         <p>Langkah</p>
                         <h4><span>{step}</span>/05</h4>
+                   </div>
+                   <div className="div-review-1">
+                       <label>Pilihan negeri</label>
+                       {
+                           bookCtxNegeri ?
+                           <p>{bookCtxNegeri}</p>
+                           :
+                           <p>-</p>
+                       }
+                       <label>Pilihan tarikh</label>
+                       {
+                           bookCtxDate ?
+                           <p>{bookCtxDate}</p>
+                           :
+                           <p>-</p>
+                       }
+                      
+                       <label>Pilihan masa</label>
+                       {
+                           bookCtxTime ?
+                           <p>{bookCtxTime}</p>
+                           :
+                           <p>-</p>
+                       }
                    </div>
                    <div className="div-total">
                         <p>Subtotal <span>MYR 0.00</span></p>
@@ -29,6 +62,8 @@ function SideBar({step}) {
                 .div-total > p > span { color: #2B2B2B; float: right;}
                 .div-total > p:last-child > span {font-weight: 600;}
                 .btn-review { background-color: #ED795F;mborder: 2px solid #ED795F;border-radius: 8px; font-style: normal;font-weight: 600;font-size: 1rem;text-align: center;color: #FFF; height: 50px; width: 100%; margin-top: 31px;}
+                label { font-style: normal; font-weight: normal;font-size: 0.75rem; color: #75848E; margin: 0;}
+                .div-review-1 > p { font-style: normal; font-weight: normal;font-size: 0.875rem;color: #2B2B2B; margin-bottom: 5px;}
                 @media screen and ( max-width: 480px) {
                     .container-sidebar { height: 100%; width: 100%; padding: 20px;}
                     .width { width: 100%;}
