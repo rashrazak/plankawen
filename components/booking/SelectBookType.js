@@ -18,19 +18,19 @@ function SelectBookType() {
         <div className="form-width">
             <label>Pilihan tempahan</label>
             <div className="div-select-type">
-                <div className="" onClick={()=>setSelectType('venue-services')} >
+                <div className={selectType == 'venue-services' ?'active':''} onClick={()=>setSelectType('venue-services')} >
                     <img src="/images/backgrounds/pilih-venue-placeholder.jpg"/>
                     <div className="select-type-words">
                         <p>Pilih venue</p>
                     </div>
                 </div>
-                <div className="" onClick={()=>setSelectType('package-services')} >
+                <div className={selectType == 'package-services' ?'active':''} onClick={()=>setSelectType('package-services')} >
                     <img src="/images/backgrounds/pilih-package-placeholder.jpg"/>
                     <div className="select-type-words">
                         <p>Pilih pakej</p>
                     </div>
                 </div>
-                <div className="" onClick={()=>setSelectType('extra-services')} >
+                <div className={selectType == 'extra-services' ?'active':''} onClick={()=>setSelectType('extra-services')} >
                     <img src="/images/backgrounds/servic-lain-placeholder.jpg"/>
                     <div className="select-type-words">
                         <p>Servis lain-lain</p>
@@ -44,8 +44,10 @@ function SelectBookType() {
                 .div-select-type > div { cursor: pointer; border: 1px solid #F59A86; border-radius: 8px; width: 160px;}
                 .div-select-type > div:hover { background-color: #ED795F; transition: .3s all;}
                 .div-select-type > div:hover > div > p { color: #FFF;}
+                .active    { background-color: #ED795F; transition: .3s all;}  
                 .div-select-type > div > img { border-top-right-radius: 8px; border-top-left-radius: 8px;}
                 .select-type-words > p { font-style: normal;font-weight: 600;font-size: 0.875rem;text-align: center;color: #ED795F; margin: 0; padding: 15px;}
+                .active > div > p { color: #FFF;} 
                 @media screen and ( max-width: 480px) {
                     .div-select-type { overflow: scroll;}
                     .div-select-type > div { margin-right: 15px;}

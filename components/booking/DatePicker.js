@@ -1,20 +1,25 @@
 import React,{useContext, useState, useEffect} from 'react'
 import DatePickerReact from 'react-datepicker'
 import {BookingMainContext} from '../../context/BookingMainContext'
+import * as ls from 'local-storage'
 
 
 function DatePicker() {
 
-    const {setMain} = useContext(BookingMainContext)
+    const {setMain, getMain} = useContext(BookingMainContext)
     const {setBookCtxDate} = setMain
+    const {bookCtxDate} = getMain
 
     const [selectDate, setSelectDate] = useState('');
 
     
     useEffect(() => {
-        if (selectDate != new Date()) {
+        if (selectDate != '' && selectDate != new Date()) {
             setBookCtxDate(selectDate)
+        }else if (bookCtxDate){
+            setSelectDate(bookCtxDate)
         }
+        
     }, [selectDate])
 
     
@@ -31,7 +36,6 @@ function DatePicker() {
            }
 
            if (index == 29) {
-               console.log(x)
               return x
            }
         }
@@ -43,11 +47,12 @@ function DatePicker() {
             <label>Pilih tarikh</label>
             <div>
                 <DatePickerReact
-                    showPopperArrow={false}
+                    showPopperArrow={true}
                     selected={selectDate}
                     onChange={date => setSelectDate(date)}
                     className="form-control-date"
                     excludeDates={first30Days()}
+                    minDate={new Date()}
                     placeholderText="Pilih tarikh sebulan awal"
                 />
             </div>

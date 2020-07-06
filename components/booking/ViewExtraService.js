@@ -54,6 +54,12 @@ function ViewExtraService({sendData, closeData, sendVendor}) {
         
     }, [sendData])
 
+    useEffect(() => {
+        if (select) {
+            
+        }
+    }, [select])
+
     const selectService = (x) =>{
         if (x) {
             setSelect(true)

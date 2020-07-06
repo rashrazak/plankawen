@@ -1,12 +1,13 @@
 import React, {useState, useEffect, useContext} from 'react'
 import firebase from '../../config/firebaseConfig'
-import {LSContext} from '../../context/LSContext'
+import {BookingMainContext} from '../../context/BookingMainContext'
 import SearchBox from 'react-search-box'
 
 
 function SearchExtraService({serviceName, returnService}) {
 
-    const {negeri} = useContext(LSContext)
+    const {getMain} = useContext(BookingMainContext)
+    const {bookCtxNegeri} = getMain
 
     const [harga, setHarga] = useState(true) //true max,min false
     const [age, setAge] = useState(true) //true baru,lama false
@@ -24,8 +25,9 @@ function SearchExtraService({serviceName, returnService}) {
             setVendorSearch([])
             setList([])
             var totalVendor = [];
-            var resultService = await firebase.getServiceByState(negeri,serviceName);
-            // var result1 = await firebase.getVendorUsers(negeri)
+            var resultService = await firebase.getServiceByState(bookCtxNegeri,serviceName);
+            console.log(resultService)
+            // var result1 = await firebase.getVendorUsers(bookCtxNegeri)
             resultService = await resultService.docs
             if (resultService.length >= 1) {
                 resultService.map(async x =>{
@@ -53,11 +55,12 @@ function SearchExtraService({serviceName, returnService}) {
             
 
         }
-        if (serviceName && negeri) {
+        if (serviceName && bookCtxNegeri) {
             getVendorAndService()
         }
-
-    }, [serviceName, negeri])
+        console.log(bookCtxNegeri)
+        console.log(serviceName)
+    }, [serviceName, bookCtxNegeri])
 
     useEffect(() => {
         //sort for price and age
@@ -123,7 +126,12 @@ function SearchExtraService({serviceName, returnService}) {
     return (
         <div>
             <div className="form-width">
-                <p>Pilihan Servis Tambahan</p>
+                {
+                    serviceName == 'Venue' ?
+                    <p>Pilihan Venue</p>
+                    :
+                    <p>Pilihan Servis Tambahan</p>
+                }
                 <div className="div-search-sort">
                     <div className="searc-box-div">                    
                     {
@@ -165,18 +173,18 @@ function SearchExtraService({serviceName, returnService}) {
                     <div className="div-result">
                         {
                             list.map((v,i) =>{
-                                var places = negeri
-                                if (v.serviceDetails.alamatPenuh && v.serviceDetails.alamatPenuh.includes(negeri)) {
+                                var places = bookCtxNegeri
+                                if (v.serviceDetails.alamatPenuh && v.serviceDetails.alamatPenuh.includes(bookCtxNegeri)) {
                                     let x = v.serviceDetails.alamatPenuh
                                     x = x.split(', ')
-                                    let a = x.indexOf(negeri)
+                                    let a = x.indexOf(bookCtxNegeri)
                                     places = x[a-1]
                                 }
                                 return (
-                                    <div key={i} className="div-result-item">
+                                    <div key={i} className="div-result-item"  onClick={()=>clickServiceToView(v)}>
                                         <img src={v.images.length >= 1 ? v.images[0].urlStorage : ''} />
                                         <div className="result-item-desc">
-                                            <p onClick={()=>clickServiceToView(v)}>{v.serviceName}</p>
+                                            <p>{v.serviceName}</p>
                                             <p>{places}</p>
                                             <p>Harga dari RM <span>{v.serviceDetails.discount > 0 ? v.serviceDetails.hargaDiscount : v.serviceDetails.harga }</span></p>
                                         </div>
@@ -191,19 +199,19 @@ function SearchExtraService({serviceName, returnService}) {
                     {
                         viewVendorList.map((v,i) =>{
                                 console.log(v)
-                                var places = negeri
-                                if (v.serviceDetails.alamatPenuh && v.serviceDetails.alamatPenuh.includes(negeri)) {
+                                var places = bookCtxNegeri
+                                if (v.serviceDetails.alamatPenuh && v.serviceDetails.alamatPenuh.includes(bookCtxNegeri)) {
                                     let x = v.serviceDetails.alamatPenuh
                                     x = x.split(', ')
                                     console.log(x)
-                                    let a = x.indexOf(negeri)
+                                    let a = x.indexOf(bookCtxNegeri)
                                     places = x[a-1]
                                 }
                                 return (
-                                    <div key={i} className="div-result-item">
+                                    <div key={i} className="div-result-item"  onClick={()=>clickServiceToView(v)}>
                                         <img src={v.images.length >= 1 ? v.images[0].urlStorage : ''} />
                                         <div className="result-item-desc">
-                                            <p onClick={()=>clickServiceToView(v)}>{v.serviceName}</p>
+                                            <p x>{v.serviceName}</p>
                                             <p>{places}</p>
                                             <p>Harga dari RM <span>{v.serviceDetails.discount > 0 ? v.serviceDetails.hargaDiscount : v.serviceDetails.harga }</span></p>
                                         </div>

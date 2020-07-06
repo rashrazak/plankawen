@@ -5,21 +5,28 @@ import Router from 'next/router'
 function ButtonNext() {
 
     const {getMain} = useContext(BookingMainContext)
-    const {bookCtxType} = getMain
+    const {bookCtxType, bookCtxNegeri, bookCtxDate, bookCtxTime} = getMain
 
     const [switching, setSwitching] = useState(false);
 
     useEffect(() => {
         if (switching) {
-            if (bookCtxType === 'venue-services') {
-                Router.push('/booking/venue-services')
-            }else if (bookCtxType === 'package-services'){
-                Router.push('/booking/package-services')
-            }else if (bookCtxType === 'extra-services'){
-                Router.push('/booking/extra-services')
+            if (Router.pathname == '/booking/date-time') {
+                if (bookCtxType && bookCtxNegeri && bookCtxDate && bookCtxTime) {
+                    if (bookCtxType === 'venue-services') {
+                        Router.push('/booking/venue-services')
+                    }else if (bookCtxType === 'package-services'){
+                        Router.push('/booking/package-services')
+                    }else if (bookCtxType === 'extra-services'){
+                        Router.push('/booking/extra-services')
+                    }
+                }else{
+    
+                    alert('Sila isikan semua ruang')
+    
+                }               
             }
-
-            setSwitching(false);
+                setSwitching(false);
 
         }
     }, [switching])
