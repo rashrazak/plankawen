@@ -85,7 +85,6 @@ const BookingMainContextProvider = (props) => {
         params.dateUpdated = new Date()
 
         await firebase.updateBooking(`book-${user.type}`,params, id)
-        ls.remove('booking-main')
         ls.remove('service-list')
         Router.push('/booking/thank-you')
     }
