@@ -12,9 +12,9 @@ function extra() {
                 <div className="booking-container">
                     <ButtonBack />
                     <ExtraService />
-                    <ButtonNext step={'03'} />
+                    <ButtonNext />
                 </div>
-                <SideBookBar/>
+                <SideBookBar step={'03'}/>
             </div>
             <style jsx>{`
                 .booking-master { display: flex; }

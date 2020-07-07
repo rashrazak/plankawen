@@ -5,83 +5,54 @@ import Router from 'next/router'
 
 function SideBar({step}) {
 
-    const {getMain} = useContext(BookingMainContext)
-    const {bookCtxNegeri,bookCtxDate,bookCtxTime} = getMain
+    const {getMain, setMain} = useContext(BookingMainContext)
+    const {bookCtxNegeri,bookCtxDate,bookCtxTime,bookCtxServiceList} = getMain
+    const {mainCtxFnDelete, setBookCtxTotalPrice} = setMain
 
-    const [allService, setAllService] = useState(null)
-    
     const [serviceList, setServiceList] = useState(null)
-    const [venue, setVenue] = useState(null)
     const [totalPrice, setTotalPrice] = useState(0)
 
-    // useEffect(() => {
-    //     if (!allService && ls('service-list')) {
-    //         getPrice(ls.get('service-list'))
-    //         getVenue(ls.get('service-list'))
-    //         getExtraService(ls.get('service-list'))
-    //         setAllService(ls.get('service-list'))
-    //     }else if(allService !== ls.get('service-list')){
-    //         // setAllService(null)
-    //     }
+    useEffect(() => {
+        if (bookCtxServiceList) {
+            console.log(bookCtxServiceList)
+            getPrice(bookCtxServiceList)
+        }
         
-    // }, [allService])
+    }, [bookCtxServiceList])
+
+    useEffect(() => {
+        if (serviceList) {
+            console.log(serviceList)
+        }
+    }, [setServiceList])
 
     function getPrice(param){
         let price = 0
 
         if (param.length >=1) {
             param.map((v,i)=>{
-                let x = Object.keys(v)
-                x = x[0]
-                let data = v[x]
+                
+                let data = v
                 let w = data.serviceDetails.hargaDiscount ? data.serviceDetails.hargaDiscount : data.serviceDetails.harga ;
                 w = parseInt(w)
                 price = price + w
                 
                 if (i == param.length - 1) {
                     setTotalPrice(price)
+                    setBookCtxTotalPrice(price)
                 }
-            
             })
         }
-
-        
-    }
-
-    function getVenue(param){
-        param.map((v,i)=>{
-            let x = Object.keys(v)
-            x = x[0]
-            let data = v[x]
-
-            if (x =='Venue') {
-                setVenue(data)
-            }
-        })
-    }
-
-    function getExtraService(param){
-        let arr = []
-
-        param.map((v,i)=>{
-            let x = Object.keys(v)
-            x = x[0]
-            let data = v[x]
-
-            if (x !='Venue') {
-                arr = [...arr,data]
-            }
-
-            if (i == param.length - 1) {
-                if (data.length >= 1) {
-                    setServiceList(arr)
-                }
-            }
-        })
     }
 
     function openInNewTab(){
         window.open('/review', '_blank')
+    }
+
+    function handleDelete(index){
+        if (window.confirm("Buang pilihan anda?")) { 
+            mainCtxFnDelete(index)
+        }
     }
 
     return (
@@ -117,34 +88,31 @@ function SideBar({step}) {
                        }
 
                        {
-
-                        venue ? 
-                            <div>
-                                <label>Pilih Venue</label>
-                                <p>{venue.serviceName}</p>
-                                <p>{venue.serviceDetails.hargaDiscount ? `RM ${venue.serviceDetails.hargaDiscount}` : `RM ${venue.serviceDetails.harga}`  }</p>
-                            </div>
-
-                        :''
-                       }
-
-                       {
-                        serviceList ?
+                        bookCtxServiceList &&  bookCtxServiceList.length >= 1?
                             <>
-                                <label>Servis tambahan</label>
+                                <label>Pilihan Servis</label>
                                 {
-                                    serviceList.map((v,i)=>{
-                                        let x = Object.keys(v)
-                                        x = x[0]
-                                        let data = v[x]
-                                        if (x != 'Venue') {
+                                    bookCtxServiceList.length >= 1 && bookCtxServiceList.map((v,i)=>{
+                                        if (v.serviceType == 'Venue') {
                                             return(
                                                 <div key={i}>
-                                                    <p>{data.serviceType}</p>
-                                                    <p>{data.serviceDetails.hargaDiscount ? `RM ${data.serviceDetails.hargaDiscount}` : `RM ${data.serviceDetails.harga}`  }</p>
+                                                    <label>Pilihan Venue</label>
+                                                    <p>{v.serviceName}</p>
+                                                    <p onClick={()=>handleDelete(i)}>delete</p>
+                                                    <p>{v.serviceDetails.hargaDiscount ? `RM ${v.serviceDetails.hargaDiscount}` : `RM ${v.serviceDetails.harga}`  }</p>
+                                                </div>
+
+                                            )
+                                        }else{
+                                            return(
+                                                <div key={i}>
+                                                    <p>{v.serviceType}</p>
+                                                    <p onClick={()=>handleDelete(i)}>delete</p>
+                                                    <p>{v.serviceDetails.hargaDiscount ? `RM ${v.serviceDetails.hargaDiscount}` : `RM ${v.serviceDetails.harga}`  }</p>
                                                 </div>
                                             )
                                         }
+                                        
                                     })
                                 }
                             </>

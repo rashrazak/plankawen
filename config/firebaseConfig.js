@@ -172,12 +172,12 @@ class Firebase {
         return newImg
     }
 
-    async addService(serviceType, data){
-        return await this.db.collection(serviceType).add(data)
+    async createBooking(serviceName, data){
+        return await this.db.collection(serviceName).add(data)
     }
   
-    async updateService(serviceType, data, serviceId){
-        return await this.db.collection(serviceType).doc(serviceId).set(data)
+    async updateBooking(serviceName, data, id){
+        return await this.db.collection(serviceName).doc(id).set(data)
     }
     
     //pending patot ada status = approved

@@ -1,15 +1,32 @@
-import React from 'react'
+import React, {useState,useContext, useEffect} from 'react'
+import {BookingMainContext} from '../../context/BookingMainContext'
 
 function Pengesahan() {
+
+    const { setMain} = useContext(BookingMainContext)
+    const {mainCtxFnSubmit} = setMain
+
+
+    const [setuju, setSetuju] = useState(false)
+
+    function handleTempah(){
+        if (setuju) {
+            if (window.confirm('Proceed hantar booking?')) {
+                mainCtxFnSubmit()
+            }
+        }else{
+            alert('Sila tandakan checkbox di atas')
+        }
+    }
     return (
         <div className="form-width">
             <div className="div-pengesahan">
                 <h2>Pengesahan</h2>
                 <div className="">
-                    <input type="checkbox"/>
+                    <input type="checkbox" checked={setuju}  onChange={() => setSetuju(!setuju)}/>
                     <p>I hereby give PlanKawen the permission to share my customer data with the Service Provider, its parent company, its franchisor entity and each of their respective affiliates and subsidiaries. I can find detailed information about the customer data sharing here.</p>
                 </div>
-                <button type="button" className="btn btn-tempah">Tempah</button>
+                <button type="button" className="btn btn-tempah" onClick={()=> handleTempah()}>Tempah</button>
             </div>
             <style jsx>{`
                 .form-width { max-width: 490px; margin: auto; margin-bottom: 20px; }
