@@ -5,7 +5,9 @@ import BookingExtraContextProvider from '../context/BookingExtraContext'
 import BookingMainContextProvider from '../context/BookingMainContext'
 import '../css/global.css'
 import '../css/index.css'
-import "react-datepicker/dist/react-datepicker.css"
+import 'react-day-picker/lib/style.css';
+
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 

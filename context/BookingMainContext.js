@@ -75,7 +75,8 @@ const BookingMainContextProvider = (props) => {
             email:bookCtxEmail,
             phone:bookCtxPhone,
             services:bookCtxServiceList,
-            dateCreated: new Date()
+            dateCreated: new Date(),
+            status:'pending'
         }
 
         let x = await firebase.createBooking(`book-${user.type}`, params)

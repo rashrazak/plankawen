@@ -1,9 +1,11 @@
 import React, {useState,useContext, useEffect} from 'react'
 import {BookingMainContext} from '../../context/BookingMainContext'
+import {LSContext} from '../../context/LSContext'
 
 function Pengesahan() {
 
     const { setMain} = useContext(BookingMainContext)
+    const { loginCtx} = useContext(LSContext)
     const {mainCtxFnSubmit} = setMain
 
 
@@ -11,8 +13,10 @@ function Pengesahan() {
 
     function handleTempah(){
         if (setuju) {
-            if (window.confirm('Proceed hantar booking?')) {
+            if (loginCtx) {
                 mainCtxFnSubmit()
+            }else{
+                alert('Sila login')
             }
         }else{
             alert('Sila tandakan checkbox di atas')

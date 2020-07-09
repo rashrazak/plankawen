@@ -46,13 +46,14 @@ function SideBar({step}) {
     }
 
     function openInNewTab(){
-        window.open('/review', '_blank')
+        // window.open('/review', '_blank')
     }
 
-    function handleDelete(index){
-        if (window.confirm("Buang pilihan anda?")) { 
+    const handleDelete = (index, isTrue) =>{
             mainCtxFnDelete(index)
-        }
+            if (isTrue) {
+                Router.push('/booking/venue-services')
+            }
     }
 
     return (
@@ -98,7 +99,7 @@ function SideBar({step}) {
                                                 <div key={i}>
                                                     <label>Pilihan Venue</label>
                                                     <p>{v.serviceName}</p>
-                                                    <p onClick={()=>handleDelete(i)}>delete</p>
+                                                    <p onClick={()=>handleDelete(i , true)}>delete</p>
                                                     <p>{v.serviceDetails.hargaDiscount ? `RM ${v.serviceDetails.hargaDiscount}` : `RM ${v.serviceDetails.harga}`  }</p>
                                                 </div>
 

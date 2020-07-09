@@ -1,18 +1,21 @@
 import React,{useContext, useState, useEffect} from 'react'
-import DatePickerReact from 'react-datepicker'
 import {BookingMainContext} from '../../context/BookingMainContext'
 import * as ls from 'local-storage'
-import parseISO from 'date-fns/parseISO'
+import DayPickerInput from 'react-day-picker/DayPickerInput';
 import moment from 'moment'
+import MomentLocaleUtils, {
+    formatDate,
+    parseDate
+  } from "react-day-picker/moment";
 
 
-function DatePicker() {
+function DatePicker2() {
 
     const {setMain, getMain} = useContext(BookingMainContext)
     const {setBookCtxDate} = setMain
     const {bookCtxDate} = getMain
 
-    const [selectDate, setSelectDate] = useState(new Date());
+    const [selectDate, setSelectDate] = useState('');
 
     
     useEffect(() => {
@@ -25,6 +28,8 @@ function DatePicker() {
                 let x = moment(bookCtxDate).toDate()
                 setSelectDate(x)
             }
+        }else{
+            setBookCtxDate( moment(new Date()).format('DD/MM/YYYY') )
         }
         
     }, [selectDate])
@@ -52,7 +57,7 @@ function DatePicker() {
         <div className="form-width">
             <label>Pilih tarikh</label>
             <div>
-                <DatePickerReact
+                {/* <DatePickerReact
                     showPopperArrow={true}
                     selected={selectDate}
                     dateFormat={'dd/MM/yyyy'}
@@ -61,6 +66,14 @@ function DatePicker() {
                     excludeDates={first30Days()}
                     minDate={new Date()}
                     placeholderText="Pilih tarikh sebulan awal"
+                /> */}
+                <DayPickerInput
+                    value={selectDate}
+                    format="DD/MM/YYYY"
+                    onDayChange={(day)=>setSelectDate(day)}
+                    formatDate={formatDate}
+                    parseDate={parseDate}
+                    placeholder={`Pilih tarikh anda`}
                 />
             </div>
             <style jsx>{`
@@ -72,4 +85,4 @@ function DatePicker() {
     )
 }
 
-export default DatePicker
+export default DatePicker2

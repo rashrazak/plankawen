@@ -72,9 +72,9 @@ function MaklumatPeribadi() {
                         :
                         <React.Fragment>
                             <div className="div-maklumat">
-                                <p><span><img src="/images/icon/user.png"/></span> <input type="text" value={name} onBlur={(e)=>setName(e.target.value)} placeholder="Nama" /></p>
-                                <p><span><img src="/images/icon/email.png"/></span><input type="email" value={email} onBlur={(e)=>setEmail(e.target.value)} placeholder="Email" /></p>
-                                <p><span><img src="/images/icon/phone.png"/></span><input type="number" value={phone} onBlur={(e)=>setPhone(e.target.value)} placeholder="Phone" /></p>
+                                <p><span><img src="/images/icon/user.png"/></span> <input type="text" value={name} onChange={(e)=>setName(e.target.value)} placeholder="Nama" /></p>
+                                <p><span><img src="/images/icon/email.png"/></span><input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email" /></p>
+                                <p><span><img src="/images/icon/phone.png"/></span><input type="number" value={phone} onChange={(e)=>setPhone(e.target.value)} placeholder="Phone" /></p>
                             </div>
                             <p className="p-edit" onClick={()=>setEdit(!edit)}><span><img src="/images/icon/edit.png"/></span> Edit</p>
                         </React.Fragment>
