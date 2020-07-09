@@ -18,7 +18,7 @@ function index() {
             </div>
             <style jsx>{`
                 .booking-master { display: flex; }
-                .booking-container { width: calc(100vw - 300px); padding: 50px 0 20px 120px; height: calc(100vh - 57px); overflow-x: scroll;}
+                .booking-container { width: calc(100vw - 300px); padding: 50px 0 20px 120px; height: calc(100vh - 57px); overflow-x: scroll; position: relative;}
             `}</style>
         </Layout>
     )
