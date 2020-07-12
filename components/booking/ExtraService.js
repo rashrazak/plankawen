@@ -144,7 +144,7 @@ function ExtraService() {
                 .form-width { max-width: 750px; margin-bottom: 30px;}
                 .btn-category { background-color: #FFF; border: 1px solid #EAEAEA;border-radius: 6px; font-style: normal;font-weight: bold;font-size: 0.75rem;color: #3E3E3E; height: 50px; width: 143px; margin-bottom: 10px; cursor: pointer}
                 .icon-service{width:15%;height:50%;margin-bottom:5px;margin-right:5px}
-                .search-box { width: 100%;}
+                .search-box { width: 100%; }
             `}</style>
         </React.Fragment>
     )

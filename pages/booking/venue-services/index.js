@@ -20,7 +20,7 @@ function index() {
                 .booking-container { width: calc(100vw - 300px); padding: 50px 0 20px 120px; height: calc(100vh - 57px); overflow-x: scroll;}
                 @media screen and ( max-width: 480px) {
                     .booking-master { flex-wrap: wrap;}
-                    .booking-container { width: 100%; padding: 20px;}
+                    .booking-container { width: 100%; padding: 20px; height: 100%;}
                 }
             `}</style>
         </Layout>

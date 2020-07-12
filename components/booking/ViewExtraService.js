@@ -320,7 +320,7 @@ function ViewExtraService({sendData, closeData, sendVendor}) {
                 {
                     sendVendor?
                     <div>
-                        <img src={sendVendor.profileImage ? sendVendor.profileImage :''} alt=""/>
+                        <img className="img-responsive img-vendor" src={sendVendor.profileImage ? sendVendor.profileImage :''} alt=""/>
                         <p>{sendVendor.namaSyarikat}</p>
                     </div>
                     :''
@@ -344,11 +344,11 @@ function ViewExtraService({sendData, closeData, sendVendor}) {
                 .area-covered-div { display: inline-block; margin-right: 10px; }
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
-                .review-catergry-and-price { display: flex; justify-content: flex-start; margin: 13px 0px 18px 0px;}
-                .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; width: 150px; margin-right: 10px;}
+                .review-catergry-and-price { display: flex; justify-content: flex-start; margin: 13px 0px 18px 0px; overflow: scroll;}
+                .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; flex: 0 0 150px; margin-right: 10px;}
                 .review-category > p { font-size: 12px; color: #FFF; margin: 0;}
                 .review-category > p > span { margin-right: 10px;}
-                .review-price { padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; width: 143px; border: 1px solid #EAEAEA; margin-right: 10px;}
+                .review-price { padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; flex: 0 0 150px; border: 1px solid #EAEAEA; margin-right: 10px;}
                 .review-price > p { font-size: 14px; color: #3E3E3E;}
                 .review-price > p > span { color: #59D0C9; font-size: 10px;}
                 .review-price > img { width: 16px;}
@@ -377,6 +377,12 @@ function ViewExtraService({sendData, closeData, sendVendor}) {
                 .button-position { position: absolute; bottom: 10px; right: 30px;}
                 .btn-batal { border: 1px solid #F4F4F4; background-color: #F4F4F4; border-radius: 8px; font-style: normal; font-weight: 600;font-size: 0.875rem;text-align: center;color: #3E3E3E; height: 50px; width: 160px;}
                 .btn-pilih { background-color: #ED795F; border-radius: 8px; font-style: normal; font-weight: 600;font-size: 0.875rem;text-align: center;color: #FFF; height: 50px; width: 160px; background-image:url('/images/icon/arrow-right-white.png'); background-repeat: no-repeat; background-position: center right 10px; background-size: 25px;}
+                .img-vendor { width: 100%;}
+                @media screen and ( max-width: 480px) {
+                    .button-position { position: unset; display: flex; justify-content: space-between; margin-top: 20px;}
+                    .button-position > button { flex: 0 0 120px;}
+                    
+                }
             `}</style>
         </div>
     )
