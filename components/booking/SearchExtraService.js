@@ -234,6 +234,12 @@ function SearchExtraService({serviceName, returnService}) {
             .result-item-desc > p:first-child { color: #2B2B2B;}
             .result-item-desc > p { font-style: normal; font-weight: normal; font-size: 0.875rem; color: #75848E; margin: 0; line-height: 18px;}
             .result-item-desc > p > span { font-weight:bold; color: #3E3E3E;}
+            @media screen and ( max-width: 480px) {
+                .div-search-sort { flex-wrap: wrap; justify-content: flex-start;}
+                .searc-box-div { margin-bottom: 10px;}
+                .div-result-item { flex 0 0 48%;}
+                
+            }
         `}</style>
         </div>
     )

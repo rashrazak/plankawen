@@ -1,13 +1,15 @@
 import React, {useState,useContext, useEffect} from 'react'
 import {BookingMainContext} from '../../context/BookingMainContext'
 import * as ls from 'local-storage'
-import Router from 'next/router'
+import Router, {useRouter} from 'next/router'
 
 function SideBar({step}) {
 
     const {getMain, setMain} = useContext(BookingMainContext)
     const {bookCtxNegeri,bookCtxDate,bookCtxTime,bookCtxServiceList} = getMain
     const {mainCtxFnDelete, setBookCtxTotalPrice} = setMain
+
+    const router = useRouter()
 
     const [serviceList, setServiceList] = useState(null)
     const [totalPrice, setTotalPrice] = useState(0)
@@ -45,6 +47,8 @@ function SideBar({step}) {
         }
     }
 
+    console.log(router.pathname)
+
     function openInNewTab(){
         // window.open('/review', '_blank')
     }
@@ -64,72 +68,82 @@ function SideBar({step}) {
                         <p>Langkah</p>
                         <h4><span>{step}</span>/05</h4>
                    </div>
-                   <div className="div-review-1">
-                       <label>Pilihan negeri</label>
-                       {
-                           bookCtxNegeri ?
-                           <p>{bookCtxNegeri}</p>
-                           :
-                           <p>-</p>
-                       }
-                       <label>Pilihan tarikh</label>
-                       {
-                           bookCtxDate ?
-                           <p>{bookCtxDate}</p>
-                           :
-                           <p>-</p>
-                       }
-                      
-                       <label>Pilihan masa</label>
-                       {
-                           bookCtxTime ?
-                           <p>{bookCtxTime}</p>
-                           :
-                           <p>-</p>
-                       }
+                   {
+                       router.pathname !== '/booking/thank-you' ?
+                       <React.Fragment>
+                        <div className="div-review-1">
+                            <label>Pilihan negeri</label>
+                            {
+                                bookCtxNegeri ?
+                                <p>{bookCtxNegeri}</p>
+                                :
+                                <p>-</p>
+                            }
+                            <label>Pilihan tarikh</label>
+                            {
+                                bookCtxDate ?
+                                <p>{bookCtxDate}</p>
+                                :
+                                <p>-</p>
+                            }
+                            
+                            <label>Pilihan masa</label>
+                            {
+                                bookCtxTime ?
+                                <p>{bookCtxTime}</p>
+                                :
+                                <p>-</p>
+                            }
 
-                       {
-                        bookCtxServiceList &&  bookCtxServiceList.length >= 1?
-                            <>
-                                <label>Pilihan Servis</label>
-                                {
-                                    bookCtxServiceList.length >= 1 && bookCtxServiceList.map((v,i)=>{
-                                        if (v.serviceType == 'Venue') {
-                                            return(
-                                                <div key={i}>
-                                                    <label>Pilihan Venue</label>
-                                                    <p>{v.serviceName}</p>
-                                                    <p onClick={()=>handleDelete(i , true)}>delete</p>
-                                                    <p>{v.serviceDetails.hargaDiscount ? `RM ${v.serviceDetails.hargaDiscount}` : `RM ${v.serviceDetails.harga}`  }</p>
-                                                </div>
+                            {
+                                bookCtxServiceList &&  bookCtxServiceList.length >= 1?
+                                    <>
+                                        <label>Pilihan Servis</label>
+                                        {
+                                            bookCtxServiceList.length >= 1 && bookCtxServiceList.map((v,i)=>{
+                                                if (v.serviceType == 'Venue') {
+                                                    return(
+                                                        <div key={i}>
+                                                            <label>Pilihan Venue</label>
+                                                            <p>{v.serviceName}</p>
+                                                            <p onClick={()=>handleDelete(i , true)}>delete</p>
+                                                            <p>{v.serviceDetails.hargaDiscount ? `RM ${v.serviceDetails.hargaDiscount}` : `RM ${v.serviceDetails.harga}`  }</p>
+                                                        </div>
 
-                                            )
-                                        }else{
-                                            return(
-                                                <div key={i}>
-                                                    <p>{v.serviceType}</p>
-                                                    <p onClick={()=>handleDelete(i)}>delete</p>
-                                                    <p>{v.serviceDetails.hargaDiscount ? `RM ${v.serviceDetails.hargaDiscount}` : `RM ${v.serviceDetails.harga}`  }</p>
-                                                </div>
-                                            )
+                                                    )
+                                                }else{
+                                                    return(
+                                                        <div key={i}>
+                                                            <p>{v.serviceType}</p>
+                                                            <p onClick={()=>handleDelete(i)}>delete</p>
+                                                            <p>{v.serviceDetails.hargaDiscount ? `RM ${v.serviceDetails.hargaDiscount}` : `RM ${v.serviceDetails.harga}`  }</p>
+                                                        </div>
+                                                    )
+                                                }
+                                                
+                                            })
                                         }
-                                        
-                                    })
-                                }
-                            </>
-                           :'-'
-                       }
+                                    </>
+                                :'-'
+                            }
 
-                   </div>
-                   <div className="div-total">
-                        {/* <p>Subtotal <span>MYR 0.00</span></p> */}
-                        {/* <p>Discount <span>MYR 0.00</span></p> */}
-                        <p>Total <span>MYR {totalPrice}</span></p>
-                   </div>
+                        </div>
+                        <div className="div-total">
+                                {/* <p>Subtotal <span>MYR 0.00</span></p> */}
+                                {/* <p>Discount <span>MYR 0.00</span></p> */}
+                                <p>Total <span>MYR {totalPrice}</span></p>
+                        </div>             
+                        <div className="">
+                            <button type="button" className="btn btn-review" onClick={()=> openInNewTab()}>Review</button>
+                        </div>              
+
+                       </React.Fragment>
+                       :
+                       ''
+
+                   }
                 </div>
-                <div className="">
-                    <button type="button" className="btn btn-review" onClick={()=> openInNewTab()}>Review</button>
-                </div>
+                
             </div>
             <style jsx>{`
                 .container-sidebar { background-color: #F5F7F8; width: 300px; height: calc(100vh - 57px); padding: 30px; margin-left: auto;}
