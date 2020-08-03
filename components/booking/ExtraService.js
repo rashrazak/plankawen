@@ -3,7 +3,7 @@ import SearchExtraService from '../booking/SearchExtraService'
 import ViewExtraService from './ViewExtraService'
 
 
-function ExtraService() {
+function ExtraService({view}) {
     const selection = [
         {name:'Venue',isActive:false},
         {name:'Canopy',isActive:false},
@@ -43,6 +43,7 @@ function ExtraService() {
     const getReturnService = (data,vendor) =>{
         console.log(data)
         setViewData(true)
+        view(true)
         setViewService(data)
         setViewVendor(vendor)
     }
@@ -54,7 +55,7 @@ function ExtraService() {
                     viewData && viewService ?
                     <React.Fragment>
                         <div>
-                            <ViewExtraService sendData={viewService} sendVendor={viewVendor} closeData={setViewData}/>
+                            <ViewExtraService sendData={viewService} sendVendor={viewVendor} closeData={setViewData}  view={view}/>
                         </div>
                     </React.Fragment>
                     :

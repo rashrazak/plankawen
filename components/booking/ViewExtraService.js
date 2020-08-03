@@ -1,12 +1,16 @@
 import React, {useContext, useState, useEffect} from 'react'
 import {BookingMainContext} from '../../context/BookingMainContext' 
 import Router  from 'next/router'
-function ViewExtraService({sendData, closeData, sendVendor}) {
+import ViewShow2 from './ViewShow2'
+import { Modal } from 'react-bootstrap';
+function ViewExtraService({sendData, closeData, sendVendor, view}) {
 
     const {setMain} = useContext(BookingMainContext)
     const {mainCtxFnSelect} = setMain
     
     const [select, setSelect] = useState(false)
+    const [show2, setShow2] = useState(false)
+    const [show3, setShow3] = useState(false)
 
     const serviceIcon = { Venue: 'ico-venue-active.png', 
     Canopy: 'ico-canopy-active.png', 
@@ -27,6 +31,9 @@ function ViewExtraService({sendData, closeData, sendVendor}) {
     const [serviceType, setserviceType] = useState('')
     const [details, setdetails] = useState([])
     const [about, setabout] = useState([])
+
+    const [list2, setList2] = useState(null)
+    const [list3, setList3] = useState(null)
 
 
     useEffect(() => {
@@ -59,14 +66,25 @@ function ViewExtraService({sendData, closeData, sendVendor}) {
 
     const selectService = (x) =>{
         if (x) {
-            mainCtxFnSelect(serviceType,sendData)
-            setSelect(true)
-            if (serviceType == 'Venue') {
-                Router.push('/booking/venue-services/extra')
+            if (serviceType == 'KadBanner' || serviceType == 'Makeup') {
+                setShow2(true)
+                
+            }else if (serviceType == 'Hantaran' || serviceType == 'Caterer' || serviceType == 'DoorGift'){
+                setShow3(true)
+            }else{
+                mainCtxFnSelect(serviceType,sendData)
+                setSelect(true)
+                if (serviceType == 'Venue') {
+                    Router.push('/booking/venue-services/extra')
+                }
+                closeData(false)
+                view(false)
             }
+            
         }
 
-        closeData(false)
+        
+        
     }
       
 
@@ -330,6 +348,28 @@ function ViewExtraService({sendData, closeData, sendVendor}) {
                     <button className="btn btn-pilih" onClick={()=>selectService(true)}>Pilih</button>
                 </div>
             </div>
+            {
+                show2 == true ? 
+                <Modal show={show2} onHide={()=>setShow2(!show2)} >
+                    <Modal.Header closeButton>
+                        <Modal.Title>{sendData.serviceName}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <ViewShow2 data={sendData} show={setShow2} closeData={closeData} view={view} closeButton/>
+                    </Modal.Body>
+                </Modal>
+                :
+                ''
+
+            }
+
+            {
+                show3 == true ? 
+                <Viewshow3 data={sendData} />
+                :
+                ''
+
+            }
             <style jsx>{`
                 .review-form { max-width: 670px; margin: 30px auto; position: relative;}
                 .hero-review { position: relative;}
