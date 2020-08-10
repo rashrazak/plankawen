@@ -18,9 +18,15 @@ function MaklumatPeribadi() {
     useEffect(() => {
         if (loginCtx) {
             let param = ls.get('client')
-            setName(param.name)
-            setEmail(param.email)
-            setPhone(param.phone)
+            if (param.name && param.email && param.phone) {
+                setName(param.name)
+                setEmail(param.email)
+                setPhone(param.phone)
+            }else{
+                alert('Sila login')
+                Router.push('/login')
+            }
+            
         }
 
     },[loginCtx])

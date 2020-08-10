@@ -33,11 +33,34 @@ function SideBar({step}) {
 
         if (param.length >=1) {
             param.map((v,i)=>{
-                
+
                 let data = v
-                let w = data.serviceDetails.hargaDiscount ? data.serviceDetails.hargaDiscount : data.serviceDetails.harga ;
-                w = parseInt(w)
-                price = price + w
+
+                if (v.serviceType == 'Makeup') {
+                    price = price + parseFloat(v.serviceDetails.selectFullPrice)
+
+                    price = price + parseFloat(v.serviceDetails.selectTouchupPrice)
+                    
+                }else if (v.serviceType == 'KadBanner'){
+
+                    price = price + parseFloat(v.serviceDetails.selectKadTotalPrice)
+
+                    if (v.serviceDetails.selectBanner) {
+                        v.serviceDetails.selectBannerArray.map((v, i) => {
+                            price = price + parseFloat(v.harga)
+                        })
+                    }
+
+                }else if (v.serviceType == 'Hantaran' || v.serviceType == 'Caterer' || v.serviceType == 'DoorGift'){
+                    price = price + parseFloat(v.serviceDetails.selectPaxTotalPrice)
+                }else if (v.serviceType == 'Photographer' || v.serviceType == 'Videographer' || v.serviceType == 'WeddingDress' || v.serviceType == 'Pelamin' || v.serviceType == 'Others'){
+                    let w = data.serviceDetails.hargaDiscount ? data.serviceDetails.hargaDiscount : data.serviceDetails.harga ;
+                    w = parseFloat(w)
+                    price = price + w
+                }
+                
+                
+                
                 
                 if (i == param.length - 1) {
                     setTotalPrice(price)
@@ -111,15 +134,79 @@ function SideBar({step}) {
                                                         </div>
 
                                                     )
-                                                }else{
+                                                }else if (v.serviceType == 'KadBanner') {
                                                     return(
                                                         <div key={i}>
                                                             <p>{v.serviceType}</p>
                                                             <p onClick={()=>handleDelete(i)}>delete</p>
-                                                            <p>{v.serviceDetails.hargaDiscount ? `RM ${v.serviceDetails.hargaDiscount}` : `RM ${v.serviceDetails.harga}`  }</p>
+                                                            <label>Kad</label>
+                                                            <p>Qty: {v.serviceDetails.selectKadQuantity}</p>
+                                                            <p>Price: RM {v.serviceDetails.selectKadTotalPrice}</p>
+                                                            {
+                                                                v.serviceDetails.selectBanner == true ?
+                                                                <div>
+                                                                <label>Banner</label>
+                                                                {
+                                                                    v.serviceDetails.selectBannerArray.map((val,i)=>{
+                                                                        return (
+                                                                            <p>Price: RM {val.harga}</p>
+                                                                        )
+                                                                    })
+                                                                }
+                                                                </div>
+
+                                                                :
+                                                                ''
+                                                            }
                                                         </div>
                                                     )
                                                 }
+                                                else if (v.serviceType == 'Makeup'){
+                                                    <div key={i}>
+                                                            <p>{v.serviceType}</p>
+                                                            <p onClick={()=>handleDelete(i)}>delete</p>
+                                                            <label>{v.serviceType}</label>
+                                                            {
+                                                                v.selectTouchup == true ?
+                                                                <div>
+                                                                    <p>Touchup: RM {v.selectTouchupPrice}</p>
+                                                                </div>
+                                                                :
+                                                                ''
+                                                            }
+
+                                                            {
+                                                                v.selectFull == true ?
+                                                                <div>
+                                                                    <p>Full: RM {v.selectFullPrice}</p>
+                                                                </div>
+                                                                :
+                                                                ''
+                                                            }
+                                                    </div>
+                                                }
+                                                else if (v.serviceType == 'Hantaran' || v.serviceType == 'Caterer' || v.serviceType == 'DoorGift') {
+                                                    return(
+                                                        <div key={i}>
+                                                            <p>{v.serviceType}</p>
+                                                            <p onClick={()=>handleDelete(i)}>delete</p>
+                                                            <label>{v.serviceType}</label>
+                                                            <p>Qty: {v.serviceDetails.selectPaxQuantity}</p>
+                                                            <p>Price: RM {v.serviceDetails.selectPaxTotalPrice}</p>
+                                                        </div>
+                                                    )
+                                                }else if (v.serviceType == 'Photographer' || v.serviceType == 'Videographer' || v.serviceType == 'WeddingDress' || v.serviceType == 'Pelamin' || v.serviceType == 'Others'){
+                                                    return(
+                                                        <div key={i}>
+                                                            <p>{v.serviceType}</p>
+                                                            <p onClick={()=>handleDelete(i)}>delete</p>
+                                                            <p>Price: RM {v.serviceDetails.hargaDiscount ? `RM ${v.serviceDetails.hargaDiscount}` : `RM ${v.serviceDetails.harga}`  }</p>
+                                                        </div>
+                                                    )
+                                                }
+                                                   
+                                                    
+                                                
                                                 
                                             })
                                         }

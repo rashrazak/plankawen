@@ -2,6 +2,7 @@ import React, {useContext, useState, useEffect} from 'react'
 import {BookingMainContext} from '../../context/BookingMainContext' 
 import Router  from 'next/router'
 import ViewShow2 from './ViewShow2'
+import ViewShow3 from './ViewShow3'
 import { Modal } from 'react-bootstrap';
 function ViewExtraService({sendData, closeData, sendVendor, view}) {
 
@@ -31,9 +32,6 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
     const [serviceType, setserviceType] = useState('')
     const [details, setdetails] = useState([])
     const [about, setabout] = useState([])
-
-    const [list2, setList2] = useState(null)
-    const [list3, setList3] = useState(null)
 
 
     useEffect(() => {
@@ -252,8 +250,8 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
                                 return(
                                     <div key={i}>
                                         <ul>
-                                            <li className="list-review-item" key={i}>Harga: RM {v.harga} </li>
-                                            <li className="list-review-item" key={i}>Size: {v.size}</li>
+                                            <li className="list-review-item">Harga: RM {v.harga} </li>
+                                            <li className="list-review-item">Size: {v.size}</li>
                                         </ul>
                                         <br/>
                                     </div>
@@ -364,8 +362,16 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
             }
 
             {
-                show3 == true ? 
-                <Viewshow3 data={sendData} />
+                show3 == true ?
+                <Modal show={show3} onHide={()=>setShow3(!show3)} >
+                    <Modal.Header closeButton>
+                        <Modal.Title>{sendData.serviceName}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <ViewShow3 data={sendData} show={setShow3} closeData={closeData} view={view} closeButton/>
+                    </Modal.Body>
+                </Modal>
+                
                 :
                 ''
 
