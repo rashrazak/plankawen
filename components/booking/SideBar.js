@@ -126,7 +126,7 @@ function SideBar({step}) {
                                             bookCtxServiceList.length >= 1 && bookCtxServiceList.map((v,i)=>{
                                                 if (v.serviceType == 'Venue') {
                                                     return(
-                                                        <div key={i}>
+                                                        <div key={i} className="review-service">
                                                             <label>Pilihan Venue</label>
                                                             <p>{v.serviceName}</p>
                                                             <p onClick={()=>handleDelete(i , true)}>delete</p>
@@ -136,9 +136,9 @@ function SideBar({step}) {
                                                     )
                                                 }else if (v.serviceType == 'KadBanner') {
                                                     return(
-                                                        <div key={i}>
+                                                        <div key={i} className="review-service">
                                                             <p>{v.serviceType}</p>
-                                                            <p onClick={()=>handleDelete(i)}>delete</p>
+                                                            <p className="delete-icon" onClick={()=>handleDelete(i)}>x</p>
                                                             <label>Kad</label>
                                                             <p>Qty: {v.serviceDetails.selectKadQuantity}</p>
                                                             <p>Price: RM {v.serviceDetails.selectKadTotalPrice}</p>
@@ -149,7 +149,7 @@ function SideBar({step}) {
                                                                 {
                                                                     v.serviceDetails.selectBannerArray.map((val,i)=>{
                                                                         return (
-                                                                            <p>Price: RM {val.harga}</p>
+                                                                            <p key={i}>Price: RM {val.harga}</p>
                                                                         )
                                                                     })
                                                                 }
@@ -162,34 +162,34 @@ function SideBar({step}) {
                                                     )
                                                 }
                                                 else if (v.serviceType == 'Makeup'){
-                                                    <div key={i}>
+                                                    <div key={i} className="review-service">
                                                             <p>{v.serviceType}</p>
-                                                            <p onClick={()=>handleDelete(i)}>delete</p>
-                                                            <label>{v.serviceType}</label>
+                                                            <p className="delete-icon" onClick={()=>handleDelete(i)}>x</p>
+                                                            {/* <label>{v.serviceType}</label>
                                                             {
-                                                                v.selectTouchup == true ?
+                                                                v.serviceDetails.selectTouchup == true ?
                                                                 <div>
-                                                                    <p>Touchup: RM {v.selectTouchupPrice}</p>
+                                                                    <p>Touchup: RM {v.serviceDetails.selectTouchupPrice}</p>
                                                                 </div>
                                                                 :
                                                                 ''
                                                             }
 
                                                             {
-                                                                v.selectFull == true ?
+                                                                v.serviceDetails.selectFull == true ?
                                                                 <div>
-                                                                    <p>Full: RM {v.selectFullPrice}</p>
+                                                                    <p>Full: RM {v.serviceDetails.selectFullPrice}</p>
                                                                 </div>
                                                                 :
                                                                 ''
-                                                            }
+                                                            } */}
                                                     </div>
                                                 }
                                                 else if (v.serviceType == 'Hantaran' || v.serviceType == 'Caterer' || v.serviceType == 'DoorGift') {
                                                     return(
-                                                        <div key={i}>
+                                                        <div key={i} className="review-service">
                                                             <p>{v.serviceType}</p>
-                                                            <p onClick={()=>handleDelete(i)}>delete</p>
+                                                            <p className="delete-icon" onClick={()=>handleDelete(i)}>x</p>
                                                             <label>{v.serviceType}</label>
                                                             <p>Qty: {v.serviceDetails.selectPaxQuantity}</p>
                                                             <p>Price: RM {v.serviceDetails.selectPaxTotalPrice}</p>
@@ -197,9 +197,9 @@ function SideBar({step}) {
                                                     )
                                                 }else if (v.serviceType == 'Photographer' || v.serviceType == 'Videographer' || v.serviceType == 'WeddingDress' || v.serviceType == 'Pelamin' || v.serviceType == 'Others'){
                                                     return(
-                                                        <div key={i}>
+                                                        <div key={i} className="review-service">
                                                             <p>{v.serviceType}</p>
-                                                            <p onClick={()=>handleDelete(i)}>delete</p>
+                                                            <p className="delete-icon" onClick={()=>handleDelete(i)}>x</p>
                                                             <p>Price: RM {v.serviceDetails.hargaDiscount ? `RM ${v.serviceDetails.hargaDiscount}` : `RM ${v.serviceDetails.harga}`  }</p>
                                                         </div>
                                                     )
@@ -244,6 +244,8 @@ function SideBar({step}) {
                 .btn-review { background-color: #ED795F;mborder: 2px solid #ED795F;border-radius: 8px; font-style: normal;font-weight: 600;font-size: 1rem;text-align: center;color: #FFF; height: 50px; width: 100%; margin-top: 31px;}
                 label { font-style: normal; font-weight: normal;font-size: 0.75rem; color: #75848E; margin: 0;}
                 .div-review-1 > p { font-style: normal; font-weight: normal;font-size: 0.875rem;color: #2B2B2B; margin-bottom: 5px;}
+                .review-service { position: relative; }
+                .delete-icon { position: absolute; left: -10px; top: 0; cursor: pointer;}
                 @media screen and ( max-width: 480px) {
                     .container-sidebar { height: 100%; width: 100%; padding: 20px;}
                     .width { width: 100%;}

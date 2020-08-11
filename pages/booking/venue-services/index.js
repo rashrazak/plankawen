@@ -1,17 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
 import VenueService from '../../../components/booking/VenueService'
 import Layout from '../../../components/Header'
 import SideBarBook from '../../../components/booking/SideBar'
 import ButtonBack from '../../../components/booking/ButtonBack'
 import ButtonNext from '../../../components/booking/ButtonNext'
 
-function index() {
+function index( ) {
+
+    const [view, setView] = useState(false)
+
     return (
         <Layout>
             <div className="booking-master">
                 <div className="booking-container">
                     <ButtonBack />
-                    <VenueService />
+                    <VenueService  view={setView}/>
                 </div>
                 <SideBarBook step={'02'}/>
             </div>

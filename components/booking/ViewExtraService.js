@@ -133,7 +133,7 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
                         <React.Fragment>
                             {
                                 details.hargaTouchup != false ?
-                                <div>
+                                <div className="review-price-flex">
                                     <div className="review-price">
                                         <p><span>MYR (Touchup)</span> <br></br>{details.hargaTouchup}</p>
                                     </div>
@@ -148,7 +148,7 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
                             }
                             {
                                 details.hargaFull != false ?
-                                <div>
+                                <div className="review-price-flex">
                                     <div className="review-price">
                                         <p><span>MYR (Full)</span> <br></br>{details.hargaFull}</p>
                                     </div>
@@ -394,6 +394,7 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
                 .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; flex: 0 0 150px; margin-right: 10px;}
                 .review-category > p { font-size: 12px; color: #FFF; margin: 0;}
                 .review-category > p > span { margin-right: 10px;}
+                .review-price-flex { display: flex; }
                 .review-price { padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; flex: 0 0 150px; border: 1px solid #EAEAEA; margin-right: 10px;}
                 .review-price > p { font-size: 14px; color: #3E3E3E;}
                 .review-price > p > span { color: #59D0C9; font-size: 10px;}

@@ -43,7 +43,7 @@ function viewShow3({data, show, closeData, view}) {
                     <label for="pax"> Harga Satu pax - RM {data.serviceDetails.hargaPerPerson} - Sila masukkan quantity </label><br/>
                     {
                         pax == true?
-                        <input type="number" value={paxQty} onChange={(e)=>setPax(e.target.value)}/>
+                        <input type="number" value={paxQty} onChange={(e)=>setPaxQty(e.target.value)}/>
                         :
                         <div>
                             <ul>
@@ -60,6 +60,15 @@ function viewShow3({data, show, closeData, view}) {
                     <button className="btn btn-pilih" onClick={()=>pilihIniQuantity()}>Pilih</button>
                 </div>
             </div>
+            <style jsx>{`
+                input[type='checkbox'] { margin-right: 10px;}
+                .button-position { text-align: right; margin: 20px auto;}
+                .btn-pilih { background-color: #ED795F; border-radius: 8px; font-style: normal; font-weight: 600;font-size: 0.875rem;text-align: center;color: #FFF; height: 50px; width: 160px; background-image:url('/images/icon/arrow-right-white.png'); background-repeat: no-repeat; background-position: center right 10px; background-size: 25px;}
+                h3 { font-weight: bold; color: #3E3E3E; font-size: 17px; margin-top: 10px;}
+                label {font-weight: normal; color: #3E3E3E; font-size: 14px; margin-top: 10px; }
+                li { font-weight: normal; color: #3E3E3E; font-size: 14px;}
+                input[type='number'] { height: 50px; border-radius: 4px; background-color: #FFF; border: 1px solid #EAEAEA; padding: .375rem .75rem; width: 100%;}
+            `}</style>
         </div>
     )
 }
