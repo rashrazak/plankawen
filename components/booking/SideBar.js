@@ -124,6 +124,7 @@ function SideBar({step}) {
                                         <label>Pilihan Servis</label>
                                         {
                                             bookCtxServiceList.length >= 1 && bookCtxServiceList.map((v,i)=>{
+                                                
                                                 if (v.serviceType == 'Venue') {
                                                     return(
                                                         <div key={i} className="review-service">
@@ -160,12 +161,12 @@ function SideBar({step}) {
                                                             }
                                                         </div>
                                                     )
-                                                }
-                                                else if (v.serviceType == 'Makeup'){
-                                                    <div key={i} className="review-service">
+                                                } else if (v.serviceType == 'Makeup'){
+                                                    return(
+                                                        <div key={i} className="review-service">
                                                             <p>{v.serviceType}</p>
                                                             <p className="delete-icon" onClick={()=>handleDelete(i)}>x</p>
-                                                            {/* <label>{v.serviceType}</label>
+                                                            <label>{v.serviceType}</label>
                                                             {
                                                                 v.serviceDetails.selectTouchup == true ?
                                                                 <div>
@@ -182,10 +183,10 @@ function SideBar({step}) {
                                                                 </div>
                                                                 :
                                                                 ''
-                                                            } */}
-                                                    </div>
-                                                }
-                                                else if (v.serviceType == 'Hantaran' || v.serviceType == 'Caterer' || v.serviceType == 'DoorGift') {
+                                                            }
+                                                        </div>
+                                                    )
+                                                }else if (v.serviceType == 'Hantaran' || v.serviceType == 'Caterer' || v.serviceType == 'DoorGift') {
                                                     return(
                                                         <div key={i} className="review-service">
                                                             <p>{v.serviceType}</p>
@@ -204,9 +205,6 @@ function SideBar({step}) {
                                                         </div>
                                                     )
                                                 }
-                                                   
-                                                    
-                                                
                                                 
                                             })
                                         }
