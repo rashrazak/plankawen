@@ -9,6 +9,8 @@ const LSContextProvider = (props) => {
     //end butri tempahan
     const signOut = () => {
         localStorage.removeItem('user');
+        localStorage.removeItem('clientCtx');
+        location.reload()
     }
 
     useEffect(() => {

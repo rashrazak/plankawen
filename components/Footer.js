@@ -10,11 +10,11 @@ function Footer() {
                     <p>@ Copywright Plankawen 2019 Kuala Lumpur, Malaysia</p>
                 </div>
                 <div className="footer-second">
-                    <ActiveLink href='/'>Tentang Kami </ActiveLink>{' '}
-                    <ActiveLink href='/about'>Hubungi Kami</ActiveLink>{' '}
-                    <ActiveLink href='/contact'>Blog</ActiveLink>
-                    <a href=""><img src="/images/icon/s-facebook.png"/></a>
-                    <a href=""><img src="/images/icon/s-instagram.png"/></a>
+                    <ActiveLink href='https://plankawen.wixsite.com/website/tentang-kami'>Tentang Kami </ActiveLink>{' '}
+                    <ActiveLink href='https://plankawen.wixsite.com/website/hubungi-kami'>Hubungi Kami</ActiveLink>{' '}
+                    <ActiveLink href='https://plankawen.wixsite.com/website/blog'>Blog</ActiveLink>
+                    <a href="https://www.facebook.com/Plankawen-745730829103427/"><img src="/images/icon/s-facebook.png"/></a>
+                    <a href="https://www.instagram.com/plankawen_/"><img src="/images/icon/s-instagram.png"/></a>
                 </div>
             </footer>
             <style jsx>{`

@@ -7,10 +7,18 @@ import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
 import Footer from '../components/Footer'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import firebase from '../config/firebaseConfig'
 
 const Layout = ({ children, title = 'This is the default title' }) => 
 {
-	const {loginCtx} = useContext(LSContext)
+	const {loginCtx, clientCtx} = useContext(LSContext)
+
+	// function logout() {
+    //     firebase.signOut().then( ()=> {
+    //         localStorage.removeItem('user');
+    //         router.push('/')
+    //       })
+    // }
  
 	var styles = {
 		navBar: {
@@ -41,55 +49,33 @@ const Layout = ({ children, title = 'This is the default title' }) =>
         	</Head>
 
         	<header>
-        		
-				{/* {
-					loginCtx == false ?
-
-					<div className="header-div header-padding">
-						<div className="">
-							<img src="/images/logo/logo-official.png" />
-						</div>
-						<nav>
-							<ActiveLink href='/'>Tentang Kami </ActiveLink>{' '}
-							<ActiveLink href='/about'>Hubungi Kami</ActiveLink>{' '}
-							<ActiveLink href='/contact'>Blog</ActiveLink>
-							<a href="/login"><button type="button" className="btn btn-register">Daftar Masuk</button></a>
-						</nav>
-					</div>
-					:
-					<div className="header-div header-login">
-						<div className="">
-							<img src="/images/logo/logo-official.png" />
-						</div>
-						<nav className="">
-							<ActiveLink className="" href='/contact'><img className="ico-bell" src="/images/icon/bell.png"/></ActiveLink>
-							<ActiveLink className="" href='/contact'><img className="user-oval" src="/images/icon/ico-user-placeholder.png"/>Tom John</ActiveLink>
-							<ul className="nav-login">
-								<li className="bell-divider"><img className="ico-bell" src="/images/icon/bell.png"/></li>
-								<li><img className="user-oval" src="/images/icon/ico-user-placeholder.png"/>Tom John</li>
-							</ul>
-						</nav>
-					</div>
-
-				} */}
 
 			<Navbar expand="lg" style={styles.navBar}>
-				<Navbar.Brand href="#home"><img src="/images/logo/logo-official.png" /></Navbar.Brand>
-				<Navbar.Toggle aria-controls="basic-navbar-nav" />
+				<Navbar.Brand href="#"><img src="/images/logo/logo-official.png" /></Navbar.Brand>
+				<Navbar.Toggle aria-controls="basic-navbar-nav" /> 
 				<Navbar.Collapse id="basic-navbar-nav">
 
 					{
-						loginCtx == true ?
+						loginCtx == false ?
+
 						<Nav className="ml-auto" style={styles.nav}>
-							<Nav.Link href="#home">Tentang Kami</Nav.Link>
-							<Nav.Link href="#link">Hubungi Kami</Nav.Link>
-							<Nav.Link href="#link">Blog</Nav.Link>
-							<Nav.Link href="#link"><Button style={styles.buttonOrange}>Daftar Masuk</Button></Nav.Link>
+							<Nav.Link href="https://plankawen.wixsite.com/website/tentang-kami">Tentang Kami</Nav.Link>
+							<Nav.Link href="https://plankawen.wixsite.com/website/hubungi-kami">Hubungi Kami</Nav.Link>
+							<Nav.Link href="https://plankawen.wixsite.com/website/blog">Blog</Nav.Link>
+							<Nav.Link href="/signup"><Button style={styles.buttonOrange}>Daftar Masuk</Button></Nav.Link>
 						</Nav>
 						:
 						<Nav className="ml-auto" style={styles.nav}>
 							<Nav.Link href="#home"><img className="ico-bell" src="/images/icon/bell.png"/></Nav.Link>
-							<Nav.Link href="#link"><img className="user-oval" src="/images/icon/ico-user-placeholder.png"/>Tom John</Nav.Link>
+							{/* <Nav.Link href="#link"><img className="user-oval" src="/images/icon/ico-user-placeholder.png"/>{clientCtx.name ? clientCtx.name : 'user'}</Nav.Link> */}
+							<NavDropdown title={clientCtx.name ? clientCtx.name : 'user'} id="basic-nav-dropdown dropdown-button-drop-left" className="dropdown-abs">
+								<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+								<NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+								<NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+								<NavDropdown.Divider />
+								<NavDropdown.Item href="/signout">Log out</NavDropdown.Item>
+							</NavDropdown>
+							
 						</Nav>
 					}
 					
@@ -101,6 +87,9 @@ const Layout = ({ children, title = 'This is the default title' }) =>
         	{children}
 			
 			<Footer/>
+			<style jsx>{`
+				.hehe { left: -70px;}
+			`}</style>
       </div>
     )
 }

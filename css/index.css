@@ -152,19 +152,7 @@
     font-size: 12px;
     margin-top: 10px;
  }
-.btn-pengatin{
-    background-color: #FFF;
-    color: #ED795F;
-    border-radius: 10px;
-    border: 1px solid #ED795F;
-    height: 60px;
-    width: 200px;
-    transition: all .3s;
-}
-.btn-pengatin:hover{
-    background-color: #ED795F;
-    color: #FFF;
-}
+
 .btn-vendor{
     background-color: #FFF;
     color: #47CBC4;
@@ -202,6 +190,26 @@
     font-size: 14px;
     display: block;
 }
+.coming-soon { 
+    position: relative; 
+}
+.a-coming-soon { 
+    position: absolute;
+    top: -35px;
+    font-weight: normal !important;
+    color: red !important;
+    font-size: 12px !important;
+    left: -50%;
+    right: -50%;
+}
+.dropdown-abs {
+   min-width: 100px;
+   width: 100%;
+}
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    left: -70px;
+}
+
 @media screen and (max-width: 480px) {
     .btn-pengatin, .btn-vendor { width: 100%; }
                     .btn-rancang { width: 30%; }

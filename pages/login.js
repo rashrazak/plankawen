@@ -9,6 +9,8 @@ function login() {
     const [goUrl, setGoUrl] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [isActive, setIsActive] = useState()
+    const [name, setName] = useState('')
 
     const {setClientCtx, setLoginCtx} = useContext(LSContext)
 
@@ -25,7 +27,7 @@ function login() {
             } 
         }
         
-    }, [goUrl])
+    }, [goUrl, isActive])
 
     function goLupaPassword(){
         //belum lagi
@@ -172,14 +174,21 @@ function login() {
 
                         <p className="title-p">PILIH AKAUN ANDA (DAFTAR MASUK)</p>
                         <div className="choose-your-fighter">
-                            <div onClick={()=>setUrl('login')} className="">
-                                <div className="image-bakal-pengantin">
+                            <div className="" onClick={()=> {
+                                setUrl('login')
+                                setIsActive(0)
+                                
+                            }}>
+                                <div className={`image-bakal-pengantin ${isActive == 0 ? 'active-pengantin' : ''}`}>
                                     <img src="/images/backgrounds/bakalpengantin.jpg"/>
                                 </div> 
                                 <h3>Bakal Pengantin</h3>
                             </div>
-                            <div onClick={()=>setUrl('https://vendor.plankawen.com/signup')} className="">
-                                <div className="image-vendor">
+                            <div className="" onClick={()=> {
+                                setUrl('https://vendor.plankawen.com/signup')
+                                setIsActive(1)
+                            }}>
+                                <div className={`image-vendor ${isActive == 1 ? 'active-vendor' : ''}`}>
                                     <img src="/images/backgrounds/bakalvendor.jpg"/>
                                 </div> 
                                 <h3>Vendor Servis</h3>
@@ -233,8 +242,10 @@ function login() {
                 .title-p { font-style: normal; font-weight: normal; font-size: 1rem; text-align: center; color: #9B9B9B; margin-top: 28px;}
                 .image-bakal-pengantin { cursor: pointer; position: relative;}
                 .image-bakal-pengantin:hover::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(245, 154, 134, 0.5); z-index: 2; border-radius: 5px; }
+                .active-pengantin::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(245, 154, 134, 0.5); z-index: 2; border-radius: 5px;}
                 .image-vendor { cursor: pointer; position: relative;}
                 .image-vendor:hover::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(89, 208, 201, 0.5); z-index: 2; border-radius: 5px; }
+                .active-vendor::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(89, 208, 201, 0.5); z-index: 2; border-radius: 5px; }
                 .klik-sini { font-style: normal;font-weight: normal;font-size: 1rem;color: #3E3E3E; margin-bottom: 0;}
                 .klik-sini > span { color: #ED795F; text-decoration: underline;}
                 .btn-next { font-style: normal; font-weight: 600; font-size: 0.875rem; color: #FFF; background-color: #ED795F; border-radius: 8px; background-image: url('/images/icon/arrow-right-white.png'); background-repeat: no-repeat; background-position: center right 10px; background-size: 20px; width: 165px; height: 45px;}

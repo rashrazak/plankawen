@@ -54,6 +54,7 @@ function Index(){
                         <div className="rancang-section">
                         {
                             loginCtx == true ?
+
                             <Button bsPrefix="btn-rancang" onClick={()=>countryFn()}>Mula merancang</Button>
                             :
                             <div>
@@ -82,8 +83,8 @@ function Index(){
             <div className="row">
                 <div className="container container-2">
                     <div className="">
-                        <a href=""><img src="/images/icon/s-facebook.png"/></a>
-                        <a href=""><img src="/images/icon/s-instagram.png"/></a>
+                        <a href="https://www.facebook.com/Plankawen-745730829103427/"><img src="/images/icon/s-facebook.png"/></a>
+                        <a href="https://www.instagram.com/plankawen_/"><img src="/images/icon/s-instagram.png"/></a>
                     </div>
                 </div>
             </div>
@@ -205,8 +206,9 @@ function Index(){
                     <div className="">
                         <h4>Sebelum itu, SIAPA ANDA?</h4>
                         <div className="">
-                            <div className="">
-                                <Button bsPrefix="btn-pengatin" onClick={()=>redirectPK('login')}>Bakal Pengantin</Button>
+                            <div className="coming-soon">
+                                <p className="a-coming-soon">*Coming soon</p>
+                                <button className="btn btn-pengatin" onClick={()=>redirectPK('login')}>Bakal Pengantin</button>
                                 <p>Ber-darah manis yang bakal diijabkabul</p>
                             </div>
                             <div className="">
@@ -246,6 +248,20 @@ function Index(){
                 .row-comment { margin-top: 300px;}
                 .search-box { background-color: red; }
                 .rancang-section { position: relative;}
+                .btn-pengatin{
+                    background-color: #FFF;
+                    color: #ED795F;
+                    border-radius: 10px;
+                    border: 1px solid #ED795F;
+                    height: 60px;
+                    width: 200px;
+                    transition: all .3s;
+                    cursor: not-allowed;
+                }
+                .btn-pengatin:hover{
+                    background-color: #ED795F;
+                    color: #FFF;
+                }
                 @media screen and ( max-width: 480px) {
                     .row-1 { height: 100%; }
                     .box-red { width: 100%; height: 579px;}
