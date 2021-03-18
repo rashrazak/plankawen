@@ -13,21 +13,21 @@ function Index(){
         // window.location.href = "https://plankawen.wixsite.com/website"
     }, [])
     const gMapsCities = [
-        {key:'Johor', value:'Johor'},
-        {key:'Kedah', value:'Kedah'},
-        {key:'Kelantan', value:'Kelantan'},
-        {key:'Melaka', value:'Melaka'},
-        {key:'Negeri Sembilan', value:'Negeri Sembilan'},
-        {key:'Pahang', value:'Pahang'},
-        {key:'Penang', value:'Penang'},
-        {key:'Perak', value:'Perak'},
-        {key:'Perlis', value:'Perlis'},
-        {key:'Sabah', value:'Sabah'},
-        {key:'Sarawak', value:'Sarawak'},
+        // {key:'Johor', value:'Johor'},
+        // {key:'Kedah', value:'Kedah'},
+        // {key:'Kelantan', value:'Kelantan'},
+        // {key:'Melaka', value:'Melaka'},
+        // {key:'Negeri Sembilan', value:'Negeri Sembilan'},
+        // {key:'Pahang', value:'Pahang'},
+        // {key:'Penang', value:'Penang'},
+        // {key:'Perak', value:'Perak'},
+        // {key:'Perlis', value:'Perlis'},
+        // {key:'Sabah', value:'Sabah'},
+        // {key:'Sarawak', value:'Sarawak'},
         {key:'Selangor', value:'Selangor'},
         {key:'Kuala Lumpur', value:'Kuala Lumpur'},
-        {key:'Terengganu', value:'Terengganu'},
-        {key:'Labuan', value:'Labuan'},
+        // {key:'Terengganu', value:'Terengganu'},
+        // {key:'Labuan', value:'Labuan'},
         {key:'Putrajaya', value:'Putrajaya'},
     ];
     const [stateMy, setStateMy] = useState('Selangor')
@@ -66,7 +66,6 @@ function Index(){
                                             setStateMy(record.key)
                                         }}
                                         value={stateMy}
-                                        autoFocus
                                         inputBoxHeight="70px"
                                         inputBoxBorderColor="#EAEAEA"
                                     />
