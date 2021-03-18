@@ -13,11 +13,11 @@ function SelectState() {
         <div className="form-width">
             <label>Pilihan negeri</label>
             <select className="form-control form-control-select-state" defaultValue={bookCtxNegeri} onChange={(e) => getState(e.target.value)}>
-                <option value="Johor">Johor</option>
+                {/* <option value="Johor">Johor</option>
                 <option value="Kedah" >Kedah</option>
-                <option value="Kelantan">Kelantan</option>
+                <option value="Kelantan">Kelantan</option> */}
                 <option value="Kuala Lumpur">Kuala Lumpur</option>
-                <option value="Labuan" >Labuan</option>
+                {/* <option value="Labuan" >Labuan</option>
                 <option value="Malacca" >Malacca</option>
                 <option value="Negeri Sembilan" >Negeri Sembilan</option>
                 <option value="Pahang"  >Pahang</option>
@@ -25,7 +25,7 @@ function SelectState() {
                 <option value="Perlis" >Perlis</option>
                 <option value="Penang" >Penang</option>
                 <option value="Sabah" >Sabah</option>
-                <option value="Sarawak"  >Sarawak</option>
+                <option value="Sarawak"  >Sarawak</option> */}
                 <option value="Selangor" >Selangor</option>
                 <option value="Terengganu" >Terengganu</option>
             </select>
