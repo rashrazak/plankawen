@@ -12,7 +12,8 @@ function SelectState() {
     return (
         <div className="form-width">
             <label>Pilihan negeri</label>
-            <select className="form-control form-control-select-state" defaultValue={bookCtxNegeri} onChange={(e) => getState(e.target.value)}>
+            <select className="form-control form-control-select-state" defaultValue={bookCtxNegeri} onChange={(e) => getState(e.target.value)} placeholder={`Pilih negeri`}>
+                <option value="-">Pilih negeri</option>
                 {/* <option value="Johor">Johor</option>
                 <option value="Kedah" >Kedah</option>
                 <option value="Kelantan">Kelantan</option> */}
@@ -27,7 +28,9 @@ function SelectState() {
                 <option value="Sabah" >Sabah</option>
                 <option value="Sarawak"  >Sarawak</option> */}
                 <option value="Selangor" >Selangor</option>
-                <option value="Terengganu" >Terengganu</option>
+                {/* <option value="Terengganu" >Terengganu</option> */}
+                <option value="Putrajaya" >Putrajaya</option>
+
             </select>
         <style jsx>{`
             .form-width { max-width: 490px; margin-bottom: 10px;}

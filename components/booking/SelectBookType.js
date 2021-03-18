@@ -4,14 +4,17 @@ import {BookingMainContext} from '../../context/BookingMainContext'
 
 function SelectBookType() {
     
-    const {setMain} = useContext(BookingMainContext)
+    const {setMain, getMain} = useContext(BookingMainContext)
     const {setBookCtxType} = setMain
+    const {bookCtxType} = getMain
 
     const [selectType, setSelectType] = useState('');
 
     useEffect(() => {
         if (selectType) {
             setBookCtxType(selectType)
+        } else {
+            setSelectType(bookCtxType)
         }
     }, [selectType])
     return (

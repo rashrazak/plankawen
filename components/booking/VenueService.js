@@ -30,6 +30,9 @@ function VenueService() {
         if (!name) {
             eventSelection()
         }
+        return () => {
+            console.log("This will be logged on unmount");
+        }
     }, [name])
 
 
@@ -41,6 +44,9 @@ function VenueService() {
     useEffect(() => {
         setSelect(selection)
         setclick(false)
+        return () => {
+            console.log("This will be logged on unmount");
+        }
     }, [click])
 
    

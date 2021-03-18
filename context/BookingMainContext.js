@@ -3,6 +3,8 @@ export const BookingMainContext = createContext();
 import firebase from '../config/firebaseConfig'
 import * as ls from 'local-storage'
 import Router from 'next/router'
+import moment from 'moment'
+
 const BookingMainContextProvider = (props) => {
 
     const [bookCtxType, setBookCtxType] = useState('')
@@ -24,23 +26,48 @@ const BookingMainContextProvider = (props) => {
     },[bookCtxServiceList])
 
     useEffect(() => {
-        if (bookCtxType && bookCtxNegeri && bookCtxDate && bookCtxTime) {
 
-            let params = {
-                type: bookCtxType,
-                negeri: bookCtxNegeri,
-                date: bookCtxDate,
-                time: bookCtxTime
+        async function fetchData() {
+
+            console.log(bookCtxDate)
+
+            
+            let date = await moment(bookCtxDate,'DD-MM-YYYY').format( "DD/MM/YYYY") || null
+
+            console.log(date)
+
+            if (bookCtxType && bookCtxNegeri && date && bookCtxTime) {
+
+                console.log('ehhe')
+
+                let params = {
+                    type: bookCtxType,
+                    negeri: bookCtxNegeri,
+                    date: moment(date,'DD-MM-YYYY').format( "DD/MM/YYYY"),
+                    time: bookCtxTime
+                }
+    
+                ls.set('booking-main',params)
+    
+            }else if(ls('booking-main')){
+
+                console.log('haha')
+    
+                let param = ls.get('booking-main')
+                console.log(param.time)
+                setBookCtxDate(param?.date)
+                setBookCtxTime(param?.time)
+                setBookCtxNegeri(param?.negeri)
+                setBookCtxType(param?.type)
             }
-
-            ls.set('booking-main',params)
-        }else if(ls('booking-main')){
-            let param = ls.get('booking-main')
-            setBookCtxDate(param.date)
-            setBookCtxTime(param.time)
-            setBookCtxNegeri(param.negeri)
-            setBookCtxType(param.type)
         }
+
+        fetchData();
+
+        return () => {
+            console.log("This will be logged on unmount");
+        }
+       
     }, [bookCtxType, bookCtxNegeri, bookCtxDate, bookCtxTime])
 
     const mainCtxFnSelect = (serviceType, serviceData) =>{

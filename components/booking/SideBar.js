@@ -2,6 +2,8 @@ import React, {useState,useContext, useEffect} from 'react'
 import {BookingMainContext} from '../../context/BookingMainContext'
 import * as ls from 'local-storage'
 import Router, {useRouter} from 'next/router'
+import moment from 'moment'
+
 
 function SideBar({step}) {
 
@@ -19,7 +21,7 @@ function SideBar({step}) {
             console.log(bookCtxServiceList)
             getPrice(bookCtxServiceList)
         }
-        
+         
     }, [bookCtxServiceList])
 
     useEffect(() => {
@@ -105,7 +107,7 @@ function SideBar({step}) {
                             <label>Pilihan tarikh</label>
                             {
                                 bookCtxDate ?
-                                <p>{bookCtxDate}</p>
+                                <p>{moment(bookCtxDate,'DD-MM-YYYY').format( "DD/MM/YYYY")}</p>
                                 :
                                 <p>-</p>
                             }

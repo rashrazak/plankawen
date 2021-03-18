@@ -20,6 +20,7 @@ function TimePicker() {
             <div className="">
                 <label>Pilih masa</label>
                 <select className="form-control form-control-time" value={bookCtxTime} name="time" id="time" onChange={(e)=>setSelectTime(e.target.value)}>
+                    <option value="-">Pilih masa</option>
                     <option value="5:00 AM">5:00 AM</option>
                     <option value="6:00 AM">6:00 AM</option>
                     <option value="7:00 AM">7:00 AM</option>

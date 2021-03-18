@@ -225,6 +225,10 @@ class Firebase {
         return await this.db.collection(serviceName).where('areaCovered', 'array-contains', state).get()
     }
 
+    async getPackageByState(state){
+        return await this.db.collection('package').where('coveredArea', 'array-contains', state).get()
+    }
+
 
     async getVendorUser(email){
         return await this.db.collection('vendor').where('email', '==', email).get()

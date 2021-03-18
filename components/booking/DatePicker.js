@@ -19,19 +19,31 @@ function DatePicker2() {
 
     
     useEffect(() => {
-        
-        if (selectDate) {
-            if (selectDate != new Date()) {
-                let y = moment(selectDate).format('DD/MM/YYYY')
-                setBookCtxDate(y)
-            }else if (bookCtxDate){
-                let x = moment(bookCtxDate).toDate()
-                setSelectDate(x)
+
+        async function fetchData() {
+
+            let date = await moment(bookCtxDate,'DD-MM-YYYY').format( "DD/MM/YYYY") || ''
+
+            if (selectDate) {
+
+                if (selectDate != new Date()) {
+                
+                    let y = moment(selectDate,'DD-MM-YYYY').format( "DD/MM/YYYY")
+                    setBookCtxDate(y)
+    
+                }
+
+            } else if ( bookCtxDate) {
+
+                // setBookCtxDate( moment(new Date()).format('DD/MM/YYYY') )
+                setSelectDate(date)
             }
-        }else{
-            setBookCtxDate( moment(new Date()).format('DD/MM/YYYY') )
         }
-        
+
+      fetchData();
+      return () => {
+        console.log("This will be logged on unmount");
+      }
     }, [selectDate])
 
     
@@ -73,7 +85,7 @@ function DatePicker2() {
                     onDayChange={(day)=>setSelectDate(day)}
                     formatDate={formatDate}
                     parseDate={parseDate}
-                    placeholder={`Pilih tarikh anda`}
+                    placeholder={'Pilih tarikh'}
                     inputProps={{ className: `form-control-date` }}
                 />
             </div>
