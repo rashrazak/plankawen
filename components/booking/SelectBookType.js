@@ -1,6 +1,6 @@
 import React,{useContext, useState, useEffect} from 'react'
 import {BookingMainContext} from '../../context/BookingMainContext'
-
+import * as ls from 'local-storage'
 
 function SelectBookType() {
     
@@ -13,8 +13,11 @@ function SelectBookType() {
     useEffect(() => {
         if (selectType) {
             setBookCtxType(selectType)
+            ls.set('bookType',selectType)
         } else {
             setSelectType(bookCtxType)
+            ls.set('bookType',bookCtxType)
+
         }
     }, [selectType])
     return (

@@ -15,7 +15,7 @@ function DatePicker2() {
     const {setBookCtxDate} = setMain
     const {bookCtxDate} = getMain
 
-    const [selectDate, setSelectDate] = useState('');
+    const [selectDate, setSelectDate] = useState(moment().add(3,'M').add(1,'d').format( "DD/MM/YYYY"));
 
     
     useEffect(() => {
@@ -30,6 +30,7 @@ function DatePicker2() {
                 
                     let y = moment(selectDate,'DD-MM-YYYY').format( "DD/MM/YYYY")
                     setBookCtxDate(y)
+                    ls.set('date', y)
     
                 }
 
@@ -80,9 +81,21 @@ function DatePicker2() {
                     placeholderText="Pilih tarikh sebulan awal"
                 /> */}
                 <DayPickerInput 
+                    disabledDays={new Date()}
                     value={selectDate}
                     format="DD/MM/YYYY"
-                    onDayChange={(day)=>setSelectDate(day)}
+                    onDayChange={(day)=>{
+                        var selectDate = moment(day);
+                        var currentDate = moment();
+                        var futureMonth = moment(currentDate).add(3, 'M');
+                        if(selectDate.isAfter(futureMonth) ) {
+                            setSelectDate(day)
+                        }else{
+                            alert('Tarikh hendaklah lebih dari 90 hari dari hari ini')
+                            setSelectDate(moment().add(3,'M').add(1,'d').format( "DD/MM/YYYY"))
+                            return false
+                        }
+                    }}
                     formatDate={formatDate}
                     parseDate={parseDate}
                     placeholder={'Pilih tarikh'}

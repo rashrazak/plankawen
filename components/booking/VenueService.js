@@ -3,7 +3,7 @@ import SearchExtraService from '../booking/SearchExtraService'
 import ViewExtraService from './ViewExtraService'
 
 
-function VenueService() {
+function VenueService({view}) {
     const selection = [
         {name:'Venue',isActive:false},
         {name:'Canopy',isActive:false},
@@ -29,9 +29,6 @@ function VenueService() {
     useEffect(() => {
         if (!name) {
             eventSelection()
-        }
-        return () => {
-            console.log("This will be logged on unmount");
         }
     }, [name])
 
@@ -65,7 +62,7 @@ function VenueService() {
                     viewData && viewService ?
                     <React.Fragment>
                         <div>
-                            <ViewExtraService sendData={viewService} sendVendor={viewVendor} closeData={setViewData}/>
+                            <ViewExtraService sendData={viewService} sendVendor={viewVendor} closeData={setViewData} view={view}/>
                         </div>
                     </React.Fragment>
                     :

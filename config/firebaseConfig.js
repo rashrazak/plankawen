@@ -1,4 +1,4 @@
-import * as app from 'firebase/app';
+import app from 'firebase/app';
 // import Swal from 'sweetalert2'
 import 'firebase/auth'
 import 'firebase/firestore'
@@ -15,7 +15,7 @@ import 'firebase/storage'
 //     appId: "1:745867454643:web:a3e3cfba41ea05de"
 //   }
 //production
-const config = {
+var config = {
     apiKey: "AIzaSyDJwYfTFCcAG71iHs6pqxIyBJaBRa-qOH8",
     authDomain: "plankawen-19918.firebaseapp.com",
     databaseURL: "https://plankawen-19918.firebaseio.com",
@@ -24,7 +24,7 @@ const config = {
     messagingSenderId: "79976166898",
     appId: "1:79976166898:web:b6fa8275211bf940b9a76b",
     measurementId: "G-3ZEDEV7BH1"
-  }
+  };
 
 class Firebase {
     constructor(){
@@ -48,7 +48,7 @@ class Firebase {
     }
 
     async signInWithSocial(){
-        return await app.auth().signInWithPopup(this.provider );
+        return await this.auth.signInWithPopup(this.provider );
     }
     async updateClientId(id){
         return await this.db.collection('client').doc(id).update({documentId:id})

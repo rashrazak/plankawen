@@ -26,6 +26,7 @@ function viewShow3({data, show, closeData, view}) {
             sd.selectPaxTotalPrice = paxQty * parseFloat(sd.hargaPerPerson)
         }
         datax.serviceDetails = sd
+        console.log(datax)
         mainCtxFnSelect(datax.serviceType, datax )
 
         show(false)
@@ -40,7 +41,7 @@ function viewShow3({data, show, closeData, view}) {
                 <h3>{data.serviceType}</h3>
                 {data.serviceDetails  && <div>
                     <input type="checkbox" checked={pax} onChange={()=>setPax(!pax)} id="pax"   />
-                    <label for="pax"> Harga Satu pax - RM {data.serviceDetails.hargaPerPerson} - Sila masukkan quantity </label><br/>
+                    <label htmlFor="pax"> Harga Satu pax - RM {data.serviceDetails.hargaPerPerson} - Sila masukkan quantity </label><br/>
                     {
                         pax == true?
                         <input type="number" value={paxQty} onChange={(e)=>setPaxQty(e.target.value)}/>

@@ -1,5 +1,6 @@
 import React,{useContext, useState, useEffect} from 'react'
 import {BookingMainContext} from '../../context/BookingMainContext'
+import * as ls from 'local-storage'
 
 function TimePicker() {
 
@@ -12,6 +13,7 @@ function TimePicker() {
     useEffect(() => {
         if (selectTime) {
             setBookCtxTime(selectTime)
+            ls.set('time', selectTime)
         }
     }, [selectTime])
 

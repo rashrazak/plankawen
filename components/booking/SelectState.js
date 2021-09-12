@@ -1,5 +1,6 @@
 import React,{useContext, useState} from 'react'
 import {BookingMainContext} from '../../context/BookingMainContext'
+import * as ls from 'local-storage'
 
 function SelectState() {
     const {setMain, getMain} = useContext(BookingMainContext)
@@ -8,6 +9,7 @@ function SelectState() {
     const getState =(v) =>{
         v.trim()
         setBookCtxNegeri(v)
+        ls.set('negeri', v)
     }
     return (
         <div className="form-width">

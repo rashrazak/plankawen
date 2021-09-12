@@ -25,7 +25,7 @@ function viewShow2({data, show, closeData, view}) {
             let newData = data.serviceDetails
             if (full) {
                 newData.selectFull = true
-                newData.selectFullPrice = newData.discountFull ? newData.hargaDiscountFull : data.hargaFull
+                newData.selectFullPrice = newData.discountFull ? parseInt(newData.hargaDiscountFull) : parseInt(newData.hargaFull)
             }else if (!full){
                 newData.selectFull = false
                 newData.selectFullPrice = 0
@@ -33,7 +33,7 @@ function viewShow2({data, show, closeData, view}) {
 
             if (touchup) {
                 newData.selectTouchup = true
-                newData.selectTouchupPrice = newData.discountTouchup ? newData.hargaDiscountTouchup : data.hargaTouchup
+                newData.selectTouchupPrice = newData.discountTouchup ? parseInt(newData.hargaDiscountTouchup) : parseInt(newData.hargaTouchup)
             }else if (!touchup){
                 newData.selectTouchup = false
                 newData.selectTouchupPrice = 0
@@ -64,10 +64,18 @@ function viewShow2({data, show, closeData, view}) {
 
         let datax = data
         let sd = datax.serviceDetails
+        if (!kad) {
+            sd.selectKad = false
+        }
+        
 
         if (kad && kadQty) {
+            sd.selectKad = true
             sd.selectKadQuantity = kadQty
+            let discount = sd.discount.length > 0 ? sd.discount.find(v => kadQty >= v.min && kadQty <= v.max) : null
+            sd.discountQuantity = discount ? discount.discount : 0
             sd.selectKadTotalPrice = kadQty * parseFloat(sd.hargaPerPerson)
+            sd.selectKadTotalDiscount = (kadQty * parseFloat(sd.hargaPerPerson))-(((kadQty * parseFloat(sd.hargaPerPerson))/100) * sd.discountQuantity )
         }
 
         if (bannerSelect.length >= 1) {

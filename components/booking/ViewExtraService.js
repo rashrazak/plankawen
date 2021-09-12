@@ -79,6 +79,9 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
                 view(false)
             }
             
+        }else{
+            closeData(false)
+            view(false)
         }
 
         

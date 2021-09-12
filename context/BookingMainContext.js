@@ -4,6 +4,7 @@ import firebase from '../config/firebaseConfig'
 import * as ls from 'local-storage'
 import Router from 'next/router'
 import moment from 'moment'
+// import { add, total } from 'cart-localstorage'
 
 const BookingMainContextProvider = (props) => {
 
@@ -19,11 +20,16 @@ const BookingMainContextProvider = (props) => {
 
     const [bookCtxServiceList, setBookCtxServiceList] = useState(null)
 
+    const [mount, setMount] = useState(false)
+    const [cartLS, setCartLS] = useState(null)
+
     useEffect(() => {
-        if (!bookCtxServiceList) {
-            setBookCtxServiceList(ls.get('service-list'))
-        }
-    },[bookCtxServiceList])
+       if (!mount) {
+           setMount(true)
+       }else{
+           setCartLS(window.cartLS)
+       }
+    }, [mount])
 
     useEffect(() => {
 
@@ -63,30 +69,50 @@ const BookingMainContextProvider = (props) => {
         }
 
         fetchData();
-
-        return () => {
-            console.log("This will be logged on unmount");
-        }
-       
     }, [bookCtxType, bookCtxNegeri, bookCtxDate, bookCtxTime])
 
-    const mainCtxFnSelect = (serviceType, serviceData) =>{
-
-        var data = [];
-        if (ls('service-list')) {
-            data = ls.get('service-list')
+    const getId = (y = 0) =>{
+        let list = cartLS.list()
+        let id = list?.length ? list.length + 1 : 1
+        id += y
+        if (list.some((v)=>v.id == id)) {
+           id = getId(10)
         }
-        data = [...data, serviceData]
-
-        ls.set('service-list', data)
-        setBookCtxServiceList(data)
+        return id
+        
     }
 
-    const mainCtxFnDelete = (index) =>{
-        let im = bookCtxServiceList;
-        im.splice(index, 1);
-        setBookCtxServiceList([...im])
-        ls.set('service-list', im)
+    const mainCtxFnSelect = (serviceType, serviceData) =>{
+        let id = getId()
+        if (serviceType == 'Makeup') {
+            let {selectFull, selectFullPrice, selectTouchup, selectTouchupPrice} = serviceData.serviceDetails
+            let price = 0
+            price = selectFullPrice + selectTouchupPrice 
+            console.log({id,...serviceData,price})
+            cartLS.add({id,...serviceData,price})
+
+        }else if (serviceType =="KadBanner") {
+            let {selectKad, selectKadTotalDiscount, selectBanner, selectBannerArray} = serviceData.serviceDetails
+            let priceKad = 0
+            priceKad = selectKad ? parseInt(selectKadTotalDiscount) : 0
+            let priceBanner = 0 
+            priceBanner = selectBanner ? selectBannerArray.reduce((a, b)=>a+parseInt(b.harga),0) : 0
+            
+            let price = priceBanner + priceKad
+            
+            cartLS.add({id,...serviceData,price})
+        
+        }else if (serviceType == 'Hantaran' || serviceType == 'Caterer' || serviceType == 'DoorGift'){
+            let {selectPaxTotalPrice} = serviceData.serviceDetails
+            cartLS.add({id,...serviceData,price:parseInt(selectPaxTotalPrice)})
+        }else{
+            let {hargaDiscount, harga}= serviceData.serviceDetails
+            cartLS.add({id,...serviceData,price:hargaDiscount? parseInt(hargaDiscount): parseInt(harga)})
+        }
+    }
+
+    const mainCtxFnDelete = (id) =>{
+        cartLS.remove(id)
 
     }
 

@@ -1,8 +1,8 @@
 import React, {useState,useContext, useEffect} from 'react'
 import {BookingMainContext} from '../../context/BookingMainContext'
-import * as ls from 'local-storage'
 import Router, {useRouter} from 'next/router'
 import moment from 'moment'
+import * as ls from 'local-storage'
 
 
 function SideBar({step}) {
@@ -15,7 +15,23 @@ function SideBar({step}) {
 
     const [serviceList, setServiceList] = useState(null)
     const [totalPrice, setTotalPrice] = useState(0)
+    const [mount, setMount] = useState(false)
+    const [cartLS, setCartLS] = useState(null)
 
+    useEffect(() => {
+       if (!mount) {
+           setMount(true)
+       }else{
+           setCartLS(window.cartLS)
+       }
+    }, [mount])
+
+    useEffect(() => {
+        if (cartLS) {
+            setServiceList(cartLS.list())
+        }
+    }, [cartLS,cartLS?.total()])
+,
     useEffect(() => {
         if (bookCtxServiceList) {
             console.log(bookCtxServiceList)
@@ -24,11 +40,6 @@ function SideBar({step}) {
          
     }, [bookCtxServiceList])
 
-    useEffect(() => {
-        if (serviceList) {
-            console.log(serviceList)
-        }
-    }, [setServiceList])
 
     function getPrice(param){
         let price = 0
@@ -78,8 +89,9 @@ function SideBar({step}) {
         // window.open('/review', '_blank')
     }
 
-    const handleDelete = (index, isTrue) =>{
-            mainCtxFnDelete(index)
+    const handleDelete = (id, isTrue) =>{
+            mainCtxFnDelete(id)
+            setMount(false)
             if (isTrue) {
                 Router.push('/booking/venue-services')
             }
@@ -99,40 +111,40 @@ function SideBar({step}) {
                         <div className="div-review-1">
                             <label>Pilihan negeri</label>
                             {
-                                bookCtxNegeri ?
-                                <p>{bookCtxNegeri}</p>
+                                ls('negeri') ?
+                                <p>{ls.get('negeri')}</p>
                                 :
                                 <p>-</p>
                             }
                             <label>Pilihan tarikh</label>
                             {
-                                bookCtxDate ?
-                                <p>{moment(bookCtxDate,'DD-MM-YYYY').format( "DD/MM/YYYY")}</p>
+                                ls('date') ?
+                                <p>{moment(ls.get('date'),'DD-MM-YYYY').format( "DD/MM/YYYY")}</p>
                                 :
                                 <p>-</p>
                             }
                             
                             <label>Pilihan masa</label>
                             {
-                                bookCtxTime ?
-                                <p>{bookCtxTime}</p>
+                                ls('time') ?
+                                <p>{ls.get('time')}</p>
                                 :
                                 <p>-</p>
                             }
 
                             {
-                                bookCtxServiceList &&  bookCtxServiceList.length >= 1?
+                                serviceList &&  serviceList.length >= 1?
                                     <>
                                         <label>Pilihan Servis</label>
                                         {
-                                            bookCtxServiceList.length >= 1 && bookCtxServiceList.map((v,i)=>{
+                                            serviceList.length >= 1 && serviceList.map((v,i)=>{
                                                 
                                                 if (v.serviceType == 'Venue') {
                                                     return(
                                                         <div key={i} className="review-service">
-                                                            <label>Pilihan Venue</label>
+                                                            <label>Venue</label>
                                                             <p>{v.serviceName}</p>
-                                                            <p className="delete-icon" onClick={()=>handleDelete(i , true)}>x</p>
+                                                            <p className="delete-icon" onClick={()=>handleDelete(v.id , true)}>x</p>
                                                             <p>{v.serviceDetails.hargaDiscount ? `RM ${v.serviceDetails.hargaDiscount}` : `RM ${v.serviceDetails.harga}`  }</p>
                                                         </div>
 
@@ -141,7 +153,7 @@ function SideBar({step}) {
                                                     return(
                                                         <div key={i} className="review-service">
                                                             <p>{v.serviceType}</p>
-                                                            <p className="delete-icon" onClick={()=>handleDelete(i)}>x</p>
+                                                            <p className="delete-icon" onClick={()=>handleDelete(v.id)}>x</p>
                                                             <label>Kad</label>
                                                             <p>Qty: {v.serviceDetails.selectKadQuantity}</p>
                                                             <p>Price: RM {v.serviceDetails.selectKadTotalPrice}</p>
@@ -167,8 +179,7 @@ function SideBar({step}) {
                                                     return(
                                                         <div key={i} className="review-service">
                                                             <p>{v.serviceType}</p>
-                                                            <p className="delete-icon" onClick={()=>handleDelete(i)}>x</p>
-                                                            <label>{v.serviceType}</label>
+                                                            <p className="delete-icon" onClick={()=>handleDelete(v.id)}>x</p>
                                                             {
                                                                 v.serviceDetails.selectTouchup == true ?
                                                                 <div>
@@ -192,18 +203,17 @@ function SideBar({step}) {
                                                     return(
                                                         <div key={i} className="review-service">
                                                             <p>{v.serviceType}</p>
-                                                            <p className="delete-icon" onClick={()=>handleDelete(i)}>x</p>
-                                                            <label>{v.serviceType}</label>
+                                                            <p className="delete-icon" onClick={()=>handleDelete(v.id)}>x</p>
                                                             <p>Qty: {v.serviceDetails.selectPaxQuantity}</p>
                                                             <p>Price: RM {v.serviceDetails.selectPaxTotalPrice}</p>
                                                         </div>
                                                     )
-                                                }else if (v.serviceType == 'Photographer' || v.serviceType == 'Videographer' || v.serviceType == 'WeddingDress' || v.serviceType == 'Pelamin' || v.serviceType == 'Others'){
+                                                }else if (v.serviceType == 'Photographer' || v.serviceType == 'Videographer' || v.serviceType == 'WeddingDress' || v.serviceType == 'Pelamin' || v.serviceType == 'Others' || v.serviceType == 'Persembahan'){
                                                     return(
                                                         <div key={i} className="review-service">
                                                             <p>{v.serviceType}</p>
-                                                            <p className="delete-icon" onClick={()=>handleDelete(i)}>x</p>
-                                                            <p>Price: RM {v.serviceDetails.hargaDiscount ? `RM ${v.serviceDetails.hargaDiscount}` : `RM ${v.serviceDetails.harga}`  }</p>
+                                                            <p className="delete-icon" onClick={()=>handleDelete(v.id)}>x</p>
+                                                            <p>Price: {v.serviceDetails.hargaDiscount ? `RM ${v.serviceDetails.hargaDiscount}` : `RM ${v.serviceDetails.harga}`  }</p>
                                                         </div>
                                                     )
                                                 }
@@ -218,11 +228,11 @@ function SideBar({step}) {
                         <div className="div-total">
                                 {/* <p>Subtotal <span>MYR 0.00</span></p> */}
                                 {/* <p>Discount <span>MYR 0.00</span></p> */}
-                                <p>Total <span>MYR {totalPrice}</span></p>
+                                <p>Total <span>MYR {cartLS?.total() ? cartLS.total() : 0}</span></p>
                         </div>             
-                        <div className="">
+                        {/* <div className="">
                             <button type="button" className="btn btn-review" onClick={()=> openInNewTab()}>Review</button>
-                        </div>              
+                        </div>               */}
 
                        </React.Fragment>
                        :

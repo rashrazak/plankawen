@@ -46,6 +46,7 @@ const Layout = ({ children, title = 'This is the default title' }) =>
 				<title>{title}</title>
 				<meta charSet='utf-8' />
 				<meta name='viewport' content='initial-scale=1.0, width=device-width' />
+                <script type="module" src="https://unpkg.com/cart-localstorage@1.1.4/dist/cart-localstorage.min.js" type="text/javascript" defer={true}></script>
         	</Head>
 
         	<header>
@@ -62,7 +63,7 @@ const Layout = ({ children, title = 'This is the default title' }) =>
 							<Nav.Link href="https://plankawen.wixsite.com/website/tentang-kami">Tentang Kami</Nav.Link>
 							<Nav.Link href="https://plankawen.wixsite.com/website/hubungi-kami">Hubungi Kami</Nav.Link>
 							<Nav.Link href="https://plankawen.wixsite.com/website/blog">Blog</Nav.Link>
-							<Nav.Link href="/signup"><Button style={styles.buttonOrange}>Daftar Masuk</Button></Nav.Link>
+							<Nav.Link href="/login"><Button style={styles.buttonOrange}>Log Masuk</Button></Nav.Link>
 						</Nav>
 						:
 						<Nav className="ml-auto" style={styles.nav}>
