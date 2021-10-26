@@ -54,7 +54,7 @@ function login() {
                     if (user != null && index == 0) {
                         let x = doc.data()
 
-                        if (x.name && x.email && x.phone) {
+                        if (x.nama && x.email && x.phone) {
                             setClientCtx({
                                 name:x.nama,
                                 email:x.email,
@@ -120,7 +120,7 @@ function login() {
                     result.map(async (doc, index) =>{
                         if (index == 0) {
                             let x = doc.data()
-                            if (x.name && x.email && x.phone) {
+                            if (x.nama && x.email && x.phone) {
                                 try{
                                     let result =  await firebase.signIn(email, password);
                                     let user = result.user;
