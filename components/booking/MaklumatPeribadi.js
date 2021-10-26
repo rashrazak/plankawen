@@ -17,7 +17,7 @@ function MaklumatPeribadi() {
 
     useEffect(() => {
         if (loginCtx) {
-            let param = ls.get('clientCtx') 
+            let param = ls.get('client') 
             if (param.name && param.email && param.phone) {
                 setName(param.name)
                 setEmail(param.email)
