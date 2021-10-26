@@ -43,42 +43,50 @@ function login() {
     async function loginWithSocial() {
         var result = await firebase.signInWithSocial();
         var user = result.user;
-
+        console.log(result)
         try{
             let exist = await firebase.check(user.email)
             let result = await exist.docs
             
-            if (result.length == 1) {
+            if (result.length > 0) {
 
-                result.map(doc =>{
-                    let x = doc.data()
-                    if (user != null) {
-                        setClientCtx({
-                            name:x.nama,
-                            email:x.email,
-                            photoUrl: user.photoURL,
-                            emailVerified: user.emailVerified,
-                            uid: user.uid,
-                            phone:x.phone,
-                            documentId:x.documentId,
-                            dateCreated:x.dateCreated,
-                            clientType:x.clientType
-                            
-                        })
-    
-                        localStorage.setItem('client', JSON.stringify({
-                            name:x.nama,
-                            email:x.email,
-                            photoUrl: user.photoURL,
-                            emailVerified: user.emailVerified,
-                            uid: user.uid,
-                            phone:x.phone,
-                            documentId:x.documentId,
-                            dateCreated:x.dateCreated,
-                            clientType:x.clientType
-                            
-                        }))
-                        setLoginCtx(true)
+                result.map((doc, index) =>{
+                    if (user != null && index == 0) {
+                        let x = doc.data()
+
+                        if (x.name && x.email && x.phone) {
+                            setClientCtx({
+                                name:x.nama,
+                                email:x.email,
+                                photoUrl: user.photoURL,
+                                emailVerified: user.emailVerified,
+                                uid: user.uid,
+                                phone:x.phone,
+                                documentId:x.documentId,
+                                dateCreated:x.dateCreated,
+                                clientType:x.clientType
+                                
+                            })
+        
+                            localStorage.setItem('client', JSON.stringify({
+                                name:x.nama,
+                                email:x.email,
+                                photoUrl: user.photoURL,
+                                emailVerified: user.emailVerified,
+                                uid: user.uid,
+                                phone:x.phone,
+                                documentId:x.documentId,
+                                dateCreated:x.dateCreated,
+                                clientType:x.clientType
+                                
+                            }))
+                            setLoginCtx(true)
+                            window.location.href = "/booking/date-time"
+                        }else{
+                            alert('Please Update Your data');
+                            Router.push(`/update?email=${user.email}`)
+                        }
+
                         
                     }
                 })
@@ -104,47 +112,59 @@ function login() {
                 throw alert('Invalid email format')
                 return false
             }
-
             try{
                 let exist = await firebase.check(email)
                 let result = await exist.docs
-                console.log(result);
-                if (result.length == 1) {
-                    try{
-                        let result =  await firebase.signIn(email, password);
-                        let user = result.user;
-                        console.log(user)
-                        if (user != null) {
-                            setClientCtx({
-                                name:x.nama,
-                                email:x.email,
-                                photoUrl: user.photoURL,
-                                emailVerified: user.emailVerified,
-                                uid: user.uid,
-                                phone:x.phone,
-                                documentId:x.documentId,
-                                dateCreated:x.dateCreated,
-                                clientType:x.clientType
-                                
-                            })
-                            localStorage.setItem('client', JSON.stringify({
-                                name:x.nama,
-                                email:x.email,
-                                photoUrl: user.photoURL,
-                                emailVerified: user.emailVerified,
-                                uid: user.uid,
-                                phone:x.phone,
-                                documentId:x.documentId,
-                                dateCreated:x.dateCreated,
-                                clientType:x.clientType
-                                
-                            }))
-                            setLoginCtx(true)
-                            window.location.href = "/"
+               
+                if (result.length > 0) {
+                    result.map(async (doc, index) =>{
+                        if (index == 0) {
+                            let x = doc.data()
+                            if (x.name && x.email && x.phone) {
+                                try{
+                                    let result =  await firebase.signIn(email, password);
+                                    let user = result.user;
+                                    console.log(user)
+                                    if (user != null) {
+                                        setClientCtx({
+                                            name:x.nama,
+                                            email:x.email,
+                                            photoUrl: user.photoURL,
+                                            emailVerified: user.emailVerified,
+                                            uid: user.uid,
+                                            phone:x.phone,
+                                            documentId:x.documentId,
+                                            dateCreated:x.dateCreated,
+                                            clientType:x.clientType
+                                            
+                                        })
+                                        localStorage.setItem('client', JSON.stringify({
+                                            name:x.nama,
+                                            email:x.email,
+                                            photoUrl: user.photoURL,
+                                            emailVerified: user.emailVerified,
+                                            uid: user.uid,
+                                            phone:x.phone,
+                                            documentId:x.documentId,
+                                            dateCreated:x.dateCreated,
+                                            clientType:x.clientType
+                                            
+                                        }))
+                                        setLoginCtx(true)
+                                        window.location.href = "/booking/date-time"
+                                    }
+                                }catch(error){
+                                    alert(error.message)
+                                }
+                            }else{
+                                alert('Please Update Your data');
+                                Router.push(`/update?email=${user.email}`)
+                            }
+                           
                         }
-                    }catch(error){
-                        alert(error.message)
-                    }
+                        
+                    })
+                    
                     
                 }else{
                     alert('Please Signup as client');

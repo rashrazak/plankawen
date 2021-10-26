@@ -8,7 +8,7 @@ function signout() {
         localStorage.removeItem('user');
         let y = firebase.signOut()
         y.then(()=>{
-            location.reload();
+            window.location.href = "/"
         })
     })
     return (
