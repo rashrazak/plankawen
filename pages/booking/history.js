@@ -1,10 +1,12 @@
 import React from 'react'
+import History from '../../components/booking/History'
+import Layout from '../../components/Header'
 
 function history() {
     return (
-        <div>
-            
-        </div>
+        <Layout title="Sejarah Tempah">
+            <History/>
+        </Layout>
     )
 }
 
