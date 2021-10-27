@@ -52,7 +52,7 @@ const Layout = ({ children, title = 'This is the default title' }) =>
         	<header>
 
 			<Navbar expand="lg" style={styles.navBar}>
-				<Navbar.Brand href="#"><img src="/images/logo/logo-official.png" /></Navbar.Brand>
+				<Navbar.Brand href="/"><img src="/images/logo/logo-official.png" /></Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" /> 
 				<Navbar.Collapse id="basic-navbar-nav">
 
@@ -70,7 +70,7 @@ const Layout = ({ children, title = 'This is the default title' }) =>
 							<Nav.Link href="#home"><img className="ico-bell" src="/images/icon/bell.png"/></Nav.Link>
 							{/* <Nav.Link href="#link"><img className="user-oval" src="/images/icon/ico-user-placeholder.png"/>{clientCtx.name ? clientCtx.name : 'user'}</Nav.Link> */}
 							<NavDropdown title={clientCtx?.name ? clientCtx.name : 'user'} id="basic-nav-dropdown dropdown-button-drop-left" className="dropdown-abs">
-								<NavDropdown.Item href="/booking">Booking (nanti)</NavDropdown.Item>
+								<NavDropdown.Item href="/booking/history">Booking (nanti)</NavDropdown.Item>
 								<NavDropdown.Divider />
 								<NavDropdown.Item href="/signout">Log out</NavDropdown.Item>
 							</NavDropdown>

@@ -84,12 +84,14 @@ const BookingMainContextProvider = (props) => {
 
     const mainCtxFnSelect = (serviceType, serviceData) =>{
         let id = getId()
+        let status = 'pending'
+
         if (serviceType == 'Makeup') {
             let {selectFull, selectFullPrice, selectTouchup, selectTouchupPrice} = serviceData.serviceDetails
             let price = 0
             price = selectFullPrice + selectTouchupPrice 
-            console.log({id,...serviceData,price})
-            cartLS.add({id,...serviceData,price})
+            console.log({id,status,...serviceData,price})
+            cartLS.add({id,status,...serviceData,price})
 
         }else if (serviceType =="KadBanner") {
             let {selectKad, selectKadTotalDiscount, selectBanner, selectBannerArray} = serviceData.serviceDetails
@@ -100,14 +102,14 @@ const BookingMainContextProvider = (props) => {
             
             let price = priceBanner + priceKad
             
-            cartLS.add({id,...serviceData,price})
+            cartLS.add({id,status,...serviceData,price})
         
         }else if (serviceType == 'Hantaran' || serviceType == 'Caterer' || serviceType == 'DoorGift'){
             let {selectPaxTotalPrice} = serviceData.serviceDetails
-            cartLS.add({id,...serviceData,price:parseInt(selectPaxTotalPrice)})
+            cartLS.add({id,status,...serviceData,price:parseInt(selectPaxTotalPrice)})
         }else{
             let {hargaDiscount, harga}= serviceData.serviceDetails
-            cartLS.add({id,...serviceData,price:hargaDiscount? parseInt(hargaDiscount): parseInt(harga)})
+            cartLS.add({id,status,...serviceData,price:hargaDiscount? parseInt(hargaDiscount): parseInt(harga)})
         }
     }
 
@@ -119,15 +121,17 @@ const BookingMainContextProvider = (props) => {
     const mainCtxFnSubmit = async ()  =>{
         //do validation
         let user = ls.get('booking-main')
+        let client = ls.get('client')
+        let cart = ls.get('__cart')
         let params = {
             type:user.type,
             date:user.date,
             negeri:user.negeri,
             time:user.time,
-            name:bookCtxName,
-            email:bookCtxEmail,
-            phone:bookCtxPhone,
-            services:bookCtxServiceList,
+            name:client.name,
+            email:client.email,
+            phone:client.phone,
+            cart,
             dateCreated: new Date(),
             status:'pending'
         }
@@ -138,9 +142,19 @@ const BookingMainContextProvider = (props) => {
         params.id = id
         params.dateUpdated = new Date()
 
-        await firebase.updateBooking(`book-${user.type}`,params, id)
-        ls.remove('service-list')
-        Router.push('/booking/thank-you')
+        firebase.updateBooking(`book-${user.type}`,params, id).then(()=>{
+            // let cart2 = ls.get('__cart')
+            // let status = 'pending'
+            // cart2.map(({email, serviceName, serviceType, },ind)=>{
+            //     // send email
+                
+            // })
+            alert('Tahniah, Kami akan menghubungi anda!')
+            Router.push('/booking/thank-you')
+            ls.remove('__cart')
+        })
+        
+        
     }
 
     return (
