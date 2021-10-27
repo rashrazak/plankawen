@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react'
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
 
 function ViewPackageService({sendData, closeData, sendVendor}) {
 
@@ -21,6 +23,7 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
     const [serviceType, setserviceType] = useState('')
     const [details, setdetails] = useState([])
     const [about, setabout] = useState([])
+    const [showPopup, setShowPopup] = useState(false)
 
     useEffect(() => {
 
@@ -33,12 +36,30 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
             setdetails(sendVendor)
             setabout(sendData) 
         }
-        console.info(sendVendor)
+        // console.info(sendVendor)
         // console.info(sendData)
     }, [sendData])
 
     const close = () => {
         closeData(false)
+    }
+
+    const handleHidePopup = () => {
+        setShowPopup(false)
+    }
+
+    const handlePilih = () => {
+
+        if (sendData.selectServices.find(data => data.serviceType === 'KadBanner')) {
+
+            setShowPopup(true)
+
+        } else {
+            
+           alert('Proceed to ...')
+
+        }
+
     }
 
     return (
@@ -106,7 +127,7 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
             }
             <div className="vendor-details">
                 <div className="">
-                    <img src={details.profileImage}></img>
+                    <img src={details?.profileImage}></img>
                 </div>
                 <div className="">
                     <span>Provided by</span>
@@ -119,8 +140,34 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
             </div>
             <div className="div-button">
                 <button className="btn btn-batal" onClick={()=> close()}>Batal</button>
-                <button className="btn btn-pilih">Pilih</button>
+                <button className="btn btn-pilih" onClick={()=> handlePilih()}>Pilih</button>
             </div>
+
+            <Modal show={showPopup} onHide={handleHidePopup}>
+            <Modal.Header className="custom-header" closeButton>
+                <Modal.Title>{about.title}
+                <p className="p-modal"><span><img src="/images/icon/ico-location.png"/></span> {about?.coveredArea?.join(', ')}</p>
+                </Modal.Title> 
+            </Modal.Header>
+            <Modal.Body>
+                <div className="div-body">
+                    <p>Quantity Pax (min 100)</p>
+                    <div className="count-section">
+                        <div><img src="/images/icon/circle-minus.png"></img></div>
+                        <div>100</div>
+                        <div><img src="/images/icon/circle-plus.png"></img></div>
+                    </div>
+                </div>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleHidePopup}>
+                Close
+                </Button>
+                <Button variant="primary">
+                Save Changes
+                </Button>
+            </Modal.Footer>
+            </Modal>
             
             
             {/* <div className="review-catergry-and-price">
@@ -454,6 +501,10 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
                 .vendor-details > div > span:last-child { color: #47CBC4; font-size: 12px; font-weight: normal; font-style: italic;}
                 .vendor-details > div > p { font-size: 12px; color: #3e3e3e; font-family: normal; padding: 10px; margin: 0;}
                 .div-button { display: flex; align-items: center; justify-content: space-around; margin: 20px 0;}
+                .p-modal { display: block; margin: 0;}
+                .custom-header { flex-direction:column;}
+                .count-section { display:flex; justify-content: space-between; align-items: center; width: 100%; border: 1px solid #EAEAEA; border-radius: 4px; padding: 20px 10px;}
+                .count-section > div > img { width: 24px; height: 24px; cursor: pointer;}
                 @media screen and ( max-width: 480px) {
                     .button-position { position: unset; display: flex; justify-content: space-between; margin-top: 20px;}
                     .button-position > button { flex: 0 0 120px;}
