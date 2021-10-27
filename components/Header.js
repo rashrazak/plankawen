@@ -69,10 +69,8 @@ const Layout = ({ children, title = 'This is the default title' }) =>
 						<Nav className="ml-auto" style={styles.nav}>
 							<Nav.Link href="#home"><img className="ico-bell" src="/images/icon/bell.png"/></Nav.Link>
 							{/* <Nav.Link href="#link"><img className="user-oval" src="/images/icon/ico-user-placeholder.png"/>{clientCtx.name ? clientCtx.name : 'user'}</Nav.Link> */}
-							<NavDropdown title={clientCtx.name ? clientCtx.name : 'user'} id="basic-nav-dropdown dropdown-button-drop-left" className="dropdown-abs">
-								<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-								<NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-								<NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+							<NavDropdown title={clientCtx?.name ? clientCtx.name : 'user'} id="basic-nav-dropdown dropdown-button-drop-left" className="dropdown-abs">
+								<NavDropdown.Item href="/booking">Booking (nanti)</NavDropdown.Item>
 								<NavDropdown.Divider />
 								<NavDropdown.Item href="/signout">Log out</NavDropdown.Item>
 							</NavDropdown>
