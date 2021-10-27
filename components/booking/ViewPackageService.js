@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
 
 function ViewPackageService({sendData, closeData, sendVendor}) {
 
@@ -24,6 +25,7 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
     const [details, setdetails] = useState([])
     const [about, setabout] = useState([])
     const [showPopup, setShowPopup] = useState(false)
+    const [quantity, setQuantity] = useState(sendData.quantity)
 
     useEffect(() => {
 
@@ -50,15 +52,17 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
 
     const handlePilih = () => {
 
-        if (sendData.selectServices.find(data => data.serviceType === 'KadBanner')) {
+        // if (sendData.selectServices.find(data => data.serviceType === 'KadBanner')) {
 
-            setShowPopup(true)
+        //     setShowPopup(true)
 
-        } else {
+        // } else {
             
-           alert('Proceed to ...')
+        //    alert('Proceed to ...')
 
-        }
+        // }
+
+        setShowPopup(true)
 
     }
 
@@ -151,12 +155,48 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
             </Modal.Header>
             <Modal.Body>
                 <div className="div-body">
-                    <p>Quantity Pax (min 100)</p>
+                    <p>Quantity Pax (min {sendData.quantity})</p>
                     <div className="count-section">
                         <div><img src="/images/icon/circle-minus.png"></img></div>
-                        <div>100</div>
+                        <div>{quantity}</div>
                         <div><img src="/images/icon/circle-plus.png"></img></div>
                     </div>
+                    {
+                        sendData.selectServices.find(data => data.serviceType === 'KadBanner') &&
+                        <div className="section-card">
+                            <p>Card</p>
+                            <Form>
+                                {['radio'].map((type) => (
+                                    <div key={`default-${type}`} className="mb-3">
+                                    <Form.Check 
+                                        type={type}
+                                        name="group1"
+                                        id={`default-${type}`}
+                                        label={`100%`}
+                                    />
+
+                                    <Form.Check
+                                        name="group1"
+                                        type={type}
+                                        label={`50%`}
+                                        id={`disabled-default-${type}`}
+                                    />
+                                    <Form.Check
+                                        name="group1"
+                                        type={type}
+                                        label={`25%`}
+                                        id={`disabled-default-${type}`}
+                                    />
+                                    </div>
+                                ))}
+                            </Form>
+                            <div className="div-jumlah">
+                                <p className="title-jum">Jumlah Harga (MYR)</p>
+                                <span className="title-jum-bold">XXX</span>
+                            </div>
+                        </div>
+                        
+                    }
                 </div>
             </Modal.Body>
             <Modal.Footer>
@@ -505,6 +545,11 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
                 .custom-header { flex-direction:column;}
                 .count-section { display:flex; justify-content: space-between; align-items: center; width: 100%; border: 1px solid #EAEAEA; border-radius: 4px; padding: 20px 10px;}
                 .count-section > div > img { width: 24px; height: 24px; cursor: pointer;}
+                .section-card { padding: 10px; }
+                .section-card > p { margin: 0; font-size: 20px; font-weight: bold;}
+                .div-jumlah { text-align:center;}
+                .div-jumlah > .title-jum { color: #75848E; font-size: 14px; margin:0;}
+                .title-jum-bold { color: #2B2B2B; font-size: 18px; font-weight: bold;}
                 @media screen and ( max-width: 480px) {
                     .button-position { position: unset; display: flex; justify-content: space-between; margin-top: 20px;}
                     .button-position > button { flex: 0 0 120px;}
