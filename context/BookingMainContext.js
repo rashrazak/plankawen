@@ -131,6 +131,7 @@ const BookingMainContextProvider = (props) => {
             name:client.name,
             email:client.email,
             phone:client.phone,
+            totalPrice:cartLS.total(),
             cart,
             dateCreated: new Date(),
             status:'pending'

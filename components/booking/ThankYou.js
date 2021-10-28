@@ -1,6 +1,10 @@
 import React from 'react'
 
 function ThankYou() {
+
+    const kembali = () =>{
+        window.location.href = "/booking/history"
+    }
     return (
         <div className="form-width">
             <div className="div-thankyou">
@@ -8,7 +12,7 @@ function ThankYou() {
                 <div className="">
                     <h6>Terima Kasih :)</h6>
                     <p>We will inform our Service Provider regarding your request. They will reply with the arrangement of time and date for site visit.</p>
-                    <button type="button" className="btn btn-home">Kembali ke Home</button>
+                    <button type="button" className="btn btn-home" onClick={kembali}>Kembali ke Home</button>
                     
                 </div>
             </div>
