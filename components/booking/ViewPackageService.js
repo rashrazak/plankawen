@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import * as ls from 'local-storage'
+import Router from 'next/router'
 
 function ViewPackageService({sendData, closeData, sendVendor}) {
 
@@ -25,7 +27,10 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
     const [details, setdetails] = useState([])
     const [about, setabout] = useState([])
     const [showPopup, setShowPopup] = useState(false)
-    const [quantity, setQuantity] = useState(sendData.quantity)
+    const [quantity, setQuantity] = useState(0)
+    const [newPrice, setNewPrice] = useState(0)
+    const [kadKawinPercent, setKadKawinPercent] = useState(0)
+
 
     useEffect(() => {
 
@@ -34,6 +39,9 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
             if (images.length > 0) {
                 setcoverImage(images[0]);
                 setimages(images);
+                setQuantity(sendData.quantity)
+                setNewPrice(parseFloat(sendData.totalPrice))
+                sendData.selectServices.some((v,i)=>v.serviceType == 'KadBanner') ? setKadKawinPercent(100): setKadKawinPercent(0)
             }
             setdetails(sendVendor)
             setabout(sendData) 
@@ -41,6 +49,58 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
         // console.info(sendVendor)
         // console.info(sendData)
     }, [sendData])
+
+
+    useEffect(() => {
+        calculatePrice(sendData.selectServices, quantity, kadKawinPercent)
+    }, [quantity, kadKawinPercent])
+
+    const calculatePrice = (service, quan, kadKawinPercent) =>{
+        var qty = quan
+        var serviceAll = service
+        var orip = 0
+        console.log(serviceAll)
+        serviceAll.map((v,i)=>{
+            if (v.serviceType == 'Makeup') {
+                let makeup = v
+
+                orip += parseInt( makeup.serviceDetails.hargaTouchup )
+                orip += parseInt( makeup.serviceDetails.hargaFull )
+                
+            }else if (v.serviceType == 'KadBanner'){
+
+                let kadbanner = v
+                if (qty > 0) {
+                    console.log(qty)
+                    orip = orip + ( ( (parseFloat( kadbanner.serviceDetails.hargaPerPerson ) * qty)/100) * kadKawinPercent  )
+                    console.log(kadbanner)
+                }
+                if (v.serviceDetails.banner == true) {
+                    let banner = kadbanner.serviceDetails.bannerDesc.bannerSize
+                    banner.map((val, index)=>{
+                        orip += parseInt( val.harga )
+                    })
+                }
+            }else if (v.serviceType == 'Hantaran' || v.serviceType == 'Caterer' || v.serviceType == 'DoorGift'){
+                let random = v
+                if (qty > 0) {
+                    orip = orip +  (parseInt( random.serviceDetails.hargaPerPerson ) * qty)
+                }
+        
+            }else if (v.serviceType == 'Photographer' || v.serviceType == 'Videographer' || v.serviceType == 'WeddingDress' || v.serviceType == 'Pelamin' || v.serviceType == 'Others' || v.serviceType == 'Venue'){
+                let fix = v
+
+                orip += parseInt( fix.serviceDetails.harga )
+                
+            }
+
+            if (i == (serviceAll.length - 1) ) {
+                console.log(orip)
+                setNewPrice(orip.toFixed(2))
+            }
+        })
+        
+    }
 
     const close = () => {
         closeData(false)
@@ -64,6 +124,26 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
 
         setShowPopup(true)
 
+    }
+
+    const saveChanges = () =>{
+        if (quantity < sendData.quantity) {
+            alert(`Kuantiti haruslah lebih atau sama dari kuantiti minima`)
+            return false
+        }
+        let param = sendData
+        param.kadBannerPercentage = sendData.selectServices.some((v,i)=>v.serviceType == 'KadBanner') ? kadKawinPercent: false
+        param.minimumTotalPrice = sendData.totalPrice
+        param.newTotalPrice = newPrice
+        param.oldTotalPrice = sendData.totalPrice
+        param.oldQuantity = sendData.quantity
+        param.newQuantity = quantity
+
+        ls.set('package-selection', param)
+
+        Router.push('/booking/package-services/tnc')
+
+        
     }
 
     return (
@@ -112,7 +192,7 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
 
                         <div className="service-container" key={i}>
                             <div className="image-service">
-                                <img src={v.images[0].urlStorage}/>
+                                <img src={v.images[0]?.urlStorage}/>
                                 <div className="service-text">
                                     <img src={`/images/icon/dark/${serviceIcon[v.serviceType]}`}/>
                                     <div>
@@ -155,16 +235,18 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
             </Modal.Header>
             <Modal.Body>
                 <div className="div-body">
-                    <p>Quantity Pax (min {sendData.quantity})</p>
+                    <p>Set Quantity Pax (min {sendData.quantity})</p>
+                    {/* <p>Harga minimum (RM {sendData.totalPrice})</p> */}
                     <div className="count-section">
-                        <div><img src="/images/icon/circle-minus.png"></img></div>
-                        <div>{quantity}</div>
-                        <div><img src="/images/icon/circle-plus.png"></img></div>
+                        {/* <div><img src="/images/icon/circle-minus.png"></img></div> */}
+                        <input style={{border:0,width:'100%'}} value={quantity} onChange={(e)=>{setQuantity(e.target.value)}} />
+                        {/* <div>Harga Baru: RM{quantity}</div> */}
+                        {/* <div><img src="/images/icon/circle-plus.png"></img></div> */}
                     </div>
                     {
                         sendData.selectServices.find(data => data.serviceType === 'KadBanner') &&
                         <div className="section-card">
-                            <p>Card</p>
+                            <p>Kad Undangan (% dari kuantiti)</p>
                             <Form>
                                 {['radio'].map((type) => (
                                     <div key={`default-${type}`} className="mb-3">
@@ -173,6 +255,8 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
                                         name="group1"
                                         id={`default-${type}`}
                                         label={`100%`}
+                                        onChange={(e)=>setKadKawinPercent(100)}
+                                        checked={kadKawinPercent == 100}
                                     />
 
                                     <Form.Check
@@ -180,31 +264,36 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
                                         type={type}
                                         label={`50%`}
                                         id={`disabled-default-${type}`}
+                                        onChange={(e)=>setKadKawinPercent(50)}
+                                        checked={kadKawinPercent == 50}
+
                                     />
                                     <Form.Check
                                         name="group1"
                                         type={type}
                                         label={`25%`}
                                         id={`disabled-default-${type}`}
+                                        onChange={(e)=>setKadKawinPercent(25)}
+                                        checked={kadKawinPercent == 25}
                                     />
                                     </div>
                                 ))}
                             </Form>
-                            <div className="div-jumlah">
-                                <p className="title-jum">Jumlah Harga (MYR)</p>
-                                <span className="title-jum-bold">XXX</span>
-                            </div>
                         </div>
-                        
                     }
+                    <br/>
+                    <div className="div-jumlah">
+                        <p className="title-jum">Jumlah Harga (MYR)</p>
+                        <span className="title-jum-bold">{newPrice}</span>
+                    </div>
                 </div>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleHidePopup}>
-                Close
+                Tutup
                 </Button>
-                <Button variant="primary">
-                Save Changes
+                <Button onClick={saveChanges} variant="primary">
+                Pilih
                 </Button>
             </Modal.Footer>
             </Modal>

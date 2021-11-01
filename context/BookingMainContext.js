@@ -119,10 +119,16 @@ const BookingMainContextProvider = (props) => {
     }
 
     const mainCtxFnSubmit = async ()  =>{
+
         //do validation
         let user = ls.get('booking-main')
         let client = ls.get('client')
         let cart = ls.get('__cart')
+
+        if (user.type == 'package-services') {
+            return mainCtxFnSubmitPackage()
+        }
+        
         let params = {
             type:user.type,
             date:user.date,
@@ -153,6 +159,52 @@ const BookingMainContextProvider = (props) => {
             alert('Tahniah, Kami akan menghubungi anda!')
             Router.push('/booking/thank-you')
             ls.remove('__cart')
+        })
+        
+        
+    }
+
+    const mainCtxFnSubmitPackage = async ()  =>{
+        //do validation
+        let user = ls.get('booking-main')
+        let client = ls.get('client')
+        let cart = ls.get('package-selection')
+        let params = {
+            type:user.type,
+            date:user.date,
+            negeri:user.negeri,
+            time:user.time,
+            name:client.name,
+            email:client.email,
+            phone:client.phone,
+            minimumTotalPrice:cart.totalPrice,
+            newTotalPrice:cart.newTotalPrice,
+            oldTotalPrice:cart.totalPrice,
+            oldQuantity:cart.quantity,
+            newQuantity:cart.newQuantity,
+            totalPrice:cart.newTotalPrice,
+            quantity:cart.newQuantity,
+            packageSelection:cart,
+            dateCreated: new Date(),
+            status:'pending'
+        }
+
+        let x = await firebase.createBooking(`book-${user.type}`, params)
+        let id = x.id
+
+        params.id = id
+        params.dateUpdated = new Date()
+
+        firebase.updateBooking(`book-${user.type}`,params, id).then(()=>{
+            // let cart2 = ls.get('package-selection')
+            // let status = 'pending'
+            // cart2.map(({email, serviceName, serviceType, },ind)=>{
+            //     // send email
+                
+            // })
+            alert('Tahniah, Kami akan menghubungi anda!')
+            Router.push('/booking/thank-you')
+            ls.remove('package-selection')
         })
         
         

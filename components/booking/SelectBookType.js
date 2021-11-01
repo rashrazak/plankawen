@@ -11,9 +11,16 @@ function SelectBookType() {
     const [selectType, setSelectType] = useState('');
 
     useEffect(() => {
-        if (selectType) {
+
+        if (selectType ) {
             setBookCtxType(selectType)
             ls.set('bookType',selectType)
+            if (selectType == 'package-services'){
+                ls.remove('__cart')
+            }else{
+                ls.remove('package-selection')
+            }
+           
         } else {
             setSelectType(bookCtxType)
             ls.set('bookType',bookCtxType)

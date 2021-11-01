@@ -8,7 +8,7 @@ import * as ls from 'local-storage'
 function SideBar({step}) {
 
     const {getMain, setMain} = useContext(BookingMainContext)
-    const {bookCtxNegeri,bookCtxDate,bookCtxTime,bookCtxServiceList} = getMain
+    const {bookCtxNegeri,bookCtxDate,bookCtxType,bookCtxServiceList} = getMain
     const {mainCtxFnDelete, setBookCtxTotalPrice} = setMain
 
     const router = useRouter()
@@ -17,6 +17,22 @@ function SideBar({step}) {
     const [totalPrice, setTotalPrice] = useState(0)
     const [mount, setMount] = useState(false)
     const [cartLS, setCartLS] = useState(null)
+    const [bookType, setBookType] = useState('')
+    const [packageSelection, setPackageSelection] = useState(null)
+
+    useEffect(() => {
+        if (ls('package-selection') && !packageSelection) {
+            setPackageSelection(ls.get('package-selection'))
+        }
+    }, [packageSelection])
+
+    useEffect(() => {
+        if (bookCtxType) {
+            setBookType(bookCtxType)
+        }else if (ls('bookType')) {
+            setBookType(ls.get('bookType'))
+        }
+    }, [bookType])
 
     useEffect(() => {
        if (!mount) {
@@ -228,7 +244,11 @@ function SideBar({step}) {
                         <div className="div-total">
                                 {/* <p>Subtotal <span>MYR 0.00</span></p> */}
                                 {/* <p>Discount <span>MYR 0.00</span></p> */}
+                                {bookType == 'package-services' ?
+                                <p>Total <span>MYR {packageSelection?.newTotalPrice ? packageSelection.newTotalPrice : 0}</span></p>
+                                :
                                 <p>Total <span>MYR {cartLS?.total() ? cartLS.total() : 0}</span></p>
+                                }
                         </div>             
                         {/* <div className="">
                             <button type="button" className="btn btn-review" onClick={()=> openInNewTab()}>Review</button>
