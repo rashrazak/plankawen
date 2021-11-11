@@ -1,6 +1,5 @@
 import React,{createContext, useState, useEffect} from 'react'
 export const BookingExtraContext = createContext();
-import firebase from '../config/firebaseConfig'
 const BookingExtraContextProvider = (props) => {
     
     const [bookingExtra, setBookingExtra] = useState([])

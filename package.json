@@ -20,8 +20,10 @@
   },
   "homepage": "https://github.com/rashrazak/plankawen#readme",
   "dependencies": {
+    "@react-pdf/renderer": "^2.0.21",
     "bootstrap": "^4.5.0",
     "firebase": "^8.10.0",
+    "iconv-lite": "^0.6.3",
     "local-storage": "^2.0.0",
     "moment": "^2.27.0",
     "next": "^9.4.4",

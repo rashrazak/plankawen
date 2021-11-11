@@ -1,6 +1,8 @@
-import React,{createContext, useState, useEffect} from 'react'
+import React,{createContext, useState, useEffect, Component} from 'react'
 export const LSContext = createContext();
 import firebase from '../config/firebaseConfig'
+import ReactPDF from '@react-pdf/renderer';
+
 const LSContextProvider = (props) => {
     
     const [clientCtx, setClientCtx] = useState(null)
@@ -11,6 +13,10 @@ const LSContextProvider = (props) => {
         localStorage.removeItem('user');
         localStorage.removeItem('clientCtx');
         location.reload()
+    }
+
+    const Download = (Component) =>{
+        ReactPDF.renderToStream(<Component />)
     }
 
     useEffect(() => {
@@ -49,7 +55,7 @@ const LSContextProvider = (props) => {
     }, [])
 
     return (
-        <LSContext.Provider value={{loginCtx, setLoginCtx, setClientCtx, clientCtx, signOut}}>
+        <LSContext.Provider value={{loginCtx, setLoginCtx, setClientCtx, clientCtx, signOut, Download}}>
             {props.children}
         </LSContext.Provider>
     )

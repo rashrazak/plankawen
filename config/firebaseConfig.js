@@ -185,6 +185,10 @@ class Firebase {
         return await this.db.collection(serviceType).where('email', '==', email).get() 
     }
 
+    async checkBookingType(bookType, email){
+        return await this.db.collection(bookType).where('email', '==', email).get() 
+    }
+
     async getPackageById(id){
         return await this.db.collection('package').doc(id).get() 
     }
