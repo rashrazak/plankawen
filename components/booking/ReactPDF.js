@@ -72,6 +72,10 @@ function ReactPDF2({pdfData}) {
     });
 
     const stylesBooking = StyleSheet.create({
+    image:{
+        width:"100px",
+        height:"40px"
+    },
     table: { 
         display: "table", 
         width: "auto", 
@@ -79,7 +83,7 @@ function ReactPDF2({pdfData}) {
         borderWidth: 1, 
         borderRightWidth: 0, 
         borderBottomWidth: 0,
-        margin:"10px 5px 0 5px"
+        margin:"10px 5px 10px 5px"
     }, 
     tableRow: { 
         margin: "auto", 
@@ -92,6 +96,14 @@ function ReactPDF2({pdfData}) {
         borderLeftWidth: 0, 
         borderTopWidth: 0 ,
     },
+    tableCol2: { 
+        width: "80%", 
+        borderStyle: "solid", 
+        borderWidth: 1, 
+        borderLeftWidth: 0, 
+        borderTopWidth: 0 ,
+        padding:"10px"
+    },
     tableCol1: { 
         width: "20%", 
         borderStyle: "solid", 
@@ -100,7 +112,7 @@ function ReactPDF2({pdfData}) {
         borderTopWidth: 0,
     },  
     tableCell: { 
-        marginLeft: "5px", 
+        margin: "5px", 
         marginTop: 5, 
         fontSize: 10,
     },
@@ -111,7 +123,7 @@ function ReactPDF2({pdfData}) {
         textDecoration:"underline"
         },
     tableCell1: { 
-        marginLeft: "5px", 
+        margin: "5px", 
         marginTop: 5, 
         fontSize: 8,
         }
@@ -159,47 +171,213 @@ function ReactPDF2({pdfData}) {
                   <Text style={stylesProfile.tableCell1}>{pdfData.email}</Text> 
                 </View> 
               </View> 
-              {/* 3rd row */}
-              <View style={stylesProfile.tableRow}> 
-                <View style={stylesProfile.tableCol}> 
-                  <Text style={stylesProfile.tableCell}>Kawasan Majlis</Text> 
-                </View> 
-                <View style={stylesProfile.tableCol1}> 
-                  <Text style={stylesProfile.tableCell1}>{pdfData.negeri} </Text> 
-                </View> 
-                <View style={stylesProfile.tableCol}> 
-                  <Text style={stylesProfile.tableCell}>Jenis Tempahan</Text> 
-                </View> 
-                <View style={stylesProfile.tableCol1}> 
-                  <Text style={stylesProfile.tableCell1}>{pdfData.type}</Text> 
-                </View> 
-              </View> 
+              
             </View>
             <Text style={stylesProfile.title}>Butiran Tempahan</Text> 
             {
                 pdfData.packageSelection ?
                 <View style={stylesBooking.table}> 
-                   
-                   <View style={stylesBooking.tableRow}> 
+                    <View style={stylesBooking.tableRow}> 
                         <View style={stylesBooking.tableCol}> 
                             <Text style={stylesBooking.tableCell}>Description</Text> 
                         </View> 
                         <View style={stylesBooking.tableCol1}> 
-                            <Text style={stylesBooking.tableCell}>Harga</Text> 
+                            <Text style={stylesBooking.tableCell}>Harga (RM) </Text> 
                         </View>
                     </View>
                     <View style={stylesBooking.tableRow}> 
                         <View style={stylesBooking.tableCol}> 
-                            {/* loop */}
+                        <Text style={stylesBooking.tableCell}>Nama Pakej: {pdfData.packageSelection.title}</Text> 
+                        <Text style={stylesBooking.tableCell}>Description: {pdfData.packageSelection.description}</Text> 
+                        <Text style={stylesBooking.tableCell}>Jum. Kuantiti: {pdfData.packageSelection.newQuantity}</Text> 
+                        <Text style={stylesProfile.tableCell}>Kawasan Majlis: {pdfData.negeri}</Text> 
+                        <Text style={stylesProfile.tableCell}>Jenis Tempahan: {pdfData.type}</Text> 
+                        <Text style={stylesProfile.tableCell}>Tarikh Majlis: {pdfData.date}</Text> 
+                        <Text style={stylesProfile.tableCell}>Waktu Majlis: {pdfData.time}</Text>
+                        <Text style={stylesProfile.tableCell}>Email Vendor: {pdfData.packageSelection.email}</Text>
+                 
+                        <Text style={stylesProfile.title}>Servis pakej</Text> 
+                        {pdfData.packageSelection.selectServices.map((v,i)=>{
+                            return(
+                                <View key={i} style={stylesBooking.table}> 
+                                    <View key={i} style={stylesBooking.tableRow}>
+                                        <View style={stylesBooking.tableCol1}> 
+                                            <Text style={stylesBooking.tableCell}>Jenis Servis:</Text> 
+                                        </View>
+                                        <View style={stylesBooking.tableCol}> 
+                                            <Text style={stylesBooking.tableCell1}>{v.serviceType}</Text> 
+                                        </View>
+                                    </View>
+                                    <View key={i} style={stylesBooking.tableRow}>
+                                        <View style={stylesBooking.tableCol1}> 
+                                            <Text style={stylesBooking.tableCell}>Nama:</Text> 
+                                        </View> 
+                                        <View style={stylesBooking.tableCol}> 
+                                            <Text style={stylesBooking.tableCell1}>{v.serviceName}</Text> 
+                                        </View>
+                                    </View>
+                                    <View key={i} style={stylesBooking.tableRow}>
+                                        <View style={stylesBooking.tableCol1}> 
+                                            <Text style={stylesBooking.tableCell}>Description:</Text> 
+                                        </View> 
+                                        <View style={stylesBooking.tableCol}> 
+                                            <Text style={stylesBooking.tableCell1}>{v.description}</Text> 
+                                        </View>
+                                    </View>
+                                    <View key={i} style={stylesBooking.tableRow}>
+                                        <View style={stylesBooking.tableCol1}> 
+                                            <Text style={stylesBooking.tableCell}>Extra:</Text> 
+                                        </View> 
+                                        <View style={stylesBooking.tableCol}> 
+                                            <Text style={stylesBooking.tableCell1}>{v.extra}</Text> 
+                                        </View>
+                                    </View>
+                                    <View key={i} style={stylesBooking.tableRow}>
+                                        <View style={stylesBooking.tableCol1}> 
+                                            <Text style={stylesBooking.tableCell}>TnC:</Text> 
+                                        </View> 
+                                        <View style={stylesBooking.tableCol}> 
+                                            <Text style={stylesBooking.tableCell1}>{v.tnc}</Text> 
+                                        </View>
+                                    </View>
+                                    {
+                                    v.serviceType == "KadBanner" &&
+                                    <View key={i} style={stylesBooking.tableRow}>
+                                        <View style={stylesBooking.tableCol1}> 
+                                            <Text style={stylesBooking.tableCell}>Banner:</Text> 
+                                        </View> 
+                                        <View style={stylesBooking.tableCol}> 
+                                            <Text style={stylesBooking.tableCell1}>
+                                            {
+                                                v.serviceDetails.banner && 
+                                                <Text style={stylesBooking.tableCell}>Description:{v.serviceDetails.bannerDesc.description} 
+                                                &nbsp;Saiz: {v.serviceDetails.bannerDesc.bannerSize.map(v=>v)}
+                                                </Text> 
+                                            }
+                                            </Text> 
+                                        </View>
+                                    </View>
+                                    }
+                                </View>
+                            )
+                        }) }
+
+                        
                         </View> 
                         <View style={stylesBooking.tableCol1}> 
-                            {/* harga */}
+                            <Text style={stylesBooking.tableCell}>{pdfData.packageSelection.newTotalPrice}</Text> 
                         </View>
                     </View>
-                   
+                    <View style={stylesBooking.tableRow}> 
+                        <View style={stylesBooking.tableCol}> 
+                            <Text style={stylesBooking.tableCell}>TOTAL</Text> 
+                        </View> 
+                        <View style={stylesBooking.tableCol1}> 
+                            <Text style={stylesBooking.tableCell}>{pdfData.packageSelection.newTotalPrice}</Text> 
+                        </View>
+                    </View>
                 </View>
                 :
-                <Text style={stylesProfile.title}>Butiran Cart</Text> 
+                <View style={stylesBooking.table}> 
+                {/* UNTUK CART */}
+                    <View style={stylesBooking.tableRow}> 
+                        <View style={stylesBooking.tableCol}> 
+                            <Text style={stylesBooking.tableCell}>Description</Text> 
+                        </View> 
+                        <View style={stylesBooking.tableCol1}> 
+                            <Text style={stylesBooking.tableCell}>Harga (RM) </Text> 
+                        </View>
+                    </View>
+                    {pdfData.cart.map((v,i)=>{
+                            return(
+                                <View key={i} style={stylesBooking.tableRow}> 
+                                    <View style={stylesBooking.tableCol}> 
+                                        <View  style={stylesBooking.tableRow}>
+                                            <View style={stylesBooking.tableCol1}> 
+                                                <Text style={stylesBooking.tableCell}>Jenis Servis:</Text> 
+                                            </View>
+                                            <View style={stylesBooking.tableCol}> 
+                                                <Text style={stylesBooking.tableCell1}>{v.serviceType}</Text> 
+                                            </View>
+                                        </View>
+                                        <View  style={stylesBooking.tableRow}>
+                                            <View style={stylesBooking.tableCol1}> 
+                                                <Text style={stylesBooking.tableCell}>Nama:</Text> 
+                                            </View> 
+                                            <View style={stylesBooking.tableCol}> 
+                                                <Text style={stylesBooking.tableCell1}>{v.serviceName}</Text> 
+                                            </View>
+                                        </View>
+                                        <View  style={stylesBooking.tableRow}>
+                                            <View style={stylesBooking.tableCol1}> 
+                                                <Text style={stylesBooking.tableCell}>Description:</Text> 
+                                            </View> 
+                                            <View style={stylesBooking.tableCol}> 
+                                                <Text style={stylesBooking.tableCell1}>{v.description}</Text> 
+                                            </View>
+                                        </View>
+                                        <View  style={stylesBooking.tableRow}>
+                                            <View style={stylesBooking.tableCol1}> 
+                                                <Text style={stylesBooking.tableCell}>Extra:</Text> 
+                                            </View> 
+                                            <View style={stylesBooking.tableCol}> 
+                                                <Text style={stylesBooking.tableCell1}>{v.extra}</Text> 
+                                            </View>
+                                        </View>
+                                        <View  style={stylesBooking.tableRow}>
+                                            <View style={stylesBooking.tableCol1}> 
+                                                <Text style={stylesBooking.tableCell}>TnC:</Text> 
+                                            </View> 
+                                            <View style={stylesBooking.tableCol}> 
+                                                <Text style={stylesBooking.tableCell1}>{v.tnc}</Text> 
+                                            </View>
+                                        </View>
+                                    </View> 
+                                    <View style={stylesBooking.tableCol1}> 
+                                        <Text style={stylesBooking.tableCell}>{v.hargaPerPerson?v.hargaPerPerson:''}{v.price?v.price:''}</Text> 
+                                    </View>
+                                    {
+                                    v.serviceType == "KadBanner" &&
+                                    <View style={stylesBooking.tableRow}>
+                                        <View style={stylesBooking.tableCol1}> 
+                                            <Text style={stylesBooking.tableCell}>Banner:</Text> 
+                                        </View> 
+                                        <View style={stylesBooking.tableCol}> 
+                                            <Text style={stylesBooking.tableCell1}>
+                                            {
+                                                v.serviceDetails.banner && 
+                                                <Text style={stylesBooking.tableCell}>Description:{v.serviceDetails.bannerDesc.description} 
+                                                &nbsp;Saiz: {v.serviceDetails.bannerDesc.bannerSize.map(v=>v)}
+                                                </Text> 
+                                            }
+                                            </Text> 
+                                        </View>
+                                    </View>
+                                    }
+                                </View>
+                            )
+                        })
+                    }
+                    <View style={stylesBooking.tableRow}> 
+                        <View style={stylesBooking.tableCol}> 
+                            <Text style={stylesProfile.tableCell}>Kawasan Majlis: {pdfData.negeri}</Text> 
+                            <Text style={stylesProfile.tableCell}>Jenis Tempahan: {pdfData.type}</Text> 
+                            <Text style={stylesProfile.tableCell}>Tarikh Majlis: {pdfData.date}</Text> 
+                            <Text style={stylesProfile.tableCell}>Waktu Majlis: {pdfData.time}</Text>
+                        </View> 
+                        <View style={stylesBooking.tableCol1}> 
+                            {/* <Text style={stylesBooking.tableCell}>{pdfData.totalPrice}</Text>  */}
+                        </View>
+                    </View>
+                    <View style={stylesBooking.tableRow}> 
+                        <View style={stylesBooking.tableCol}> 
+                            <Text style={stylesBooking.tableCell}>TOTAL</Text> 
+                        </View> 
+                        <View style={stylesBooking.tableCol1}> 
+                            <Text style={stylesBooking.tableCell}>{pdfData.totalPrice}</Text> 
+                        </View>
+                    </View>
+                </View> 
             }
           </Page>
         </Document>
