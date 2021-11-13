@@ -41,7 +41,7 @@ function ReactPDF2({pdfData}) {
         tableCol: { 
           width: "20%", 
           borderStyle: "solid", 
-          borderWidth: 2, 
+          borderWidth: 1, 
           borderLeftWidth: 0, 
           borderTopWidth: 0 ,
         },
@@ -94,14 +94,24 @@ function ReactPDF2({pdfData}) {
         borderStyle: "solid", 
         borderWidth: 1, 
         borderLeftWidth: 0, 
-        borderTopWidth: 0 ,
+        borderTopWidth: 0,
+        borderRightWidth: 0.5,
+    },
+    tableColNoBorder: { 
+        width: "80%", 
+        borderStyle: "solid", 
+        borderWidth: 1, 
+        borderLeftWidth: 0, 
+        borderTopWidth: 0,
+        borderBottomWidth: 0,
+        borderRightWidth: 0.5,
     },
     tableCol2: { 
         width: "80%", 
         borderStyle: "solid", 
         borderWidth: 1, 
         borderLeftWidth: 0, 
-        borderTopWidth: 0 ,
+        borderTopWidth: 0,
         padding:"10px"
     },
     tableCol1: { 
@@ -110,7 +120,15 @@ function ReactPDF2({pdfData}) {
         borderWidth: 1, 
         borderLeftWidth: 0, 
         borderTopWidth: 0,
-    },  
+    },
+    tableCol1Noborder: { 
+        width: "20%", 
+        borderStyle: "solid", 
+        borderWidth: 1, 
+        borderLeftWidth: 0, 
+        borderTopWidth: 0,
+        borderBottomWidth: 0,
+    },    
     tableCell: { 
         margin: "5px", 
         marginTop: 5, 
@@ -325,10 +343,10 @@ function ReactPDF2({pdfData}) {
                                             </View>
                                         </View>
                                         <View  style={stylesBooking.tableRow}>
-                                            <View style={stylesBooking.tableCol1}> 
+                                            <View style={stylesBooking.tableCol1Noborder}> 
                                                 <Text style={stylesBooking.tableCell}>TnC:</Text> 
                                             </View> 
-                                            <View style={stylesBooking.tableCol}> 
+                                            <View style={stylesBooking.tableColNoBorder}> 
                                                 <Text style={stylesBooking.tableCell1}>{v.tnc}</Text> 
                                             </View>
                                         </View>
