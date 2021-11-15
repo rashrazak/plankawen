@@ -76,14 +76,6 @@ function History() {
                         </tr>
                       )  
                     })}
-                    <tr>
-                        <td>1</td>
-                        <td>10/12/2011</td>
-                        <td>RM 40000</td>
-                        <td>RM 40000</td>
-                        <td>RM 40000</td>
-                        <td style={{textAlign:'center'}}><button onClick={()=>clickView()}>View PDF</button></td>
-                    </tr>
                 </tbody>
             </Table>
             {

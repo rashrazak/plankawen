@@ -40,6 +40,13 @@ function Index(){
         Router.push('/booking/date-time?state='+state)
     }
 
+    const lginFN = () =>{
+        ls.remove('booking-main')
+        ls.remove('service-list')
+        
+        Router.push('/login')
+    }
+
     const redirectPK = (x) =>{
         x == 'login' ? Router.push('/login') : window.location.href="https://vendor.plankawen.com"
     }
@@ -69,7 +76,7 @@ function Index(){
                                         inputBoxHeight="70px"
                                         inputBoxBorderColor="#EAEAEA"
                                     />
-                                    <Button bsPrefix="btn-rancang" onClick={()=>countryFn()}>Mula merancang</Button>
+                                    <Button bsPrefix="btn-rancang" onClick={()=>lginFN()}>Mula merancang</Button>
                             </div>
                         }
                         </div>
