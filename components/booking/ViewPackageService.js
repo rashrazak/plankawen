@@ -215,8 +215,8 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
                 </div>
                 <div className="">
                     <span>Provided by</span>
-                    <span>{details.namaSyarikat}</span>
-                    <span>Verifief</span>
+                    <span>{details?.namaSyarikat || ''}</span>
+                    <span>Verified</span>
                 </div>
                 <div className="">
                     <p>{details.companyDesc} </p>

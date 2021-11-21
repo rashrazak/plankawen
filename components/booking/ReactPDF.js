@@ -218,7 +218,7 @@ function ReactPDF2({pdfData}) {
                         {pdfData.packageSelection.selectServices.map((v,i)=>{
                             return(
                                 <View key={i} style={stylesBooking.table}> 
-                                    <View key={i} style={stylesBooking.tableRow}>
+                                    <View style={stylesBooking.tableRow}>
                                         <View style={stylesBooking.tableCol1}> 
                                             <Text style={stylesBooking.tableCell}>Jenis Servis:</Text> 
                                         </View>
@@ -226,7 +226,7 @@ function ReactPDF2({pdfData}) {
                                             <Text style={stylesBooking.tableCell1}>{v.serviceType}</Text> 
                                         </View>
                                     </View>
-                                    <View key={i} style={stylesBooking.tableRow}>
+                                    <View  style={stylesBooking.tableRow}>
                                         <View style={stylesBooking.tableCol1}> 
                                             <Text style={stylesBooking.tableCell}>Nama:</Text> 
                                         </View> 
@@ -234,7 +234,7 @@ function ReactPDF2({pdfData}) {
                                             <Text style={stylesBooking.tableCell1}>{v.serviceName}</Text> 
                                         </View>
                                     </View>
-                                    <View key={i} style={stylesBooking.tableRow}>
+                                    <View  style={stylesBooking.tableRow}>
                                         <View style={stylesBooking.tableCol1}> 
                                             <Text style={stylesBooking.tableCell}>Description:</Text> 
                                         </View> 
@@ -242,7 +242,7 @@ function ReactPDF2({pdfData}) {
                                             <Text style={stylesBooking.tableCell1}>{v.description}</Text> 
                                         </View>
                                     </View>
-                                    <View key={i} style={stylesBooking.tableRow}>
+                                    <View  style={stylesBooking.tableRow}>
                                         <View style={stylesBooking.tableCol1}> 
                                             <Text style={stylesBooking.tableCell}>Extra:</Text> 
                                         </View> 
@@ -250,7 +250,7 @@ function ReactPDF2({pdfData}) {
                                             <Text style={stylesBooking.tableCell1}>{v.extra}</Text> 
                                         </View>
                                     </View>
-                                    <View key={i} style={stylesBooking.tableRow}>
+                                    <View  style={stylesBooking.tableRow}>
                                         <View style={stylesBooking.tableCol1}> 
                                             <Text style={stylesBooking.tableCell}>TnC:</Text> 
                                         </View> 
@@ -260,7 +260,7 @@ function ReactPDF2({pdfData}) {
                                     </View>
                                     {
                                     v.serviceType == "KadBanner" &&
-                                    <View key={i} style={stylesBooking.tableRow}>
+                                    <View  style={stylesBooking.tableRow}>
                                         <View style={stylesBooking.tableCol1}> 
                                             <Text style={stylesBooking.tableCell}>Banner:</Text> 
                                         </View> 
@@ -269,7 +269,7 @@ function ReactPDF2({pdfData}) {
                                             {
                                                 v.serviceDetails.banner && 
                                                 <Text style={stylesBooking.tableCell}>Description:{v.serviceDetails.bannerDesc.description} 
-                                                &nbsp;Saiz: {v.serviceDetails.bannerDesc.bannerSize.map(v=>v)}
+                                                {/* &nbsp;Saiz: {v.serviceDetails.bannerDesc.bannerSize.map(v=>v)} */}
                                                 </Text> 
                                             }
                                             </Text> 

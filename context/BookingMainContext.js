@@ -4,9 +4,12 @@ import firebase from '../config/firebaseConfig'
 import * as ls from 'local-storage'
 import Router from 'next/router'
 import moment from 'moment'
+import emailjs,{init} from 'emailjs-com';
 // import { add, total } from 'cart-localstorage'
 
 const BookingMainContextProvider = (props) => {
+
+    init("user_N6KRRJTJ75AsRrWqlUJSn");
 
     const [bookCtxType, setBookCtxType] = useState('')
     const [bookCtxNegeri, setBookCtxNegeri] = useState('')
@@ -143,6 +146,22 @@ const BookingMainContextProvider = (props) => {
             status:'pending'
         }
 
+        cart.map((v,i)=>{
+             
+                        
+            let sendMailData = {
+                vendor_email:v.email,
+                serviceName:v.serviceName,
+                time:user.time,
+                clientName:client.name,
+                clientEmail:client.email,
+                clientDate:user.date,
+                negeri:user.negeri,
+                headerTitle:`Satu Booking telah diterima: ${v.serviceName}`
+            }
+             emailjs.send('service_aaq80og','template_k0aiiyu', sendMailData)
+        })
+
         let x = await firebase.createBooking(`book-${user.type}`, params)
         let id = x.id
 
@@ -188,6 +207,18 @@ const BookingMainContextProvider = (props) => {
             dateCreated: new Date(),
             status:'pending'
         }
+
+        let sendMailData = {
+            vendor_email:cart.email,
+            serviceName:cart.title,
+            time:user.time,
+            clientName:client.name,
+            clientEmail:client.email,
+            clientDate:user.date,
+            negeri:user.negeri,
+            headerTitle:`Satu Booking telah diterima: ${cart.title}`
+        }
+        emailjs.send('service_aaq80og','template_k0aiiyu', sendMailData)
 
         let x = await firebase.createBooking(`book-${user.type}`, params)
         let id = x.id
