@@ -62,7 +62,7 @@ function Index(){
                         {
                             loginCtx == true ?
 
-                            <Button bsPrefix="btn-rancang" onClick={()=>countryFn()}>Mula merancang</Button>
+                            <button className={`${loginCtx ? 'btn-rancak' : 'btn-rancang'}`} onClick={()=>countryFn()}>Mula merancang</button>
                             :
                             <div>
                                 {/* google npm react-search-box ada css attr */}
@@ -209,7 +209,7 @@ function Index(){
                             <p>Vendor Pelamin</p>
                         </div>
                     </div>
-                    <div className="">
+                    <div className="div-siapa">
                         <h4>Sebelum itu, SIAPA ANDA?</h4>
                         <div className="">
                             <div className="coming-soon">
@@ -270,19 +270,26 @@ function Index(){
                 }
                 @media screen and ( max-width: 480px) {
                     .row-1 { height: 100%; }
-                    .box-red { width: 100%; height: 579px;}
+                    .box-red { width: 100%; height: 620px;}
                     .box-red-2 { width: 100%; height: 100vh; }
-                    .container-1 { position: relative;}
+                    .container-1 { position: relative;  display:flex; flex-direction: column-reverse;}
                     .container-1 > div:first-child {width: 100%;}
                     .container-2 > div:nth-child(4) > div > div { max-width: 200%; width: 100%; }
                     .fungsi-desc-container { flex-wrap: wrap; margin-top: 50px;}
                     .btn-pengatin, .btn-vendor { width: 100%; }
                     .btn-rancang { width: 30%; }
-                    .image-bg { position: absolute; top: 80px;width: 100%;overflow: hidden;left: -80%;z-index: -1;}
+                    .image-bg { position: unset;}
                     .available-servis > div {  width: 50%; margin-top: 50px;}
                     .row-comment { margin-top: 0;}
                     .container-2 > div:nth-child(3) { flex-wrap: wrap; margin: 60px 0;}
                     .container-2 > div:nth-child(3) > div { margin: 0;}
+                    .container-1 > div:first-child {text-align: left;}
+                    .box-red { border-radius: 10px;}
+                    .container-2 > div:first-child > a > img { margin: 20px;}
+                    .box-red-2 { display: none;}
+                    .div-siapa { margin: 10px 0;}
+                    body {overflow-x: hidden;}
+                    .rancang-section { padding-bottom: 60px;}
                 }
             `}</style>
         </Layout>

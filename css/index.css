@@ -19,6 +19,20 @@
     background-color: #ED795F;
     color: #FFF;
 }
+.btn-rancak {
+    background-color: #ED795F;
+    border: 2px solid #ED795F;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #FFF;
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    right: 9px;
+    top: 10px;
+}
 .sc-bdVaJa { 
     border-top-left-radius: 4px !important;
     border-bottom-left-radius: 4px !important;
@@ -212,5 +226,15 @@
 
 @media screen and (max-width: 480px) {
     .btn-pengatin, .btn-vendor { width: 100%; }
-                    .btn-rancang { width: 30%; }
+    .btn-rancang { width: 30%; }
+    .container-1 > div > h1{
+        font-size: 2em;
+    }
+    .container-1 > div > h1 > span{
+        font-size: 1em;
+    }
+    .container-1 > div > p{
+        font-size: 14px;
+    }
+    .btn-rancak { position: unset;}
 }

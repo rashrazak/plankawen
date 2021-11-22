@@ -192,6 +192,14 @@ function signup() {
                 .btn-next { font-style: normal; font-weight: 600; font-size: 0.875rem; color: #FFF; background-color: #ED795F; border-radius: 8px; background-image: url('/images/icon/arrow-right-white.png'); background-repeat: no-repeat; background-position: center right 10px; background-size: 20px; width: 165px; height: 45px;}
                 .next-container { text-align: right;  margin-top: 44px;}
                 .label-error { font-style: normal; font-weight: normal; font-size: 1rem; color: #3E3E3E; margin-top: 10px;}
+                @media screen and ( max-width: 480px) {
+                    .auth-container { width:100%; position:unset; transform: unset; padding: 30px 16px;}
+                    .image-container { display: none;}
+                    .choose-your-fighter { flex-wrap: wrap; justify-content: center;}
+                    .next-container { flex-wrap: wrap; justify-content: center;}
+                    .btn-next { margin: 20px 0;}
+                    .next-container { margin-top: 20px;}
+                }
             `}</style>
         </div>
     )

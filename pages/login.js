@@ -273,6 +273,14 @@ function login() {
                 .form-custom { background: #FFF; border-radius: 4px; font-style: normal; font-weight: normal; font-size: 0.875rem; color: #2B2B2B; height: 60px; border: none;} 
                 label { font-style: normal; font-weight: normal; font-size: 0.875rem; color: #47CBC4; margin-top: 10px;}
                 .btn-google { background-color: #3E3E3E; border: 1px solid #979797; box-sizing: border-box; border-radius: 6px; height: 50px; font-style: normal; font-weight: bold; font-size: 0.9375rem; text-align: center;color: #FFF; width: 100%;}
+                @media screen and ( max-width: 480px) {
+                    .auth-container { width:100%; position:unset; transform: unset; padding: 30px 16px;}
+                    .image-container { display: none;}
+                    .choose-your-fighter { flex-wrap: wrap; justify-content: center;}
+                    .master-layout { height: auto;}
+                    .next-container { flex-wrap: wrap; justify-content: center;}
+                    .btn-next { margin: 20px 0;}
+                }
             `}</style>
         </div>
     )
