@@ -121,7 +121,7 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
             
             <div className="review-catergry-and-price">
                 <div className="review-category">
-                    <p><span><img className="icon-service" src={'/images/icon/white/'+serviceIcon[serviceType]}/></span>{serviceType}</p>
+                    <p><span><img className="icon-service" src={'/images/icon/white/'+serviceIcon[serviceType]}/></span>{serviceType == 'KadBanner' ? 'Kad Banner' : serviceType == 'WeddingDress' ? 'Baju Pengantin' : serviceType}</p>
                 </div>
                 {
                     (serviceType == 'KadBanner' || serviceType == 'Caterer' || serviceType == 'DoorGift' || serviceType == 'Hantaran')
@@ -197,7 +197,11 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
                         <h4>{about.serviceName}</h4>
                     </div>
             }
+
             <div className="review-desc">
+
+                <h5>Penerangan:</h5>
+                <p>{about.description}</p>
                 {   serviceType == "WeddingDress" ?
                     <React.Fragment>
                         <h5>Jenis Baju</h5>
@@ -327,10 +331,8 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
                     ''
                 }
                 
-                <h5>Description:</h5>
-                <p>{about.description}</p>
 
-                <h5>Terms And Condition:</h5>
+                <h5> Terma dan Syarat</h5>
                 <p>{about.tnc}</p>
 
                 <h5>Extra:</h5>
@@ -393,12 +395,12 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
                 .area-covered-div { display: inline-block; margin-right: 10px; }
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
-                .review-catergry-and-price { display: flex; justify-content: flex-start; margin: 13px 0px 18px 0px; overflow: scroll;}
-                .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; flex: 0 0 150px; margin-right: 10px;}
+                .review-catergry-and-price { display: flex; justify-content: flex-start; margin: 13px 0px 18px 0px; flex-wrap: wrap; gap: 10px;}
+                .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; flex:0 0 170px;}
                 .review-category > p { font-size: 12px; color: #FFF; margin: 0;}
                 .review-category > p > span { margin-right: 10px;}
-                .review-price-flex { display: flex; }
-                .review-price { padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; flex: 0 0 150px; border: 1px solid #EAEAEA; margin-right: 10px;}
+                .review-price-flex { display: flex; gap: 10px; }
+                .review-price { padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; border: 1px solid #EAEAEA; flex: 0 0 150px;}
                 .review-price > p { font-size: 14px; color: #3E3E3E;}
                 .review-price > p > span { color: #59D0C9; font-size: 10px;}
                 .review-price > img { width: 16px;}

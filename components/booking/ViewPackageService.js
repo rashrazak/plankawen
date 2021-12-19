@@ -510,7 +510,7 @@ function ViewPackageService({sendData, closeData, sendVendor}) {
                 <h5>Description:</h5>
                 <p>{about.description}</p>
 
-                <h5>Terms And Condition:</h5>
+                <h5>Terma dan syarat</h5>
                 <p>{about.tnc}</p>
 
                 <h5>Extra:</h5>
