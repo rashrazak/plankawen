@@ -326,6 +326,27 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
                         <h5>Berapa Kali Persembahan</h5>
                         <p>{details.kaliPersembahan}</p>
                     </React.Fragment>
+                    : serviceType == 'Makeup'?
+                    
+                    <>
+                        <h5>Jenis Makeup</h5>
+                        {
+                            details.jenisMakeup.map((v,i) => {
+                                return (
+                                    <li className='list-review-item' key={i}>{v}</li>
+                                )
+                            })
+                        }
+                        <h5>Jantina</h5>
+                        {
+                            details.jantina.map((v,i) => {
+                                return (
+                                    <li className='list-review-item' key={i}>{v}</li>
+                                )
+                            })
+                        }
+                    </>
+
                     :
                     
                     ''
@@ -433,6 +454,7 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
                 .profile-vr { display: flex; align-items: center;}
                 .profile-vr > img { margin-right: 10px; width: 100px; height: 100px; border-radius: 50%; object-fit: cover;}
                 .profile-vr > p { color: #75848E; }
+                .list-review-item { font-size: 14px; color: #75848E;}
                 @media screen and ( max-width: 480px) {
                     .button-position { position: unset; display: flex; justify-content: space-between; margin-top: 20px;}
                     .button-position > button { flex: 0 0 120px;}

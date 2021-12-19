@@ -273,6 +273,7 @@ function SideBar({step}) {
                 .div-total > p:last-child > span {font-weight: 600;}
                 .btn-review { background-color: #ED795F;mborder: 2px solid #ED795F;border-radius: 8px; font-style: normal;font-weight: 600;font-size: 1rem;text-align: center;color: #FFF; height: 50px; width: 100%; margin-top: 31px;}
                 label { font-style: normal; font-weight: normal;font-size: 0.75rem; color: #75848E; margin: 0;}
+                .div-review-1 { height: calc(100vh - 260px);overflow-y: scroll;}
                 .div-review-1 > p { font-style: normal; font-weight: normal;font-size: 0.875rem;color: #2B2B2B; margin-bottom: 5px;}
                 .review-service { position: relative; margin-bottom: 10px;}
                 .delete-icon { position: absolute; left: -15px; top: 0; cursor: pointer; color: red;}
