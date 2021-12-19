@@ -234,7 +234,7 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
                             }
                             
                         </ul>
-                        <h5>Waktu Tiba</h5>
+                        <h5>Penghantaran</h5>
                         <p>{details.waktuTiba}</p>
                     </React.Fragment>
                     : serviceType == 'KadBanner' ?
@@ -275,7 +275,7 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
                             <p>{details.maxDesignChanges}</p>
                             <h5>Jenis Hantar</h5>
                             <p>{details.jenisHantar}</p>
-                            <h5>Waktu Tiba</h5>
+                            <h5>Penghantaran</h5>
                             <p>details.waktuTiba</p>
                             <h5>Kaedah Hantar</h5>
                             <p>{details.jenisHantar}</p>
@@ -297,7 +297,7 @@ function ViewExtraService({sendData, closeData, sendVendor, view}) {
                             <p>{details.jenisMaterial}</p>
                             <h5>Max Design Changes</h5>
                             <p>{details.maxDesignChanges}</p>
-                            <h5>Waktu Tiba</h5>
+                            <h5>Penghantaran</h5>
                             <p>{details.waktuTiba}</p>
                         </React.Fragment>
                    
